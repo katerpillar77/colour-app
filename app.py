@@ -1,6 +1,6 @@
 
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, g
 from dotenv import load_dotenv
 import sqlite3
 
@@ -8,7 +8,7 @@ load_dotenv()
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
-DATABASE = '/finance.db'
+DATABASE = 'finance.db'
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -22,10 +22,13 @@ def query_db(query, args=(), one=False):
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
-    
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    users = query_db('select * from users')
+    for user in users:
+        print(user['username'], 'has the id', user['id'])
+    return render_template('index.html', users=users)
 
 # Custom 404 error handler
 @app.errorhandler(404)
