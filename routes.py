@@ -5,7 +5,8 @@ from db_functions import *
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    paints =get_all_paints();
+    return render_template('index.html', paints=paints)
 
 @app.route('/add', methods=["GET", "POST"])
 def add():

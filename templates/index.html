@@ -4,7 +4,196 @@
     Home
 {% endblock %}
 
+{%block include %}
+        <!--rangeSlider-->
+        <script src="https://cdn.jsdelivr.net/npm/range-slider-input@2.4/dist/rangeslider.umd.min.js"></script>
+
+        <!-- js colorpicker -->
+        <script src="{{ url_for('static', filename='js/colorpicker/colorpicker.iife.js')}}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/colorpicker.min.css')}}" />
+
+        <!--tinycolor-->
+        <script src="{{ url_for('static', filename='js/tinycolor-min.js')}}"></script>
+
+        <!--page-specific js-->
+        <script src="{{ url_for('static', filename='js/index.js')}}"></script>
+
+    {% endblock %}
+
 {% block main %}
 <h1>Paint colour comparison tool</h1>
-    
+    <!-- COLOUR CHOOSER -->
+
+    <div class="container border border-dark rounded mb-2 py-2">
+        <div class="row justify-content-center">
+            <div class="col-md px-3 ">
+                <div class="row ">
+                    <h3>Reference colour</h3>
+                </div>
+                <div class="row mb-3">
+                    <div id="selected-colour" class="w-100 colour-ref border border-dark rounded">
+                        <button id="picker" class="color-picker" >
+                    </div><!--end #selected_colour-->
+                </div><!--end .row-->
+            </div><!--end .col-->
+            <div class="col-md px-3 hide-initial">
+                <div class="row ">
+                    <h3>Adjusted colour</h3>
+                </div>
+                <div class="row mb-3">
+                    <div id="adjusted-colour" class="colour-ref  w-100 border border-dark rounded"></div>
+                </div><!--end .row-->
+            </div><!--end .col-->
+        </div><!--end .row-->
+        <div class="row hide-initial" id="adjustments">
+            <div class="row mb-2 ">
+                <div class="col-3 text-end">
+                    <label for="hue">Hue: </label>
+                </div>
+                <div class="col-3">
+                    <input id="hue" class="border-dark border rounded w-100" value=0 readonly>
+                </div>
+                <div class="col-6 ">
+                    <button id="reset" class="border-dark border rounded w-50">Reset</button>
+                </div>
+            </div>
+            <div class="row mb-2 ">
+                <div class="col-3 text-end">
+                    <label for="saturation">Saturation:</label>
+                </div>
+                <div class="col-3">
+                    <input id="saturation" class="border-dark border rounded w-100">
+                </div>
+                <div class="col-6">
+                    <div id="saturation-slider"></div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3 text-end">
+                    <label for="luminance">Luminance:</label>
+                </div>
+                <div class="col-3">
+                    <input id="luminance" class="border-dark border rounded w-100">
+                </div>
+                <div class="col-6">
+                    <div id="luminance-slider"></div>
+                </div>
+            </div><!--end .row-->
+        </div><!--end #adjustments-->
+    </div><!--end .container-->
+
+    <!-- FILTERS AND PAINTS LIST-->
+    <div id="filter-block" class="hide-initial container py-2 border border-dark rounded">
+        <!-- Filters -->
+        <!--<div class="filters">
+            <a href="?status=all" class="{{ 'active' if filter_status=='all' }}">All</a>
+            <a href="?status=active" class="{{ 'active' if filter_status=='active' }}">Active</a>
+            <a href="?status=completed" class="{{ 'active' if filter_status=='completed' }}">Completed</a>
+            <a href="?status=archived" class="{{ 'active' if filter_status=='archived' }}">Archived</a>
+            <div class="search-box">
+                <form method="GET">
+                    <input type="hidden" name="status" value="{{ filter_status }}">
+                    <input type="text" name="q" value="{{ search }}" placeholder="Search...">
+                    <button class="btn-sm btn-ghost" type="submit">🔍</button>
+                </form>
+            </div>
+        </div>-->
+        <h3>Find paint colours</h3>
+        <p class="text-start">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Leeway on the hue, saturation and luminance values is in settings.</p>
+        <div class= "list-section" >
+            <div class="container text-center  mb-2">
+                <div class="row justify-content-center">
+                    <div class="col text-start">
+                        <select  id="filter" class="form-select" >
+                            <option value="0" selected>All</option>
+                            <option value="1" text="Similar colours to the adjusted colour, sorted by similarity">Analogous</option>
+                            <option value="2" text="Complementary colours to the adjusted colour, sorted by similarity">Complementary</option>
+                            <option value="3" text="Triadic colours to the adjusted colour, sorted by similarity">Triadic</option>
+                        </select>
+                    </div>
+                    <div class="col-3 text-end">
+                        <!-- Button trigger settings modal -->
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                            Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Settings Modal -->
+            <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="settingsModalLabel">Change settings for filtering</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body container">
+                        <p class="text-start">What change to the values is considered the same? For example, if &plusmnHue is set to 5, a colour with a hue of 50 or 60 will be considered the same as one with a hue of 55.</p>
+                        <div class="row">
+                            <div class="row mb-2 ">
+                                <div class="col-4 text-end">
+                                    <label for="hue-distance">&plusmnHue: </label>
+                                </div>
+                                <div class="col-2">
+                                    <input id="hue-distance" value="5" min="0" max="180" step="1" class="border-dark border rounded w-100" value=0>
+                                </div>
+                                <div class="col-6 ">
+                                    <div id="hue-distance-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row mb-2 ">
+                                <div class="col-4 text-end">
+                                    <label for="saturation-distance">&plusmnSaturation: </label>
+                                </div>
+                                <div class="col-2">
+                                    <input id="saturation-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
+                                </div>
+                                <div class="col-6 ">
+                                    <div id="saturation-distance-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row mb-2 ">
+                                <div class="col-4 text-end">
+                                    <label for="luminance-distance">&plusmnLuminance: </label>
+                                </div>
+                                <div class="col-2">
+                                    <input id="luminance-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
+                                </div>
+                                <div class="col-6 ">
+                                    <div id="luminance-distance-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--ITEMS-->
+            <h5 id="paints-list-title">Paints similar to the adjusted colour</h5>
+            <div id="paints" class="container ">
+                <div id="no-results">No paints found.</div>
+                {% if paints %}
+                    {% for p in paints %}
+                    <div class="row justify-content-center item-card mb-2" custom-h={{p.colour.H}} custom-s={{p.colour.S}} custom-l={{p.colour.L}}>
+                        <div class="col-2">{{ p.brand.name }}</div>
+                        <div class="col-4">{{ p.name }}</div>
+                        <div class="col-3 border border-dark rounded" style="background-color: rgb({{p.colour.R}},{{p.colour.G}},{{p.colour.B}})"></div>
+                        <div class="col-3 text-start">HSL({{p.colour.H}}, {{p.colour.S}}%, {{p.colour.L}}%)</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty">No paints found.</div>
+                {% endif %}
+            </div><!--end #paints-->
+        </div><!--end .list-section-->
+    </div><!--end #filter-block-->
 {% endblock %}
