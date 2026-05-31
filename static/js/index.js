@@ -345,7 +345,7 @@ function get_ranking(references, max_distances, attributes) {
     //gets an array of rankings based on distance between reference colour and attributes of an element
     var distances = {};
     const WEIGHTS = {}
-    WEIGHTS['hue'] = 3
+    WEIGHTS['hue'] = 2
     WEIGHTS['saturation'] = 0.5
     WEIGHTS['luminance'] = 0.5
     //get min distance between reference hue and element hues
@@ -372,6 +372,8 @@ function get_ranking(references, max_distances, attributes) {
     //normalise total
     max_total = WEIGHTS['hue'] * 180 + WEIGHTS['saturation'] * 100 + WEIGHTS['luminance'] * 100;
     rankings['total'] = Math.round(100 * (max_total - rankings['total']) / max_total);
+    console.log(distances);
+    console.log(rankings);
     return rankings;
 }
 //Helper functions for saturation/luminance
