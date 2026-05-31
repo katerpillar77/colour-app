@@ -370,9 +370,9 @@ function get_ranking(references, max_distances, attributes) {
         rankings['total'] += rankings[name];
     });
     //normalise total
-    max_total = WEIGHTS['hue'] * 180 + WEIGHTS['saturation'] * 100 + WEIGHTS['luminance'] * 100;
-    rankings['total'] = Math.round(100 * (max_total - rankings['total']) / max_total);
-    console.log(distances);
+    threshold_total = WEIGHTS['hue'] * 50 + WEIGHTS['saturation'] * 30 + WEIGHTS['luminance'] * 20;
+    rankings['total'] = Math.round(100 * Math.max(0, threshold_total - rankings['total'])) / threshold_total);
+//    console.log(distances);
     console.log(rankings);
     return rankings;
 }
