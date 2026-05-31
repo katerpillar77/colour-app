@@ -371,7 +371,7 @@ function get_ranking(references, max_distances, attributes) {
     });
     //normalise total
     threshold_total = WEIGHTS['hue'] * 50 + WEIGHTS['saturation'] * 30 + WEIGHTS['luminance'] * 20;
-    rankings['total'] = Math.round(100 * Math.max(0, threshold_total - rankings['total'])) / threshold_total);
+    rankings['total'] = Math.round(100 * Math.max(0, threshold_total - rankings['total']) / threshold_total);
 //    console.log(distances);
     console.log(rankings);
     return rankings;
