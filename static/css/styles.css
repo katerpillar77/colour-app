@@ -1,13 +1,52 @@
-.cp_dialog {
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+.navbar {
+    background-image:url('/static/images/rainbowbanner.jpg');
+    background-size: 100% 100%;
+}
+#selected-colour .cp_dialog {
     width: 50%
 }
+.constrain-sm {
+    max-width: 516px
+}
+.constrain-720, .constrain-md {
+    max-width: 720px
+}
+.constrain-968, .constrain-lg {
+    max-width: 968px
+}
+
 .colour-ref {
     background-color: white;
-    padding: 10%;
-    height: 150px;
+    min-height: 10rem;
 }
+.compare-colours {
+    min-height:10rem;
+}
+.saved-colour {
+    min-height: 5rem;
+    display: flex;
+}
+.colour-small {
+    min-height: 3rem;
+}
+.colour-button:hover {
+    outline: 2px solid black;
+    
+}
+span.colour-name  {
+    background-color: white;
+    width: fit-content;
+}
+
 .range-slider__thumb[data-lower] {
     width: 0;
+}
+.colour-holder {
+    min-height: 2rem
 }
 .range-slider__range {
     border-radius: 6px;
@@ -18,10 +57,24 @@
 .hide-initial  {
     display: none;
 }
-#no-results  {
-    hidden="true"
-}
-.navbar {
-    background-image:url('/static/images/rainbowbanner.jpg');
+
+.active {
+   font-weight: 800
 }
 
+.item-card .btn {
+    vertical-align: top
+}
+.item-card {
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+}
+
+@media (hover: none) {
+  /* Hover is not supported */
+ .tooltip
+ {
+  display: none;
+ }
+}

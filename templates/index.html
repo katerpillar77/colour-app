@@ -5,43 +5,87 @@
 {% endblock %}
 
 {%block include %}
-        <!--rangeSlider-->
-        <script src="https://cdn.jsdelivr.net/npm/range-slider-input@2.4/dist/rangeslider.umd.min.js"></script>
+    <!--rangeSlider-->
+    <script src="https://cdn.jsdelivr.net/npm/range-slider-input@2.4/dist/rangeslider.umd.min.js"></script>
 
-        <!-- js colorpicker -->
-        <script src="{{ url_for('static', filename='js/colorpicker/colorpicker.iife.js')}}"></script>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/colorpicker.min.css')}}" />
+    <!-- js colorpicker -->
+    <script src="{{ url_for('static', filename='js/colorpicker/colorpicker.iife.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/colorpicker.min.css')}}" />
 
-        <!--tinycolor-->
-        <script src="{{ url_for('static', filename='js/tinycolor-min.js')}}"></script>
+    <!--tinycolor-->
+    <script src="{{ url_for('static', filename='js/tinycolor-min.js')}}"></script>
 
-        <!--page-specific js-->
-        <script src="{{ url_for('static', filename='js/index.js')}}"></script>
+    <!--page-specific js-->
+    <script src="{{ url_for('static', filename='js/index.js')}}"></script>
 
-    {% endblock %}
+{% endblock %}
 
 {% block main %}
-<h1>Paint colour comparison tool</h1>
+    <h1>Paint colour comparison tool</h1>
     <!-- COLOUR CHOOSER -->
-
-    <div class="container border border-dark rounded mb-2 py-2">
+    <div id="colour-chooser" class="container border border-dark rounded mb-2 py-2 constrain-md">
+        <p class="text-start d-none d-md-block">Choose a reference colour using the colour picker, or pick a saved colour if you are logged in. Adjust the colour, if desired, using the saturation and luminance sliders. Paint colours that are similar to the adjusted colour will be displayed below.</p>
         <div class="row justify-content-center">
             <div class="col-md px-3 ">
-                <div class="row ">
-                    <h3>Reference colour</h3>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-1 text-end p-0" data-bs-toggle="tooltip" data-bs-title="How does it work?">
+                        <button type="button" class="d-md-none btn btn-secondary px-2 py-1" data-bs-toggle="modal" data-bs-target="#helpModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14"/>
+                        </svg></button>
+                    </div>
+                    <div class="col-10 p-0">
+                        <h3 class="display-6">Reference colour</h3>
+                    </div>
+                    <div class="col-1"></div>
                 </div>
-                <div class="row mb-3">
-                    <div id="selected-colour" class="w-100 colour-ref border border-dark rounded">
-                        <button id="picker" class="color-picker" >
+                <div class="row mb-2">
+                    <div id="selected-colour" class="container colour-ref w-100 py-1 border border-dark rounded">
+                        <div class="row mb-2">
+                            <div  class="col col-2 text-start px-1"  data-bs-toggle="tooltip" data-bs-title="Add reference colour to saved colours">
+                                <button id="save-reference-colour" class="add-saved border p-0 btn btn-light border-dark rounded" colour="#ffffff" data-bs-toggle="modal" data-bs-target="#addSavedColModal" hidden>
+                                    {% if current_user.is_anonymous == false %}
+                                        <img src="{{ heart }}" class="m-1">
+                                    {% endif %}
+                                </button>
+                            </div>
+                            <div class="col-8 text-center">
+                                {% if current_user.is_anonymous %}
+                                    <form action ="/login",  method="post">
+                                        <button id="login-for-fav" class="border mt-4 mb-1 btn btn-light border-dark rounded select-fav mt-1" data-bs-toggle="tooltip" data-bs-title="Choose from your saved colours">
+                                            Login for saved colours.
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <button id="select-saved-colour" class="border mt-4 mb-1 btn btn-light border-dark rounded select-fav mt-1" data-bs-toggle="modal" data-bs-target="#selectSavedColModal" >
+                                        Saved colours <img src="{{ heart }}">
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button id="picker" class="color-picker" >
+                            </div>
+                        </div>
                     </div><!--end #selected_colour-->
                 </div><!--end .row-->
             </div><!--end .col-->
             <div class="col-md px-3 hide-initial">
                 <div class="row ">
-                    <h3>Adjusted colour</h3>
+                    <h3 class="display-6">Adjusted colour</h3>
                 </div>
                 <div class="row mb-3">
-                    <div id="adjusted-colour" class="colour-ref  w-100 border border-dark rounded"></div>
+                    <div id="adjusted-colour" class="colour-ref py-1 w-100 border border-dark rounded">
+                        <div class="row mb-2">
+                            <div  class="col col-2 text-start px-1"  data-bs-toggle="tooltip" data-bs-title="Add adjusted colour to saved colours">
+                                <button id="save-adjusted-colour" class="add-saved border p-0 btn btn-light border-dark rounded" colour="#ffffff" data-bs-toggle="modal" data-bs-target="#addSavedColModal" hidden> 
+                                    {% if current_user.is_anonymous == false %}
+                                        <img src="{{ heart }}" class="m-1">
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div><!--end .row-->
             </div><!--end .col-->
         </div><!--end .row-->
@@ -54,7 +98,7 @@
                     <input id="hue" class="border-dark border rounded w-100" value=0 readonly>
                 </div>
                 <div class="col-6 ">
-                    <button id="reset" class="border-dark border rounded w-50">Reset</button>
+                    <button id="reset" class="btn btn-secondary border-dark border rounded w-50">Reset</button>
                 </div>
             </div>
             <div class="row mb-2 ">
@@ -83,32 +127,30 @@
     </div><!--end .container-->
 
     <!-- FILTERS AND PAINTS LIST-->
-    <div id="filter-block" class="hide-initial container py-2 border border-dark rounded">
-        <!-- Filters -->
-        <!--<div class="filters">
-            <a href="?status=all" class="{{ 'active' if filter_status=='all' }}">All</a>
-            <a href="?status=active" class="{{ 'active' if filter_status=='active' }}">Active</a>
-            <a href="?status=completed" class="{{ 'active' if filter_status=='completed' }}">Completed</a>
-            <a href="?status=archived" class="{{ 'active' if filter_status=='archived' }}">Archived</a>
-            <div class="search-box">
-                <form method="GET">
-                    <input type="hidden" name="status" value="{{ filter_status }}">
-                    <input type="text" name="q" value="{{ search }}" placeholder="Search...">
-                    <button class="btn-sm btn-ghost" type="submit">🔍</button>
-                </form>
+    <div id="filter-block" class=" container py-2 border border-dark rounded constrain-lg">
+        <div class="container mb-2">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-2 text-end p-0"  data-bs-toggle="tooltip" data-bs-title="How does it work?">
+                    <button type="button" class="d-md-none btn btn-secondary px-2 py-1" data-bs-toggle="modal" data-bs-target="#helpFilterModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14"/>
+                    </svg></button>
+                </div>
+                <div class="col-8">
+                    <h3 class="display-6">Find paint colours</h3>
+                </div>
+                <div class="col-2"></div>
             </div>
-        </div>-->
-        <h3>Find paint colours</h3>
-        <p class="text-start">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Leeway on the hue, saturation and luminance values is in settings.</p>
+        </div>
+        <p class="text-start d-none d-md-block">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Leeway on the hue, saturation and luminance values is in settings.</p>
         <div id= "list-section" >
             <div class="container text-center  mb-3">
                 <div class="row justify-content-center">
-                    <div class="col text-start">
+                    <div class="col text-start p-0">
                         <select  id="filter" class="form-select" >
                             <!--<option value="0" selected>All</option>-->
-                            <option value="1" selected text="Similar colours to the adjusted colour">Analogous<span id="analogous-hue"></span></option>
-                            <option value="2" text="Complementary colours to the adjusted colour">Complementary<span id="complementary-hue"></span></option>
-                            <option value="3" text="Triadic colours to the adjusted colour">Triadic<span id="triadic-hues"></span></option>
+                            <option value="1" selected text="Similar to the adjusted colour">Analogous<span id="analogous-hue"></span></option>
+                            <option value="2" text="Complementary to the adjusted colour">Complementary<span id="complementary-hue"></span></option>
+                            <option value="3" text="Triadic to the adjusted colour">Triadic<span id="triadic-hues"></span></option>
                         </select>
                     </div>
                     <div class="col-3 text-end">
@@ -125,23 +167,33 @@
                 <h5 id="paints-list-title">Paints similar to the adjusted colour</h5>
                 <div id="paints" class="container ">
                     <div class="row fw-bold justify-content-center table-headings mb-2" >
-                        <div class="col-2">BRAND</div>
-                        <div class="col-3">PAINT NAME</div>
-                        <div class="col-2">COLOUR</div>
-                        <div class="col-3">HSL</div>
-                        <div class="col-2 ">RELEVANCE</div>
+                        <div class="col-2">Brand</div>
+                        <div class="col-3">Paint name</div>
+                        <div class="col-4">Colour</div>
+                        <div class="col-3 text-end">Relevance</div>
                     </div>
                     <div id="no-results">No paints found.</div>
                     <div id="paints-list">
                         {% for p in paints %}
-                        <div class="row justify-content-center item-card mb-2" custom-h={{p.colour.H}} custom-s={{p.colour.S}} custom-l={{p.colour.L}}>
-                            <div class="col-2">{{ p.brand.name }}</div>
-                            <div class="col-3">{{ p.name }}</div>
-                            <div class="colour-holder col-2 p-0" data-bs-toggle="tooltip" data-bs-title="Click to compare with reference/adjusted colours">
-                                <button type="button" class="compare btn w-100 h-100 border border-dark rounded" style="background-color: rgb({{p.colour.R}},{{p.colour.G}},{{p.colour.B}})", data-bs-toggle="modal" data-bs-target="#compareModal"></button>
-                            </div>
-                            <div class="col-3 ">HSL({{p.colour.H}}, {{p.colour.S}}%, {{p.colour.L}}%)</div>
-                            <div id="relevance" class="col-2 "></div>
+                        <div class="row  item-card justify-content-center align-items-center py-1 mb-2 rounded" custom-h={{p.colour.H}} custom-s={{p.colour.S}} custom-l={{p.colour.L}}>
+                            <div class="col-2 p-1">{{ p.brand.name }}</div>
+                            <div class="col-3 p-1">{{ p.name }}</div>
+                            {% if current_user.is_anonymous%}
+                                <div class="colour-holder col-3 p-0" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours">
+                                    <button type="button" class="compare btn w-100 h-100 border border-dark rounded" style="background-color: #{{p.colour.hex}}", data-bs-toggle="modal" data-bs-target="#compareModal"></button>
+                                </div>
+                            {% else %}
+                                <div class=" col-2 p-0" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours">
+                                    <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" style="background-color: #{{p.colour.hex}}", data-bs-toggle="modal" data-bs-target="#compareModal"></button>
+                                </div>
+                                <div class="col-1 p-1" data-bs-toggle="tooltip" data-bs-title="Add to saved paints">
+                                    <button type="button" class="save-paint p-0 btn w-auto border border-dark rounded" paint-id="{{p.id}}" paint-name="{{ p.brand.name }} {{p.name}}" paint-colour="#{{p.colour.hex}}" data-bs-toggle="modal" data-bs-target="#addSavedPaintModal">
+                                        <img class="m-1" src="{{ heart }}">
+                                    </button>
+                                </div>
+                            {% endif %}
+                            <div class="col-2 p-1 small">HSL({{p.colour.H}}, {{p.colour.S}}%, {{p.colour.L}}%)</div>
+                            <div id="relevance" class="col-2 p-1"></div>
                         </div>
                         {% endfor %}
                     </div>
@@ -153,102 +205,5 @@
         </div><!--end .list-section-->
     </div><!--end #filter-block-->
 
-
-    <!--MODALS-->
-    <!-- Settings Modal -->
-    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="settingsModalLabel">Change settings for filtering</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body container">
-                <p class="text-start">What change to the values is considered the same? For example, if &plusmnHue is set to 5, a colour with a hue of 50 or 60 will be considered the same as one with a hue of 55.</p>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="hue-distance">&plusmnHue: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="hue-distance" value="5" min="0" max="180" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="hue-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="saturation-distance">&plusmnSaturation: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="saturation-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="saturation-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="luminance-distance">&plusmnLuminance: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="luminance-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="luminance-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Paint compare modal-->
-    <div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="compareModalLabel">Compare colours</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body container">
-                    <div class="row" class="mb-1 fw-bold">
-                        <div class="col">
-                            Selected colour
-                        </div>
-                        <div class="col">
-                            <div class="row">
-                                <label for="compare-adj" >Adjusted colour<input  type="radio" id="compare-adj" class="m-2" name="compare" value="0" checked="checked"></label>
-                            </div>
-                            <div class="row">
-                                <label for="compare-ref" class=>Reference colour<input  type="radio" id="compare-ref" class="m-2" name="compare" value="1"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col p-0">
-                            <div id="chosen-colour" class="p-4 border border-dark rounded" ></div>
-                        </div>
-                        <div class="col p-0">
-                            <div id="compare-reference-colour" class="p-4 border border-dark rounded" hidden="true"></div>
-                            <div id="compare-adjusted-colour" class="p-4 border border-dark rounded"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include "index-modals.html" %}
 {% endblock %}

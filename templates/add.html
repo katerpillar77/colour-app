@@ -1,31 +1,58 @@
 {% extends "layout.html" %}
 
+{%block include %}
+
+    <!-- js colorpicker -->
+    <script src="{{ url_for('static', filename='js/colorpicker/colorpicker.iife.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/colorpicker.min.css')}}" />
+
+    <!--tinycolor-->
+    <script src="{{ url_for('static', filename='js/tinycolor-min.js')}}"></script>
+
+    <!--page-specific js-->
+    <script src="{{ url_for('static', filename='js/add.js')}}"></script>
+
+{% endblock %}
+
 {% block title %}
     Add
 {% endblock %}
 
 {% block main %}
-<h1>Add a paint colour</h1>
+<h1>Add a paint to the database</h1>
     <form action="/add" method="post">
-        <div class="mb-3">
-            <input autocomplete="off"  autofocus class="form-control mx-auto w-auto" name="name" placeholder="Paint colour" type="text">
-        </div>
-        <div class="mb-3">
-            <input autocomplete="off" class="form-control mx-auto w-auto" name="hex" placeholder="Hexcode" type="text">
-        </div>
-        <div class="container">
+        <div class="container border border-dark rounded p-3 constrain-720">
             <div class="row">
-              <div class="col col-">
-                <input autocomplete="off"  class="form-control mx-auto " name="R" placeholder="Red" type="integer" min="1" max="255" step="1">
-              </div>
-              <div class="col col-">
-                  <input autocomplete="off"  class="form-control mx-auto " name="G" placeholder="Green" type="integer" min="1" max="255" step="1">
-              </div>
-              <div class="col col-">
-                  <input autocomplete="off"  class="form-control mx-auto " name="B" placeholder="Blue" type="integer" min="1" max="255" step="1">
-              </div>
+                <div class="col-md text-start">
+                    <div class="row mb-3">
+                        <div class="col ">
+                            <select id="brand" class="form-select w-100" name="brand">
+                                <option selected>Select brand</option>
+                                {% for b in brands %}
+                                    <option value="{{ b.id }}">{{ b.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col ">
+                            <button id="add-brand" class="btn btn-secondary border border-dark rounded">Add new brand</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3 ">
+                        <div class="col ">
+                            <input autocomplete="off" class="form-control w-100" name="name" placeholder="Paint name" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-3 ">
+                        <div class="col ">
+                            <button class="btn btn-primary w-100" type="submit">Add paint</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div id="picker" class="color-picker" ></div>
+                </div>
+                <input id="hex" name="hex" type="text" hidden>
             </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Add</button>
-    </form>
+        </form>
+    </div>
 {% endblock %}
