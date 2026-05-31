@@ -240,6 +240,7 @@ function get_ranking(references, max_distances, attributes){
     //get distance between reference saturation and element saturation, then for luminance
     distances['saturation']=getSatDifference(references['saturation'], attributes['saturation']);
     distances['luminance']=getSatDifference(references['luminance'], attributes['luminance']);
+    console.log(distances);
     //create rankings
     let rankings={};
     rankings['total']=0;
@@ -252,6 +253,7 @@ function get_ranking(references, max_distances, attributes){
         }
         rankings['total']+=rankings[name];
     });
+    console.log(rankings);
     return rankings;
 }
 //Helper functions for saturation/luminance
