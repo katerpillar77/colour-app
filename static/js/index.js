@@ -346,8 +346,8 @@ function get_ranking(references, max_distances, attributes) {
     var distances = {};
     const WEIGHTS = {}
     WEIGHTS['hue'] = 2
-    WEIGHTS['saturation'] = 0.5
-    WEIGHTS['luminance'] = 0.5
+    WEIGHTS['saturation'] = 1
+    WEIGHTS['luminance'] = 1
     //get min distance between reference hue and element hues
     const hue_distances = [];
     for (let index = 0; index < references['hue'].length; ++index) {
