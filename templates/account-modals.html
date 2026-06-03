@@ -1,0 +1,99 @@
+    <!--MODALS-->
+    <!--Edit saved paint modal-->
+    <div class="modal fade" id="editSavedPaintModal" tabindex="-1" aria-labelledby="editSavedPaintModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSavedPaintModalLabel">Edit saved paint</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-edit-paint" class="modal-body container">
+                    <div class="text-start mb-2">Edit saved notes for this paint"</div>
+                    <div id="paint-details" class="container px-0 mb-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="row h-50">
+                                    <div class="col">
+                                        <div id="edit-paint-colour" class="colour-holder w-100 h-100 border border-dark rounded" style="background-color: #ffffff" title="#ffffff"></div>
+                                    </div>
+                                </div>
+                                 <div class="row h-50">
+                                    <div class="col">
+                                        <div id="edit-paint-name" class="paint-name">#ffffff</div>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-8">
+                                <form id="paint-input" class="h-100">
+                                    <textarea id="edit-paint-notes" maxlength="256" class="w-100 h-100 border border-dark rounded" placeholder="Notes about paint (optional)" name="notes"></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end #paint-details-->                    
+                    
+                    <button type="button" class="add-workspace float-start btn-secondary btn w-auto border border-dark rounded"   data-bs-toggle="tooltip" data-bs-title="Add a new workspace and save the colour into it">
+                        Copy paint into another workspace
+                    </button>                    
+                </div><!--end .modal-body-->
+                <div class="modal-footer">
+                    <button id="edit-paint-modal-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="edit-paint-modal-save" type="button" class="btn btn-primary" disabled>Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--Edit saved colour modal-->
+    <div class="modal fade" id="editSavedColourModal" tabindex="-1" aria-labelledby="editSavedColourModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSavedColourModalLabel">Edit saved colour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-edit-colour" class="modal-body container">
+                    <div class="text-start mb-2">Edit saved name and notes for this colour"</div>
+                    <div id="colour-details" class="container px-0 mb-3">
+                        <div class="row">
+                            <div class="col-3 ">
+                                <div class="row h-75">
+                                    <div class="col">
+                                        <div id="edit-colour-colour" class="btn colour-holder w-100 h-100 border border-dark rounded" style="background-color: #ffffff" title="#ffffff"></div>
+                                    </div>
+                                </div>
+                                 <div class="row h-25">
+                                    <div class="col">
+                                        <div id="edit-colour-code" class="colour-code">#ffffff</div>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-9">
+                                <form id="colour-input">
+                                    <div class="row mb-2 h-25 text-start">
+                                        <div class="col">
+                                            <input id="edit-colour-name" class="w-100 border border-dark rounded" autocomplete="off" placeholder="Name for colour" name="name" maxlength="32">
+                                            <div id="name-required" hidden class="text-danger">Name is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="row h-75 text-start">
+                                        <div class="col">
+                                            <textarea id="edit-colour-notes" maxlength="256" class="w-100 h-100 border border-dark rounded" placeholder="Notes about colour (optional)" name="notes"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end #paint-details-->                    
+                    
+                    <button type="button" class="add-workspace float-start btn-secondary btn w-auto border border-dark rounded"   data-bs-toggle="tooltip" data-bs-title="Add a new workspace and save the colour into it">
+                        Copy paint into another workspace
+                    </button>                    
+                </div><!--end .modal-body-->
+                <div class="modal-footer">
+                    <button id="edit-colour-modal-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="edit-colour-modal-save" type="button" class="btn btn-primary" disabled>Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    

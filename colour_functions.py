@@ -4,9 +4,11 @@ from models import Paint, Colour, Brand, sa
 from sqlalchemy import func
 import colorsys
 
-def get_all_paints():
+def get_all_paints(limit=None):
     ##get list of all paints in the database
     query=sa.select(Paint)
+    if limit!=None:
+        query=sa.select(Paint).limit(limit)        
     return db.session.scalars(query)
 
 def get_all_brands():

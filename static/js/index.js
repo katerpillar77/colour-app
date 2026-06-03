@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initiateSliders();
     initiateButtons();
     filterList();
+
+  
 });
 
 
@@ -38,7 +40,7 @@ function changeColour() {
     document.querySelectorAll('.colour-ref').forEach((elem) => {
         applyColor(elem, current_colour)
     });
-    document.querySelectorAll('.add-saved').forEach((button) => {
+    document.querySelectorAll('.add-saved-colour').forEach((button) => {
         button.setAttribute('colour', current_colour);
     });
     //show everything if hidden (only on first run)
@@ -51,15 +53,16 @@ function changeColour() {
         if (elementExists) {
             document.getElementById('login-for-fav').setAttribute('hidden', 'true');
         }
-        document.querySelectorAll('.add-saved').forEach((button) => {
+        document.querySelectorAll('.add-saved-colour').forEach((button) => {
             button.removeAttribute('hidden');
             //add event listeners as well
             button.addEventListener('click', function() {
+                //display modal
+                const modalAddColour = new bootstrap.Modal(document.getElementById('add-saved-colour-modal')).show();
                 //populate modal to allow user to select workspace to save colour into
                 let colour=this.getAttribute('colour');                
                 if (colour=="") {
-                    //trigger close of modal
-                    document.getElementById('add-colour-modal-close').click() 
+                    return;
                 }
                 let modalElement = document.getElementById('modal-add-colour');
                 displayColoursInWorkspaces(modalElement, 'add', colour);
@@ -89,6 +92,10 @@ function initiateSliders() {
             adjustColour();
         }
     });
+    document.getElementById('saturation').addEventListener('change', function() {
+        saturation_slider.value([0, this.value]);
+       // adjustColour();
+    });
     luminance_slider = rangeSlider(document.getElementById('luminance-slider'), {
         min: 0,
         max: 100,
@@ -101,45 +108,91 @@ function initiateSliders() {
             adjustColour();
         }
     });
-    let hue_dist = document.getElementById('hue-distance');
-    hue_distance_slider = rangeSlider(document.getElementById('hue-distance-slider'), {
+    document.getElementById('luminance').addEventListener('change', function() {
+        luminance_slider.value([0, this.value]);
+        //adjustColour();
+    });
+    document.getElementById('hue').addEventListener('change', function() {
+        adjustColour();
+    });
+
+    
+    //define weights for ranking
+    WEIGHTS = {};
+    WEIGHTS['hue'] = 3;
+    WEIGHTS['saturation'] = 1
+    WEIGHTS['luminance'] = 2;
+
+    //sliders/inputs for settings modal
+    let hue_weight = document.getElementById('hue-weight');
+    hue_weight.value=WEIGHTS['hue'];
+    hue_weight.setAttribute('default', WEIGHTS['hue']);
+    hue_weight.addEventListener('change', function() {
+        hue_weight_slider.value([0, this.value]);
+        WEIGHTS['hue']=this.value;
+
+    });
+    hue_weight_slider = rangeSlider(document.getElementById('hue-weight-slider'), {
         min: 0,
-        max: 180,
-        step: 1,
+        max: hue_weight.getAttribute('max'),
+        step: hue_weight.getAttribute('step'),
         thumbsDisabled: [true, false],
-        value: [0, hue_dist.value],
+        value: [0, hue_weight.value],
         rangeSlideDisabled: true,
         onInput: (value, userInteraction) => {
-            hue_dist.value = value[1];
+            hue_weight.value = value[1];
+            WEIGHTS['hue']=value[1];
             adjustColour();
         }
     });
-    let sat_dist = document.getElementById('saturation-distance');
-    saturation_distance_slider = rangeSlider(document.getElementById(
-    'saturation-distance-slider'), {
+    let sat_weight = document.getElementById('saturation-weight');
+    sat_weight.value=WEIGHTS['saturation'];
+    sat_weight.setAttribute('default', WEIGHTS['saturation']);
+    sat_weight.addEventListener('change', function() {
+        saturation_weight_slider.value([0, this.value]);
+
+    });
+    saturation_weight_slider = rangeSlider(document.getElementById('saturation-weight-slider'), {
         min: 0,
-        max: 100,
-        step: 1,
+        max: sat_weight.getAttribute('max'),
+        step: sat_weight.getAttribute('step'),
         thumbsDisabled: [true, false],
-        value: [0, sat_dist.value],
+        value: [0, sat_weight.value],
         rangeSlideDisabled: true,
         onInput: (value, userInteraction) => {
-            sat_dist.value = value[1];
+            sat_weight.value = value[1];
+            WEIGHTS['saturation']=value[1];
             adjustColour();
         }
     });
-    let lum_dist = document.getElementById('luminance-distance');
-    luminance_distance_slider = rangeSlider(document.getElementById('luminance-distance-slider'), {
+    let lum_weight = document.getElementById('luminance-weight');
+    lum_weight.value=WEIGHTS['luminance'];
+    lum_weight.setAttribute('default', WEIGHTS['luminance']);
+    lum_weight.addEventListener('change', function() {
+        luminance_weight_slider.value([0, this.value]);
+    });
+    luminance_weight_slider = rangeSlider(document.getElementById('luminance-weight-slider'), {
         min: 0,
-        max: 100,
-        step: 1,
+        max: lum_weight.getAttribute('max'),
+        step: lum_weight.getAttribute('step'),
         thumbsDisabled: [true, false],
-        value: [0, lum_dist.value],
+        value: [0, lum_weight.value],
         rangeSlideDisabled: true,
         onInput: (value, userInteraction) => {
-            lum_dist.value = value[1];
+            lum_weight.value = value[1];
+            WEIGHTS['luminance']=value[1];
             adjustColour();
         }
+    });
+    document.getElementById('reset-weights').addEventListener('click', function() {
+        console.log('resetting weights');
+        hue_weight.value=hue_weight.getAttribute('default');
+        hue_weight_slider.value([0, hue_weight.value]);
+        sat_weight.value=sat_weight.getAttribute('default');
+        saturation_weight_slider.value([0, sat_weight.value]);
+        lum_weight.value=lum_weight.getAttribute('default');
+        luminance_weight_slider.value([0, lum_weight.value]);
+        adjustColour();
     });
 }
 
@@ -174,9 +227,11 @@ function adjustColour() {
 
 function initiateButtons() {
 
-    //add additional event to button that opens modal
+    //button to open compare colours modal
     document.querySelectorAll('.compare').forEach((button) => {
         button.addEventListener('click', function() {
+            //display modal
+            const modalCompare = new bootstrap.Modal(document.getElementById('compare-modal')).show();
             document.getElementById('chosen-colour').style.backgroundColor = this
                 .style.backgroundColor;
             document.getElementById('compare-reference-colour').style
@@ -205,11 +260,12 @@ function initiateButtons() {
     });
 
     const select_saved_colour = document.getElementById('select-saved-colour');
-    if (select_saved_colour) {
+    if (!!select_saved_colour) {
         select_saved_colour.addEventListener('click', function() {
+            //display modal
+            const modalSelect = new bootstrap.Modal(document.getElementById('select-saved-colour-modal')).show();
             //populate modal to allow user to select from saved colours
-            let modalElement = document.getElementById('modal-select-colour');
-            displayColoursInWorkspaces(modalElement, 'select');
+            displayColoursInWorkspaces(document.getElementById('modal-select-colour'), 'select');
         });
     }
 
@@ -221,29 +277,27 @@ function initiateButtons() {
                 'colour': this.getAttribute('paint-colour')
             };
             if (paint['id']=="") {
-                //trigger close of modal - doesn't work
-                document.getElementById('add-paint-modal-close').click() 
+                return;
             }
+            //display modal
+            const modalSavePaint = new bootstrap.Modal(document.getElementById('add-saved-paint-modal')).show();
             //populate modal to allow user to select workspace to save paint into
-            let modalElement = document.getElementById('modal-add-paint');
-            displayPaintsInWorkspaces(modalElement, paint);
+            displayPaintsInWorkspaces(document.getElementById('modal-add-paint'), paint);
         });
     });
 
-    //undo changes to modals when they close
-    const modal_select_colour = document.getElementById('selectSavedColModal');
+    const modal_select_colour = document.getElementById('select-saved-colour-modal');
     modal_select_colour.addEventListener('hidden.bs.modal', event => {
         destroyModalAccordion(modal_select_colour);
     });
-    const modal_add_colour = document.getElementById('addSavedColModal');
+    const modal_add_colour = document.getElementById('add-saved-colour-modal');
     modal_add_colour.addEventListener('hidden.bs.modal', event => {
         destroyModalAccordion(modal_add_colour);
     });
-    const modal_add_paint = document.getElementById('addSavedPaintModal');
+    const modal_add_paint = document.getElementById('add-saved-paint-modal');
     modal_add_paint.addEventListener('hidden.bs.modal', event => {
         destroyModalAccordion(modal_add_paint);
     });
-
 }
 
 //Helper function: fires event when needed
@@ -254,6 +308,12 @@ function createEvent(id) {
 }
 
 function filterList() {
+
+ // THIS NEEDS UPDATING  
+ // There are too many paints to load them all every time
+ // Need to load only paints with a similar hue when the colour is chosen, and then filter them here
+ // Reload paints when the hue is changed
+
     // Get list of all list items
     const items = document.querySelectorAll(".item-card");
     // Get the filter inputs and add listeners for the change event
@@ -274,9 +334,9 @@ function filterList() {
     function filter() {
 
         let distances = {};
-        distances['hue'] = hue_distance_input.value;
-        distances['saturation'] = saturation_distance_input.value;
-        distances['luminance'] = luminance_distance_input.value;
+        //distances['hue'] = hue_distance_input.value;
+       // distances['saturation'] = saturation_distance_input.value;
+        //distances['luminance'] = luminance_distance_input.value;
         let references = {};
         let hues = [];
         hues[0] = hue_input.value;
@@ -292,7 +352,7 @@ function filterList() {
         references['saturation'] = saturation_input.value
         references['luminance'] = luminance_input.value
         hue = hues[0];
-        distance = distances['hue'];
+        //distance = distances['hue'];
         results = false;
         // Look at each item in the array
         items.forEach(element => {
@@ -303,7 +363,7 @@ function filterList() {
             attributes["saturation"] = element.getAttribute("custom-s");
             attributes["luminance"] = element.getAttribute("custom-l");
             //work out the ranking value for this element
-            rankings = get_ranking(references, distances, attributes);
+            rankings = get_ranking(references, attributes);
             element.setAttribute("ranking", rankings['total']);
             //filter by ranking threshold
             const RANKING_THRESHOLD = 60;
@@ -341,36 +401,45 @@ function filterList() {
 }
 
 //get ranking for element
-function get_ranking(references, max_distances, attributes) {
-    //gets an array of rankings based on distance between reference colour and attributes of an element
+function get_ranking(references, attributes) {
+    //gets an array of rankings based on distances between reference colour and attributes of an element
+
+    const HUE_THRESHOLD = 30;
+
     var distances = {};
-    const WEIGHTS = {}
-    WEIGHTS['hue'] = 3
-    WEIGHTS['saturation'] = 0.7
-    WEIGHTS['luminance'] = 0.5
+
     //get min distance between reference hue and element hues
     const hue_distances = [];
     for (let index = 0; index < references['hue'].length; ++index) {
         hue_distances[index] = getHueDifference(references['hue'][index], attributes['hue']);
     }
     distances['hue'] = Math.min(...hue_distances);
-    //get distance between reference saturation and element saturation, then for luminance
-    distances['saturation']=getSatDifference(references['saturation'], attributes['saturation']);
-    distances['luminance']=getSatDifference(references['luminance'], attributes['luminance']);
-    console.log(distances);
-    //create rankings
+
     let rankings = {};
     rankings['total'] = 0;
+    //only display and calculate ranking if within the maximum hue distance (otherwise irrelevant)
+    if (distances['hue'] > HUE_THRESHOLD) {
+        return rankings;
+    }
+    //get distance between reference saturation and element saturation, then for luminance
+    distances['saturation'] = getSatDifference(references['saturation'], attributes['saturation']);
+    distances['luminance'] = getSatDifference(references['luminance'], attributes['luminance']);
+    //create rankings
+    
     const NAMES = ['hue', 'saturation', 'luminance'];
     NAMES.forEach(name => {
-        if (distances[name] - max_distances[name] < 0) {
-            rankings[name] = 0;
-        } else {
-            rankings[name] = distances[name] * WEIGHTS[name];
-        }
+        //not doing max distances any more
+   //     if (distances[name] - max_distances[name] < 0) {
+   //         rankings[name] = 0;
+   //     } else {
+   //         rankings[name] = distances[name] * WEIGHTS[name];
+   //     }
+        rankings[name] = distances[name] * WEIGHTS[name];
         rankings['total'] += rankings[name];
     });
-    console.log(rankings);
+    //normalise total
+    max_total = WEIGHTS['hue'] * 50 + WEIGHTS['saturation'] * 20 + WEIGHTS['luminance'] * 20;
+    rankings['total'] = Math.round(100 * (max_total - rankings['total']) / max_total);
     return rankings;
 }
 //Helper functions for saturation/luminance
@@ -415,385 +484,4 @@ const applyColor = (el, colour) => {
     } else {
         el.style.backgroundColor = ''
     }
-}
-
-//user functions
-
-async function displayPaintsInWorkspaces(destElem, paint={}) {
-    //inserts list of saved paints nested inside workspaces into modal for adding saved paints
- 
-    showSpinner(destElem, true);
-
-    //hide error messages in modal
-    destElem.querySelectorAll('.error').forEach(function(element) {
-        element.setAttribute('hidden', 'true');
-    });
-
-    //add details of paint to be saved
-    colour_holder=destElem.querySelector('#paint-details .colour-holder');
-    const p_col = paint['colour'] ?? "#ffffff";
-    colour_holder.style.backgroundColor=p_col;
-    colour_holder.setAttribute('title', p_col);
-    destElem.querySelector('.paint-name').innerHTML = paint['name'] ?? "";
-    
-    //get data
-    const [paints, workspaces] = await Promise.all([loadSavedPaints(),
-        loadWorkspaces()]);
-
-    //get template for workspace
-    let content=destElem.querySelector('#template');
-    for (const w of workspaces) {
-        //clone accordion-item template
-        let new_content=content.cloneNode(true);
-        new_content.id="workspace-" + w.id;
-        let ws = content.parentNode.appendChild(new_content);
-        //add workspace details to accordion
-        ws.removeAttribute("hidden");
-        let accordion_button=ws.querySelector('.accordion-button');
-        accordion_button.setAttribute('data-bs-target', '#collapse'+w.id);
-        accordion_button.setAttribute('aria-controls', 'collapse'+w.id);
-        accordion_button.innerHTML = w.name;
-        ws.querySelector('.workspace-notes').innerHTML = w.notes;
-        accordion_collapse=ws.querySelector('.accordion-collapse');
-        accordion_collapse.id='collapse'+w.id;
-        //uncollapse if the first accordion item
-                  
-        //add event listener to the "choose" button
-        ws.querySelector('.choose-workspace').addEventListener ('click', function() {
-            savePaint(destElem, paint, ws, {id:w.id, name:w.name});
-        });
-        
-        //add paints
-        addPaintCol(paints, w, ws);
-    }
-    //push template to end to prevent accordion styling issues
-    content.parentNode.appendChild(content);
-    showSpinner(destElem, false);
-    return;
-}
-
-function addPaintCol( paint_list, w, ws, modalAction) {
-    //adds additional details for paint modal for a workspace
-
-    //add colours to workspaces
-    let col=ws.querySelector('#col-template');
-    let i =0;
-    for (const p of paint_list) {
-        //if the colour belongs in this workspace
-        if (p.workspace_id == w.id) {
-            i+=1;
-            //clone column template
-            let new_col=col.cloneNode(true);
-            new_col.id="paint-" + p.saved_paint_id;            
-            let paint = col.parentNode.appendChild(new_col);
-            //add paint details to column
-            paint.removeAttribute("hidden");
-            paint.querySelector('.paint-name').innerHTML = p.brand_name + " "+ p.paint_name;
-            let colour_holder=paint.querySelector('.saved-paint');
-            colour_holder.style.backgroundColor = "#" + p.hex;
-            //add name and notes to element's title
-            colour_holder.setAttribute('title', p.saved_paint_notes);
-        }
-    }
-    if (i==0 ){
-        //no paints
-        ws.querySelector('.already-saved').innerHTML="No paints saved in this workspace yet."
-    }
-}
-
-async function savePaint(modal, paint, ws, workspace) {
-    //saves a chosen paint to a chosen workspace
-
-    //hide error messages in modal
-    modal.querySelectorAll('.error').forEach(function(element) {
-        element.setAttribute('hidden', 'true');
-    });
-
-    let paint_notes = document.getElementById('colour-notes').value;
-    const response=await fetch('/addSavedPaint', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
-            body: JSON.stringify({
-                paint_id: paint['id'],
-                workspace_id: workspace['id'],
-                paint_notes: paint_notes
-            })
-    });
-    if (!response.ok) {
-        console.log('Response status: ' + response.status);
-        return false
-    }
-    const data = await response.json();
-    if (data['result']==false){
-        //paint is already saved in this workspace
-        let display_error=ws.querySelector('.error');
-        display_error.removeAttribute('hidden');
-        display_error.innerHTML="This paint is already saved in this workspace."
-        return;
-    }
-    
-    //empty form
-    document.getElementById("paint-input").reset();
-    
-    //trigger close of modal
-    document.getElementById('add-paint-modal-close').click() ;
-    //display confirmation message
-    displayMessage("The paint '" + paint['name'] + "' has been saved in your workspace '" + workspace['name'] + "'.");  
-}
-
-function displayMessage(message=""){
-    //display a modal with a message
-    if (message!="") {        
-        document.getElementById('confirmation-message').innerHTML=message;
-        const modalMessage = new bootstrap.Modal(document.getElementById('confirmModal'));
-        modalMessage.show();
-    }
-}
-
-async function displayColoursInWorkspaces(destElem, modalAction, colour_to_add="") {
-    //inserts list of saved colours nested inside workspaces into modal for adding/selecting saved colours
-    showSpinner(destElem, true);
-
-    //get data
-    let with_colours=false;
-    if (modalAction=="select") {
-        //get only workspaces with saved colours
-        with_colours=true;        
-    } 
-    
-    const [colours, workspaces] = await Promise.all([loadSavedColours(),
-        loadWorkspaces(with_colours)]);
-
-    if (modalAction=="select" && workspaces[0]==0){
-        //no workspaces with colours returned
-        insert_text(destElem, "No saved colours.");
-        return;
-    }
-    if (colours == false || workspaces == false) {
-        //error has occurred
-        insert_text(destElem, "Could not load saved colours.");
-        return;
-    }
-    if (modalAction=="add") {
-        //add details of colour to be saved
-        colour_holder=destElem.querySelector('#colour-details .colour-holder');
-        colour_holder.style.backgroundColor=colour_to_add;
-        colour_holder.setAttribute('title', colour_to_add);
-        destElem.querySelector('.colour-code').innerHTML =colour_to_add;
-    }
-    //get template for workspace
-    let content=destElem.querySelector('#template');
-   // let i=0;
-    for (const w of workspaces) {
-        //clone accordion-item template
-        let new_content=content.cloneNode(true);
-        new_content.id="workspace-" + w.id;
-        let ws = content.parentNode.appendChild(new_content);
-        //let ws = content.parentNode.insertBefore(new_content, content.nextSibling);
-        //add workspace details to accordion
-        ws.removeAttribute("hidden");
-        let accordion_button=ws.querySelector('.accordion-button');
-        accordion_button.setAttribute('data-bs-target', '#collapse'+w.id);
-        accordion_button.setAttribute('aria-controls', 'collapse'+w.id);
-        accordion_button.innerHTML = w.name;
-        ws.querySelector('.workspace-notes').innerHTML = w.notes;
-        accordion_collapse=ws.querySelector('.accordion-collapse');
-        accordion_collapse.id='collapse'+w.id;
-        //uncollapse if the first accordion item
-      //  if (i==0){
-         //   accordion_button.classList.remove('collapsed');
-         //   accordion_button.setAttribute('aria-expanded', "True");
-          //  accordion_collapse.classList.add('show');
-      //  }
-            
-        if (modalAction=='add') {
-            //add event listener to the "choose" button
-            ws.querySelector('.choose-workspace').addEventListener ('click', function() {
-                saveColour(colour_holder.getAttribute('title'), {id: w.id, name: w.name});
-            });
-        }
-
-        //add colours
-        addColourCol(colours, w, ws, modalAction);
-      //  i=+1;
-    }
-    //push template to end to prevent accordion styling issues
-    content.parentNode.appendChild(content);
-    showSpinner(destElem, false);
-    return;
-}
-
-function addColourCol( colour_list, w, ws, modalAction) {
-    //adds a column for each matching colour
-
-    //add colours to workspaces
-    let col=ws.querySelector('#col-template');
-    let i=0;
-    for (const c of colour_list) {
-        //if the colour belongs in this workspace
-        if (c.workspace_id == w.id) {
-            i+=1;
-            //clone column template
-            let new_col=col.cloneNode(true);
-            new_col.id="colour-" + c.saved_colour_id;
-            new_col.setAttribute('colour', c.hex);
-            //let colour = col.parentNode.insertBefore(new_col, col.nextSibling);
-            let colour = col.parentNode.appendChild(new_col);
-            //add colour details to column
-            colour.removeAttribute("hidden");
-            colour.querySelector('.colour-name').innerHTML = c.saved_colour_name;
-            let colour_holder=colour.querySelector('.saved-colour');
-            colour_holder.style.backgroundColor = "#" + c.hex;
-            let notes_text="";
-            if(c.saved_colour_notes !="") {
-                notes_text=" - " + c.saved_colour_notes;
-            }
-            if (modalAction=="select") {
-                //add colour and notes to element's title
-                colour_holder.setAttribute('title', "#" + c.hex + notes_text);
-                //add event listener to allow selection of colour
-                colour_holder.addEventListener ('click', function() {
-                    picker.setColor(c.hex, true);
-                    document.getElementById('select-saved-modal-close').click();
-                });
-            } else if (modalAction=="add") {
-                //add name and notes to element's title
-                colour_holder.setAttribute('title', c.saved_colour_name + notes_text);
-            }
-        }
-    }
-    if (i==0 ){
-        //no paints
-        ws.querySelector('.already-saved').innerHTML="No paints saved in this workspace yet."
-    }   
-}
-
-async function saveColour(colour_hex, workspace){
-    //saves a chosen colour to a chosen workspace
-    
-    //hide error messages 
-    name_required=document.getElementById('name-required');
-    name_required.setAttribute('hidden', 'True');
-
-    //get form data
-    let colour_name = document.getElementById('colour-name').value;
-    if (colour_name==""){
-        name_required.removeAttribute('hidden');
-        return;
-    }
-    let colour_notes = document.getElementById('colour-notes').value;
-    
-    //add colour to workspace
-    const response=await fetch('/addSavedColour', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
-            body: JSON.stringify({
-                colour_hex: colour_hex,
-                workspace_id: workspace['id'],
-                colour_name: colour_name,
-                colour_notes: colour_notes
-            })
-    });
-    if (!response.ok) {
-        console.log('Response status: ' + response.status);
-        return false
-    }
-    const data = await response.json();
-    
-    //empty form
-    document.getElementById("colour-input").reset();
-    
-    //trigger close of modal
-    document.getElementById('add-colour-modal-close').click();
-    
-    //display confirmation message
-    displayMessage("The colour " + colour_hex + " has been saved with the name '" + colour_name + "' in your workspace '" + workspace['name'] + "'.");      
-}
-
-function showSpinner(destElem, show) {
-    //displays or removes a spinner inside a ".spinner" element
-    let spinnerHTML = "";
-    if (show == true) {
-        spinnerHTML =
-            "<div class='spinner-border text-primary' role='status'><span class='visually-hidden'>Loading...</span></div>";
-    }
-    destElem.querySelector(".spinner").innerHTML = spinnerHTML;
-}
-
-function insert_text(destElem, destHTML) {
-    //remove spinner and insert content into .content class
-    showSpinner(destElem, false);
-    destElem.querySelector('.content').innerText = destHTML;
-}
-
-function destroyModalAccordion(destElem) {
-    //remove inserted accordion content from a modal
-    let elements=destElem.querySelectorAll('.accordion-item');
-    elements.forEach(function(element) {
-        if (element.id!="template"){
-            element.remove();
-        }
-    });
-}
-
-
-async function loadWorkspaces(with_colours=false) {
-    //return json object of workspaces
-    //return false if failure
-   
-    let response="";
-    if (with_colours == true ){
-        //only get workspaces that have colours saved to it
-        response = await fetch('/returnWorkspacesWithColours');
-        if (!response.ok) {
-            console.log('Response status: ' + response.status);
-            return false
-        }
-    } else {
-        //get all workspaces
-        response = await fetch('/returnWorkspaces');
-        if (!response.ok) {
-            console.log('Response status: ' + response.status);
-            return false
-        }
-    }
-       
-    const data = await response.json();
-    //control for empty data - it gets processed as False
-    if (data.length==0){
-        data.push(0);
-    }
-    return data;
-}
-
-async function loadSavedColours() {
-    //return json object of saved colours
-    //return false if failure
-    const response = await fetch('/returnSavedColours');
-    if (!response.ok) {
-        console.log('Response status: ' + response.status);
-        return false
-    }
-    const data = await response.json();
-    //control for empty data - it gets processed as False
-    if (data.length==0){
-        data.push(0);
-    }
-    return data;
-}
-
-async function loadSavedPaints() {
-    //return json object of saved paints
-    //return false if failure
-    const response = await fetch('/returnSavedPaints');
-    if (!response.ok) {
-        console.log('Response status: ' + response.status);
-        return false
-    }
-    const data = await response.json();
-    //control for empty data - it gets processed as False
-    if (data.length==0){
-        data.push(0);
-    }
-    return data;
 }

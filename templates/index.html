@@ -42,7 +42,7 @@
                     <div id="selected-colour" class="container colour-ref w-100 py-1 border border-dark rounded">
                         <div class="row mb-2">
                             <div  class="col col-2 text-start px-1"  data-bs-toggle="tooltip" data-bs-title="Add reference colour to saved colours">
-                                <button id="save-reference-colour" class="add-saved border p-0 btn btn-light border-dark rounded" colour="#ffffff" data-bs-toggle="modal" data-bs-target="#addSavedColModal" hidden>
+                                <button id="save-reference-colour" class="add-saved-colour border p-0 btn btn-light border-dark rounded" colour="#ffffff"  hidden>
                                     {% if current_user.is_anonymous == false %}
                                         <img src="{{ heart }}" class="m-1">
                                     {% endif %}
@@ -56,7 +56,7 @@
                                         </button>
                                     </form>
                                 {% else %}
-                                    <button id="select-saved-colour" class="border mt-4 mb-1 btn btn-light border-dark rounded select-fav mt-1" data-bs-toggle="modal" data-bs-target="#selectSavedColModal" >
+                                    <button id="select-saved-colour" class="border mt-4 mb-1 btn btn-light border-dark rounded select-fav mt-1 ">
                                         Saved colours <img src="{{ heart }}">
                                     </button>
                                 {% endif %}
@@ -78,7 +78,7 @@
                     <div id="adjusted-colour" class="colour-ref py-1 w-100 border border-dark rounded">
                         <div class="row mb-2">
                             <div  class="col col-2 text-start px-1"  data-bs-toggle="tooltip" data-bs-title="Add adjusted colour to saved colours">
-                                <button id="save-adjusted-colour" class="add-saved border p-0 btn btn-light border-dark rounded" colour="#ffffff" data-bs-toggle="modal" data-bs-target="#addSavedColModal" hidden> 
+                                <button id="save-adjusted-colour" class="add-saved-colour border p-0 btn btn-light border-dark rounded" colour="#ffffff" hidden> 
                                     {% if current_user.is_anonymous == false %}
                                         <img src="{{ heart }}" class="m-1">
                                     {% endif %}
@@ -90,15 +90,15 @@
             </div><!--end .col-->
         </div><!--end .row-->
         <div class="row hide-initial" id="adjustments">
-            <div class="row mb-2 ">
+            <div class="row align-items-end mb-2 ">
                 <div class="col-3 text-end">
                     <label for="hue">Hue: </label>
                 </div>
                 <div class="col-3">
-                    <input id="hue" class="border-dark border rounded w-100" value=0 readonly>
+                    <input id="hue" class="border-dark border rounded w-100" value=0 max="360" min="0" step="1">
                 </div>
                 <div class="col-6 ">
-                    <button id="reset" class="btn btn-secondary border-dark border rounded w-50">Reset</button>
+                    <button id="reset" class="btn btn-secondary border-dark border rounded" data-bs-toggle="tooltip" data-bs-title="Reset adjusted colour to reference colour">Reset adjusted colour</button>
                 </div>
             </div>
             <div class="row mb-2 ">
@@ -106,7 +106,7 @@
                     <label for="saturation">Saturation:</label>
                 </div>
                 <div class="col-3">
-                    <input id="saturation" class="border-dark border rounded w-100">
+                    <input id="saturation" class="border-dark border rounded w-100" min="0" max="100" step="1">
                 </div>
                 <div class="col-6">
                     <div id="saturation-slider"></div>
@@ -117,7 +117,7 @@
                     <label for="luminance">Luminance:</label>
                 </div>
                 <div class="col-3">
-                    <input id="luminance" class="border-dark border rounded w-100">
+                    <input id="luminance" class="border-dark border rounded w-100" min="0" max="100" step="1">
                 </div>
                 <div class="col-6">
                     <div id="luminance-slider"></div>
@@ -127,7 +127,7 @@
     </div><!--end .container-->
 
     <!-- FILTERS AND PAINTS LIST-->
-    <div id="filter-block" class=" container py-2 border border-dark rounded constrain-lg">
+    <div id="filter-block" class="hide-initial container py-2 border border-dark rounded constrain-lg">
         <div class="container mb-2">
             <div class="row justify-content-center align-items-center">
                 <div class="col-2 text-end p-0"  data-bs-toggle="tooltip" data-bs-title="How does it work?">
@@ -141,7 +141,7 @@
                 <div class="col-2"></div>
             </div>
         </div>
-        <p class="text-start d-none d-md-block">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Leeway on the hue, saturation and luminance values is in settings.</p>
+        <p class="text-start d-none d-md-block">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Control how the relevance is calculated in Settings.</p>
         <div id= "list-section" >
             <div class="container text-center  mb-3">
                 <div class="row justify-content-center">
@@ -187,7 +187,7 @@
                                     <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" style="background-color: #{{p.colour.hex}}", data-bs-toggle="modal" data-bs-target="#compareModal"></button>
                                 </div>
                                 <div class="col-1 p-1" data-bs-toggle="tooltip" data-bs-title="Add to saved paints">
-                                    <button type="button" class="save-paint p-0 btn w-auto border border-dark rounded" paint-id="{{p.id}}" paint-name="{{ p.brand.name }} {{p.name}}" paint-colour="#{{p.colour.hex}}" data-bs-toggle="modal" data-bs-target="#addSavedPaintModal">
+                                    <button type="button" class="save-paint p-0 btn w-auto border border-dark rounded" paint-id="{{p.id}}" paint-name="{{ p.brand.name }} {{p.name}}" paint-colour="#{{p.colour.hex}}">
                                         <img class="m-1" src="{{ heart }}">
                                     </button>
                                 </div>
