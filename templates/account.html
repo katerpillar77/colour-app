@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+    <h1>Account</h1>
+    <div class="container border border-dark rounded mb-4 p-2 constrain-sm">
+        <h4 class="mb-2 display-6">User details</h4>
+        <div class="row text-start mb-2">
+            <div class="col-2">
+                <div>Name: </div>
+            </div>
+            <div class="col">
+                <div>{{ user.username }}</div>
+            </div>
+        </div>
+        <div class="row text-start  mb-2">
+            <div class="col-2">
+                <div>Email: </div>
+            </div>
+            <div class="col">
+                <div>{{ user.email }}</div>
+            </div>
+        </div>
+        <div class="row text-start align-items-center  mb-2">
+            <div class="col-2">
+                <div>Password: </div>
+            </div>
+            <div class="col">
+                <form action="/change" method="GET">
+                <button id="change-password" class="btn btn-primary">Change password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container border border-dark rounded p-2 constrain-lg">
+        <h4 class="mb-3 display-6">Workspaces</h4>
+        {% if workspaces %}
+            <div class="accordion" id="accordion-workspace">
+                {% for w in workspaces %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="fs-5 accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{w.id}}" aria-expanded="false" aria-controls="collapseOne">
+                                {{ w.name }}
+                            </button>
+                        </h2>
+                        <div id="collapse-{{w.id}}" class="accordion-collapse collapse " >
+                            <div class="accordion-body text-start">
+                                <div class="container">
+                                    <div class="row align-items-center">
+                                        <div class="col p-0 text-start">
+                                            {% if w.notes != '' %}
+                                                <p>Notes: {{ w.notes }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col p-1 text-end">
+                                            <div data-bs-toggle="tooltip" data-bs-title="Edit workspace">
+                                                <button class="edit-workspace btn btn-secondary rounded border border-dark" workspace-id={{w.id}}>Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4>Saved colours</h4>
+                                {% set ns = namespace(colours_found=false) %}
+                                {% for c in colours %}
+                                    {% if c.workspace_id == w.id %}
+                                        {% set ns.colours_found = true %}
+                                        <div class="row item-card justify-content-center py-1 mb-2 rounded" >
+                                            <div class="col ">
+                                                <div class="row align-items-center">
+                                                    <div class="col-3 text-start">{{ c.saved_colour_name }}</div>
+                                                    <div class=" col-3 p-0 text-center">
+                                                        <button class="btn colour-holder w-100 border border-dark rounded" style="background-color: #{{c.hex }}" title="#{{c.hex }}"></button>
+                                                    </div>
+                                                    <div class="col-3 p-1 text-center small">HSL({{c.H}}, {{c.S}}%, {{c.L}}%)</div>
+                                                    <div class="col-3  text-end"  >
+                                                        <button type="button" class="edit-saved-paint btn-secondary btn w-auto border border-dark rounded" saved-colour="{{c.saved_colour_id}}" data-bs-toggle="tooltip" data-bs-title="Edit saved colour (name and notes)">
+                                                            Edit
+                                                        </button>
+                                                        <button type="button" class="remove-saved-paint btn-secondary btn w-auto border border-dark rounded"  saved-colour="{{c.saved_colour_id}}" data-bs-toggle="tooltip" data-bs-title="Remove from saved colours">
+                                                            Remove
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                {% if c.saved_colour_notes != "" %}
+                                                <div class="row align-items-center">
+                                                    <div class="col ">
+                                                        <div class="small">Notes: {{c.saved_colour_notes}}</div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if ns.colours_found == false %}
+                                    <p>No saved colours.</p>
+                                {% endif %}
+
+                                <h4 class="mt-3">Saved paints</h4>
+                                {% set ns = namespace(paints_found=false) %}
+                                {% for p in paints %}
+                                    {% if p.workspace_id == w.id %}
+                                        {% set ns.paints_found = true %}
+                                        <div class="row item-card justify-content-center  py-1 mb-2 rounded" >
+                                            <div class="col ">
+                                                <div class="row align-items-center">
+                                                    <div class="col-4 text-start">{{ p.brand_name }} {{ p.paint_name }}</div>
+                                                    <div class=" col-2 p-0 text-center">
+                                                        <button class="btn colour-holder w-100 border border-dark rounded" style="background-color: #{{p.hex }}" title="#{{p.hex }}"></button>
+                                                    </div>
+                                                    <div class="col-3 p-1 text-center small">HSL({{p.H}}, {{p.S}}%, {{p.L}}%)</div>
+                                                    <div class="col-3  text-end"  data-bs-toggle="tooltip" data-bs-title="Remove from saved paints">
+                                                        <button type="button" class="remove-fav-paint btn-secondary btn w-auto border border-dark rounded" title="Remove saved paint from workspace" saved-paint="{{p.saved_paintid}}">
+                                                            Remove
+                                                        </button>
+                                                    </div>
+                                               </div>
+                                               {% if p.saved_paint_notes != "" %}
+                                               <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <div class="small">Notes: {{p.saved_paint_notes}}</div>
+                                                    </div>
+                                               </div>
+                                               {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if ns.paints_found == false %}
+                                    <p>No saved paints.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+

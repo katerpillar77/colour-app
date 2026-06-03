@@ -1,0 +1,353 @@
+
+    <!--MODALS FOR INDEX.HTML-->
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="settingsModalLabel">Change settings for filtering</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container">
+                <p class="text-start">What change to the values is considered the same? For example, if &plusmnHue is set to 5, a colour with a hue of 50 or 60 will be considered the same as one with a hue of 55.</p>
+                <div class="row">
+                    <div class="row mb-2 ">
+                        <div class="col-4 text-end">
+                            <label for="hue-distance">&plusmnHue: </label>
+                        </div>
+                        <div class="col-2">
+                            <input id="hue-distance" value="5" min="0" max="180" step="1" class="border-dark border rounded w-100" value=0>
+                        </div>
+                        <div class="col-6 ">
+                            <div id="hue-distance-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row mb-2 ">
+                        <div class="col-4 text-end">
+                            <label for="saturation-distance">&plusmnSaturation: </label>
+                        </div>
+                        <div class="col-2">
+                            <input id="saturation-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
+                        </div>
+                        <div class="col-6 ">
+                            <div id="saturation-distance-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row mb-2 ">
+                        <div class="col-4 text-end">
+                            <label for="luminance-distance">&plusmnLuminance: </label>
+                        </div>
+                        <div class="col-2">
+                            <input id="luminance-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
+                        </div>
+                        <div class="col-6 ">
+                            <div id="luminance-distance-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Paint compare modal-->
+    <div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="compareModalLabel">Compare colours</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container">
+                    <div class="row mb-2 compare-colours">
+                        <div class="col p-0">
+                            <div id="chosen-colour" class="p-4 h-100 border border-dark rounded" ></div>
+                        </div>
+                        <div class="col p-0">
+                            <div id="compare-reference-colour" class="p-4 h-100 border border-dark rounded" hidden="true"></div>
+                            <div id="compare-adjusted-colour" class="p-4 h-100 border border-dark rounded"></div>
+                        </div>
+                    </div>
+                    <div class="row fw-bold" >
+                        <div class="col">
+                            Paint colour
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="compare-adj">Adjusted colour<input  type="radio" id="compare-adj" class="m-2" name="compare" value="0" checked="checked"></label>
+                            </div>
+                            <div class="row">
+                                <label for="compare-ref" class=>Reference colour<input  type="radio" id="compare-ref" class="m-2" name="compare" value="1"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Select saved colour modal-->
+    <div class="modal fade" id="selectSavedColModal" tabindex="-1" aria-labelledby="selectSavedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectSavedModalLabel">Select a saved colour from a workspace</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-select-colour" class="modal-body container">
+                    <div class="spinner"></div>
+                    <div class="content accordion mb-3">
+                        <div id="template" class="accordion-item" hidden>
+                            <h2 class="accordion-header">
+                                <button class="fs-5 accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapse-0" aria-expanded="false" aria-controls="collapse-0">
+                                </button>
+                            </h2>
+                            <div id="collapse-0" class="accordion-collapse collapse" >
+                                <div class="accordion-body p-2 text-start">
+                                    <div class="workspace-notes px-2"></div>
+                                    <div class="saved-colours container">
+                                        <div class="row justify-content-start" >
+                                            <div id="col-template" hidden class="p-1 col-3 text-center">
+                                                <button class="colour-button saved-colour align-items-start justify-content-center h-100 w-100 p-2 border border-dark rounded"  style="background-color: #ffffff" colour="#ffffff" title="#ffffff">
+                                                    <span class="colour-name  small px-1 rounded" ></span>
+                                                </button>                                                
+                                            </div>
+                                        </div>
+                                    </div><!--end .saved-colours-->
+                                </div>
+                            </div><!--end .accordion-collapse-->
+                        </div>
+                    </div><!-- end .accordion-->                
+                    <form action="/account" method="GET">
+                        <button type="submit" class="btn btn-secondary border border-dark rounded">Manage saved colours</button>
+                    </form>
+                </div><!--end .modal-body-->
+                <div class="modal-footer">
+                    <button id="select-saved-modal-close" type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Add saved colour modal-->
+    <div class="modal fade" id="addSavedColModal" tabindex="-1" aria-labelledby="addSavedColModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSavedColModalLabel">Save colour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-add-colour" class="modal-body container">
+                    <div class="text-start mb-2">Enter a name and optional notes for the saved colour, and choose a workspace to save it in.</div>
+                    <div id="colour-details" class="container px-0 mb-3">
+                        <div class="row">
+                            <div class="col-3 ">
+                                <div class="row h-75">
+                                    <div class="col">
+                                        <div class="btn colour-holder w-100 h-100 border border-dark rounded" style="background-color: #ffffff" title="#ffffff"></div>
+                                    </div>
+                                </div>
+                                 <div class="row h-25">
+                                    <div class="col">
+                                        <div class="colour-code">#ffffff</div>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-9">
+                                <form id="colour-input">
+                                    <div class="row mb-2 h-25 text-start">
+                                        <div class="col">
+                                            <input id="colour-name" class="w-100 border border-dark rounded" autocomplete="off" placeholder="Name for colour" name="name" maxlength="32">
+                                            <div id="name-required" hidden class="text-danger">Name is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="row h-75 text-start">
+                                        <div class="col">
+                                            <textarea id="colour-notes" maxlength="256" class="w-100 h-100 border border-dark rounded" placeholder="Notes about colour (optional)" name="notes"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end #colour-details-->
+                    <h5 class="text-start">Choose a workspace:</h5>
+                    <div class="spinner"></div>
+                    <div class="content accordion mb-3">
+                        <div id="template" class="accordion-item" hidden>
+                            <h2 class="accordion-header">
+                                <button class="fs-5 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-0" aria-expanded="false" aria-controls="collapse-0">
+                                </button>
+                            </h2>
+                            <div id="collapse-0" class="accordion-collapse collapse" >
+                                <div class="accordion-body text-start p-2">
+                                    <div class="workspace-notes px-1 mb-1"></div>                                  
+                                    <button type="button" class="choose-workspace btn-primary btn w-auto border border-dark rounded" workspace-id="0" data-bs-toggle="tooltip" data-bs-title="Save the colour into this workspace">
+                                        Save colour in this workspace
+                                    </button>
+                                    <h6 class="already-saved mt-2">Colours already saved in this workspace:</h6>
+                                    <div class="saved-colours container">
+                                        <div class="row justify-content-start" >
+                                            <div id="col-template" hidden class="p-1 col-2 text-center">
+                                                <div class="saved-colour colour-small h-100 w-100 p-2 border border-dark rounded"  style="background-color: #ffffff" colour="#ffffff" title="">
+                                                    <span hidden class="colour-name  small px-1  rounded" ></span>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div><!--end .saved-colours-->
+                                </div><!--end .accordion-body-->
+                            </div><!--end .accordion-collapse-->
+                        </div><!--end .accordion-item-->
+                    </div><!--end .accordion-->
+                    
+                    <button type="button" class="add-workspace float-start btn-secondary btn w-auto border border-dark rounded"   data-bs-toggle="tooltip" data-bs-title="Add a new workspace and save the colour into it">
+                        Add new workspace
+                    </button>                    
+                </div><!--end .modal-body-->
+                <div class="modal-footer">
+                    <button id="add-colour-modal-close" type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--Add saved paint modal-->
+    <div class="modal fade" id="addSavedPaintModal" tabindex="-1" aria-labelledby="addSavedPaintModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSavedPaintModalLabel">Save paint</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-add-paint" class="modal-body container">
+                    <div class="text-start mb-2">Enter optional notes for the saved paint, and choose a workspace to save it in.</div>
+                    <div id="paint-details" class="container px-0 mb-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="row h-50">
+                                    <div class="col">
+                                        <div class="colour-holder w-100 h-100 border border-dark rounded" style="background-color: #ffffff" title="#ffffff"></div>
+                                    </div>
+                                </div>
+                                 <div class="row h-50">
+                                    <div class="col">
+                                        <div class="paint-name">#ffffff</div>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-8">
+                                <form id="paint-input" class="h-100">
+                                    <textarea id="colour-notes" maxlength="256" class="w-100 h-100 border border-dark rounded" placeholder="Notes about paint (optional)" name="notes"></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end #paint-details-->
+                    <h5 class="text-start">Choose a workspace:</h5>
+                    <div class="spinner"></div>
+                    <div class="content accordion mb-3">
+                        <div id="template" class="accordion-item" hidden>
+                            <h2 class="accordion-header">
+                                <button class="fs-5 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-0" aria-expanded="false" aria-controls="collapse-0">
+                                </button>
+                            </h2>
+                            <div id="collapse-0" class="accordion-collapse collapse" >
+                                <div class="accordion-body text-start p-2">
+                                    <div class="workspace-notes px-1 mb-1"></div>                                  
+                                    <button type="button" class="choose-workspace btn-primary btn w-auto border border-dark rounded" workspace-id="0" data-bs-toggle="tooltip" data-bs-title="Save the colour into this workspace">
+                                        Save paint in this workspace
+                                    </button>
+                                    <div hidden class="error text-danger">No</div>
+                                    <h6 class="already-saved mt-2">Paints already saved in this workspace:</h6>
+                                    <div class="saved-paints container">
+                                        <div class="row justify-content-start" >
+                                            <div id="col-template" hidden class="p-1 col-3 text-center">
+                                                <div class="row h-50">
+                                                    <div class="col w-100">
+                                                        <div class="saved-paint colour-small  h-100 w-100 p-2 border border-dark rounded"  style="background-color: #ffffff" colour="#ffffff" title=""></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row h-50 align-items-end">
+                                                    <div class="col w-100">
+                                                        <div class="paint-name small" ></div>
+                                                    </div>
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div><!--end .saved-paints-->
+                                </div><!--end .accordion-body-->
+                            </div><!--end .accordion-collapse-->
+                        </div><!--end .accordion-item-->
+                    </div><!--end .accordion-->
+                    
+                    <button type="button" class="add-workspace float-start btn-secondary btn w-auto border border-dark rounded"   data-bs-toggle="tooltip" data-bs-title="Add a new workspace and save the colour into it">
+                        Add new workspace
+                    </button>                    
+                </div><!--end .modal-body-->
+                <div class="modal-footer">
+                    <button id="add-paint-modal-close" type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--First help modal-->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Paint chooser</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container">
+                    <p class="text-start">Choose a reference colour using the colour picker, or pick a saved colour if you are logged in. Adjust the colour, if desired, using the saturation and luminance sliders. Paint colours that are similar to the adjusted colour will be displayed below.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Filtering help modal-->
+    <div class="modal fade" id="helpFilterModal" tabindex="-1" aria-labelledby="helpFilterModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpFilterModalLabel">Finding similar paints</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container">
+                     <p class="text-start">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Leeway on the hue, saturation and luminance values is in settings.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Confirm modal-->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container">
+                     <p id="confirmation-message" class="text-start"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
