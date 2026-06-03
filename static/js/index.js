@@ -277,7 +277,7 @@ function initiateButtons() {
                 'colour': this.getAttribute('paint-colour')
             };
             if (paint['id']=="") {
-                return;
+                return; 
             }
             //display modal
             const modalSavePaint = new bootstrap.Modal(document.getElementById('add-saved-paint-modal')).show();
