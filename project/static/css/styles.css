@@ -1,0 +1,27 @@
+.cp_dialog {
+    width: 50%
+}
+.colour-ref {
+    background-color: white;
+    padding: 10%;
+    height: 150px;
+}
+.range-slider__thumb[data-lower] {
+    width: 0;
+}
+.range-slider__range {
+    border-radius: 6px;
+}
+.range-slider {
+    margin-top: 8px;
+}
+.hide-initial  {
+    display: none;
+}
+#no-results  {
+    hidden="true"
+}
+.navbar {
+    background-image:url('/static/images/rainbowbanner.jpg');
+}
+

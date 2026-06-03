@@ -355,8 +355,9 @@ function get_ranking(references, max_distances, attributes) {
     }
     distances['hue'] = Math.min(...hue_distances);
     //get distance between reference saturation and element saturation, then for luminance
-    distances['saturation'] = getSatDifference(references['saturation'], attributes['saturation']);
-    distances['luminance'] = getSatDifference(references['luminance'], attributes['luminance']);
+    distances['saturation']=getSatDifference(references['saturation'], attributes['saturation']);
+    distances['luminance']=getSatDifference(references['luminance'], attributes['luminance']);
+    console.log(distances);
     //create rankings
     let rankings = {};
     rankings['total'] = 0;
@@ -369,10 +370,6 @@ function get_ranking(references, max_distances, attributes) {
         }
         rankings['total'] += rankings[name];
     });
-    //normalise total
-    threshold_total = WEIGHTS['hue'] * 50 + WEIGHTS['saturation'] * 30 + WEIGHTS['luminance'] * 20;
-    rankings['total'] = Math.round(100 * Math.max(0, threshold_total - rankings['total']) / threshold_total);
-//    console.log(distances);
     console.log(rankings);
     return rankings;
 }
