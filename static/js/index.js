@@ -736,7 +736,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function sortList(items){
             //TODO add other sort options
-            
+
             //sort by ranking
             elements = Array.from(items);
             elements.sort(function(a, b) {
