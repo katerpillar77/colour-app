@@ -1,8 +1,9 @@
 from app import app, db
 from flask import flash
 from models import Paint, Colour, Brand, sa
-from sqlalchemy import func
+from sqlalchemy import func, text
 import colorsys
+from helpers import obj_to_dict
 
 def get_all_paints(limit=None):
     ##get list of all paints in the database
@@ -11,10 +12,30 @@ def get_all_paints(limit=None):
         query=sa.select(Paint).limit(limit)        
     return db.session.scalars(query)
 
+def get_paints_hue(data):
+    #get list of all paints with hues within a set threshold of a provided hue
+    #print(data)
+    hue=str(data['hue'])
+    threshold=str(data['threshold'])
+    query_string=text(
+        'SELECT paint.id, paint.name AS paint_name, paint.brand_id, brand.name AS brand_name, colour.H, colour.S, colour.L, colour.hex, \
+            min(abs(colour.H-' + hue +'), 360-abs(colour.H-' + hue +')) AS difference \
+            FROM paint JOIN colour ON paint.colour_id=colour.id JOIN brand ON paint.brand_id=brand.id \
+            WHERE difference < ' + threshold +' ORDER BY difference'
+    )
+    result = db.session.execute(query_string)
+    return obj_to_dict(result)
+
 def get_all_brands():
     ##get list of brands in the database
     query=sa.select(Brand).order_by(Brand.name)
     return db.session.scalars(query)
+
+def get_brands_with_paints():
+    ##get list of brands in the database that are used  
+    query=sa.select(Brand.id, Brand.name).join(Paint.brand).order_by(Brand.name).distinct()
+    results= db.session.execute(query)
+    return obj_to_dict(results)
 
 def add_paint(brand="", name="", colour={}):
     #add a paint to the paints table

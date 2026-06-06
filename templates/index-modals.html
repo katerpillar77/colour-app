@@ -67,65 +67,8 @@
         </div>
     </div>
 
-    <!-- Settings_old Modal -->
-    <div class="modal fade" id="settingsoModal" tabindex="-1" aria-labelledby="settingsoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="settingsoModalLabel">Change settings for filtering</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body container">
-                <p class="text-start">What change to the values is considered the same? For example, if &plusmnHue is set to 5, a colour with a hue of 50 or 60 will be considered the same as one with a hue of 55.</p>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="hue-distance">&plusmnHue: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="hue-distance" value="5" min="0" max="180" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="hue-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="saturation-distance">&plusmnSaturation: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="saturation-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="saturation-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="luminance-distance">&plusmnLuminance: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="luminance-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="luminance-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
     <!--Paint compare modal-->
-    <div class="modal fade" id="compare-modal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
+    <div class="modal " id="compare-modal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -394,7 +337,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body container">
-                     <p class="text-start">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Control how the relevance is calculated in Settings.</p>
+                     <p class="text-start">Paints with analogous colours to the adjusted colour are shown by default. In Filters, you can choose complementary and triadic colours. You can cntrol how the relevance is calculated in Settings.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>

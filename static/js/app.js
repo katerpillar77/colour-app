@@ -36,8 +36,8 @@ async function displayPaintsInWorkspaces(destElem, paint={}) {
     destElem.querySelector('.paint-name').innerHTML = paint['name'] ?? "";
     
     //get data
-    const [paints, workspaces] = await Promise.all([loadSavedPaints(),
-        loadWorkspaces()]);
+    const [paints, workspaces] = await Promise.all([loadData('/return-saved-paints'),
+        loadData('/return-workspaces')]);
 
     //get template for workspace
     let content=destElem.querySelector('#template');
@@ -152,8 +152,8 @@ async function displayColoursInWorkspaces(destElem, modalAction, colour_to_add="
         with_colours=true;        
     } 
     
-    const [colours, workspaces] = await Promise.all([loadSavedColours(),
-        loadWorkspaces(with_colours)]);
+    const [colours, workspaces] = await Promise.all([loadData('/return-saved-colours'),
+        loadData('/return-workspaces-with-colours')]);
 
     if (modalAction=="select" && workspaces[0]==0){
         //no workspaces with colours returned
@@ -184,7 +184,7 @@ async function displayColoursInWorkspaces(destElem, modalAction, colour_to_add="
         //add workspace details to accordion
         ws.removeAttribute("hidden");
         let accordion_button=ws.querySelector('.accordion-button');
-        accordion_button.setAttribute('data-bs-target', '#collapse'+w.id);
+        accordion_button.dataset.bsTarget='#collapse'+w.id;
         accordion_button.setAttribute('aria-controls', 'collapse'+w.id);
         accordion_button.innerHTML = w.name;
         ws.querySelector('.workspace-notes').innerHTML = w.notes;
@@ -307,41 +307,12 @@ async function saveColour(colour_hex, workspace){
     displayMessage(message);      
 }
 
-async function loadWorkspaces(with_colours=false) {
-    //return json object of workspaces
+async function loadData(route) {
+    //return json object from route
     //return false if failure
-   
-    let response="";
-    if (with_colours == true ){
-        //only get workspaces that have colours saved to it
-        response = await fetch('/return-workspaces-with-colours');
-        if (!response.ok) {
-            console.log('Response status: ' + response.status);
-            return false
-        }
-    } else {
-        //get all workspaces
-        response = await fetch('/return-workspaces');
-        if (!response.ok) {
-            console.log('Response status: ' + response.status);
-            return false
-        }
-    }
-       
-    const data = await response.json();
-    //control for empty data - it gets processed as False
-    if (data.length==0){
-        data.push(0);
-    }
-    return data;
-}
-
-async function loadSavedColours() {
-    //return json object of saved colours
-    //return false if failure
-    const response = await fetch('/return-saved-colours');
+    const response = await fetch(route);
     if (!response.ok) {
-        console.log('Response status: ' + response.status);
+        console.log('Route ' + route + '; Response status: ' + response.status);
         return false
     }
     const data = await response.json();
@@ -349,25 +320,9 @@ async function loadSavedColours() {
     if (data.length==0){
         data.push(0);
     }
+    //console.log(data);
     return data;
 }
-
-async function loadSavedPaints() {
-    //return json object of saved paints
-    //return false if failure
-    const response = await fetch('/return-saved-paints');
-    if (!response.ok) {
-        console.log('Response status: ' + response.status);
-        return false
-    }
-    const data = await response.json();
-    //control for empty data - it gets processed as False
-    if (data.length==0){
-        data.push(0);
-    }
-    return data;
-}
-
 
 function showSpinner(destElem, show) {
     //displays or removes a spinner inside a ".spinner" element
@@ -402,4 +357,10 @@ function destroyModalAccordion(destElem) {
             element.remove();
         }
     });
+}
+
+//Helper function: fire an event when needed
+function createEvent(id, eventType) {
+    //fire an event for input boxes that are programmatically changed
+    document.querySelector(id).dispatchEvent(new Event('eventType'));
 }

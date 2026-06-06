@@ -1,9 +1,9 @@
 from app import db
-from flask import jsonify, flash
 from flask_login import current_user
 from models import Brand, Paint, Colour, SavedColour, SavedPaint, User, Workspace, sa
 from sqlalchemy import func
 from colour_functions import getColourID
+from helpers import obj_to_dict
 
 def get_user_details():
     # get user's details
@@ -171,16 +171,5 @@ def edit_saved_colour_row(data):
         return False
     return True
 
-def obj_to_dict(results):
-    # takes scalars object as input
-    if not results:
-        return {}
-    results_list = []
-    try:
-        for r in results.mappings():
-            results_list.append(dict(r))
-    except:
-        print('Could not convert to dictionary.')
-        return {}
-    return results_list
+
 

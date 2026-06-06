@@ -15,28 +15,29 @@
     <h1>Account</h1>
     <div class="container border border-dark rounded mb-4 p-2 constrain-sm">
         <h4 class="mb-2 display-6">User details</h4>
-        <div class="row text-start mb-2">
-            <div class="col col-sm-5 col-md-3
+        <div class="row mb-2">
+            <div class="col-4 text-end">
+                Name:
             </div>
-            <div class="col ">
-                <div>{{ user.username }}</div>
+            <div class="col text-start">
+               {{ user.username }}
             </div>
         </div>
-        <div class="row text-start  mb-2">
-            <div class="col col-md-5 col-lg-3">
-                <div>Email: </div>
+        <div class="row mb-2">
+            <div class="col-4 text-end">
+                Email: 
             </div>
-            <div class="col col-md-7">
-                <div>{{ user.email }}</div>
+            <div class="col text-start">
+                {{ user.email }}
             </div>
         </div>
         <div class="row text-start align-items-center  mb-2">
-            <div class="col col-md-5 col-lg-3">
-                <div>Password: </div>
+            <div class="col-12 ">
+                <button id="edit-user" class="btn btn-secondary">Edit user details</button>
             </div>
-            <div class="col col-md-7">
+            <div class="col-12 ">
                 <form action="/change" method="GET">
-                <button id="change-password" class="btn btn-primary">Change password</button>
+                    <button id="change-password" class="btn btn-secondary">Change password</button>
                 </form>
             </div>
         </div>
@@ -48,8 +49,7 @@
                 {% for w in workspaces %}
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="fs-5 accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{w.id}}" aria-expanded="false" aria-controls="collapseOne">
-                                {{ w.name }}
+                            <button class="fs-5 accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{w.id}}" aria-expanded="false" aria-controls="collapse-{{w.id}}">                                {{ w.name }}
                             </button>
                         </h2>
                         <div id="collapse-{{w.id}}" class="accordion-collapse collapse " >

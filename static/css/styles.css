@@ -46,7 +46,8 @@ span.colour-name  {
     width: 0;
 }
 .colour-holder {
-    min-height: 2rem
+    min-height: 2rem;
+    max-width: 10rem;
 }
 .range-slider__range {
     border-radius: 6px;

@@ -127,7 +127,7 @@
     </div><!--end .container-->
 
     <!-- FILTERS AND PAINTS LIST-->
-    <div id="filter-block" class="hhide-initial container py-2 border border-dark rounded constrain-lg">
+    <div id="filter-block" class="hide-initial container py-2 border border-dark rounded constrain-lg">
         <div class="container mb-2">
             <div class="row justify-content-center align-items-center">
                 <div class="col-2 text-end p-0"  data-bs-toggle="tooltip" data-bs-title="How does it work?">
@@ -141,12 +141,17 @@
                 <div class="col-2"></div>
             </div>
         </div>
-        <p class="text-start d-none d-md-block">Paints with analogous colours to the adjusted colour are shown by default. In Filters, you can choose complementary and triadic colours. You can cntrol how the relevance is calculated in Settings.</p>
+        <p class="text-start d-none d-md-block">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Control how the relevance is calculated in Settings.</p>
         <div id= "list-section" >
             <div class="container text-center  mb-3">
                 <div class="row justify-content-center">
-                    <div class="col-9 text-start p-0">
-                         {% include "index-filter.html" %}                     
+                    <div class="col text-start p-0">
+                        <select  id="filter" class="form-select" >
+                            <!--<option value="0" selected>All</option>-->
+                            <option value="1" selected text="Similar to the adjusted colour">Analogous<span id="analogous-hue"></span></option>
+                            <option value="2" text="Complementary to the adjusted colour">Complementary<span id="complementary-hue"></span></option>
+                            <option value="3" text="Triadic to the adjusted colour">Triadic<span id="triadic-hues"></span></option>
+                        </select>
                     </div>
                     <div class="col-3 text-end">
                         <!-- Button trigger settings modal -->
@@ -158,56 +163,53 @@
             </div>
 
             <!--ITEMS-->
-            <div id="paints" class="container ">
-                <div class="row fw-bold justify-content-center table-headings mb-2" >
-                    <div class="col-4">Paint name</div>
-                    <div class="col-5">Colour</div>
-                    <div class="col-3 text-end">Relevance</div>
-                </div>
-                <div id="no-results" hidden>No paints found.</div>
-                <div class="spinner"></div>
-                <div id="paints-list">
-                    <div id="template" hidden class="row item-card justify-content-center align-items-center py-1 mb-2 rounded" >
-                        <div class="col-4 ">
-                            <div class="row">
-                                <div class="brand-name col-12 col-md-5 p-1 p-1"></div>
-                                <div class="paint-name col-12 col-md-5 p-1 p-1"></div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="row">
-                                {% if current_user.is_anonymous%}
-                                    <div class="col-12 col-md-7 p-0" >
-                                        <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours"></button>
-                                    </div>
-                                {% else %}
-                                    <div class="col-10 col-md-5 p-0" >
-                                        <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours"></button>
-                                    </div>
-                                    <div class="col-2 p-1" >
-                                        <button type="button" class="save-paint p-0 btn w-auto border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Add to saved paints">
-                                            <img class="m-1" src="{{ heart }}">
-                                        </button>
-                                    </div>
-                                {% endif %}
-                                <div class="hsl col-12 col-md-5 p-1 small"></div>
-                            </div>
-                        </div>    
-                        <div class="col-2 p-1">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="relevance"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="hue-type small">Analogous</div>
-                                </div>
-                            </div>
-                        </div>
+            {% if paints %}
+                <h5 id="paints-list-title">Paints similar to the adjusted colour</h5>
+                <div id="paints" class="container ">
+                    <div class="row fw-bold justify-content-center table-headings mb-2" >
+                        <div class="col-5 col-md-5">Brand and paint name</div>
+                        <div class="col-5 ">Colour</div>
+                        <div class="col-2  text-end">Relevance</div>
                     </div>
-                </div>
-            </div><!--end #paints-->
+                    <div id="no-results">No paints found.</div>
+                    <div id="paints-list">
+                        {% for p in paints %}
+                        <div class="row  item-card justify-content-center align-items-center py-1 mb-2 rounded" custom-h={{p.colour.H}} custom-s={{p.colour.S}} custom-l={{p.colour.L}}>
+                            <div class="col-5 col-md-5">
+                                <div class="row">
+                                    <div class="col-12 col-md-5 p-1 p-1">{{ p.brand.name }}</div>
+                                    <div class="col-12 col-md-5 p-1 p-1">{{ p.name }}</div>
+                                </div>
+                            </div>
+                            <div class="col-5 col-md-6">
+                                <div class="row">
+                                    {% if current_user.is_anonymous%}
+                                        <div class="colour-holder col-12 col-md-5 p-0" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours">
+                                            <button type="button" class="compare btn w-100 h-100 border border-dark rounded" style="background-color: #{{p.colour.hex}}", data-bs-toggle="modal" data-bs-target="#compareModal"></button>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-10 col-md-3 p-0" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours">
+                                            <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" style="background-color: #{{p.colour.hex}}", data-bs-toggle="modal" data-bs-target="#compareModal"></button>
+                                        </div>
+                                        <div class="col-2 p-1" data-bs-toggle="tooltip" data-bs-title="Add to saved paints">
+                                            <button type="button" class="save-paint p-0 btn w-auto border border-dark rounded" paint-id="{{p.id}}" paint-name="{{ p.brand.name }} {{p.name}}" paint-colour="#{{p.colour.hex}}">
+                                                <img class="m-1" src="{{ heart }}">
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                    <div class="col-12 col-md-7 p-1 small">HSL({{p.colour.H}}, {{p.colour.S}}%, {{p.colour.L}}%)</div>
+                                </div>
+                            </div>    
+                            <div id="relevance" class="col-2 col-md-1 p-1"></div>
+                        </div>
+                        {% endfor %}                    
+                        
+                    </div>
+                </div><!--end #paints-->
+            {% else %}
+                <div class="empty">No paints in the database.</div>
+            {% endif %}
+
         </div><!--end .list-section-->
     </div><!--end #filter-block-->
 
