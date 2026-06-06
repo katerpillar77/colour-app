@@ -85,7 +85,6 @@ def add():
 #JS requests
 
 @app.route('/return-brands-with-paints', methods=["GET"])
-@login_required
 def returnBrandsWithPaints():
     return get_brands_with_paints()
 
