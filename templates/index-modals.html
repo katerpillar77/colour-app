@@ -5,47 +5,57 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="settingsModalLabel">Change settings for filtering</h5>
+                <h5 class="modal-title" id="settingsModalLabel">Change weights for relevance scores</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body container">
-                <p class="text-start">What change to the values is considered the same? For example, if &plusmnHue is set to 5, a colour with a hue of 50 or 60 will be considered the same as one with a hue of 55.</p>
-                <div class="row">
-                    <div class="row mb-2 ">
+                <p class="text-start">Change the weights assigned to the colour attributes when determining relevance scores.</p> 
+                <p class="text-start">A higher weight means the attribute is more important in determining relevance.</p>
+                <div class="row mb-2 ">
+                    <div class="row ">
                         <div class="col-4 text-end">
-                            <label for="hue-distance">&plusmnHue: </label>
+                            <label for="hue-weight">&plusmnHue: </label>
                         </div>
                         <div class="col-2">
-                            <input id="hue-distance" value="5" min="0" max="180" step="1" class="border-dark border rounded w-100" value=0>
+                            <input id="hue-weight" default="" value="5" min="0.1" max="5" step="0.1" class="border-dark border rounded w-100" value=0>
                         </div>
                         <div class="col-6 ">
-                            <div id="hue-distance-slider"></div>
+                            <div id="hue-weight-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2 ">
+                    <div class="row ">
+                        <div class="col-4 text-end">
+                            <label for="saturation-weight">&plusmnSaturation: </label>
+                        </div>
+                        <div class="col-2">
+                            <input id="saturation-weight" default="" value="0" min="0.1" max="5" step="0.1" class="border-dark border rounded w-100" value=0>
+                        </div>
+                        <div class="col-6 ">
+                            <div id="saturation-weight-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="row ">
+                        <div class="col-4 text-end">
+                            <label for="luminance-weight">&plusmnLuminance: </label>
+                        </div>
+                        <div class="col-2">
+                            <input id="luminance-weight" default="" value="0" min="0.1" max="5" step="0.1" class="border-dark border rounded w-100" value=0>
+                        </div>
+                        <div class="col-6 ">
+                            <div id="luminance-weight-slider"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="saturation-distance">&plusmnSaturation: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="saturation-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="saturation-distance-slider"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row mb-2 ">
-                        <div class="col-4 text-end">
-                            <label for="luminance-distance">&plusmnLuminance: </label>
-                        </div>
-                        <div class="col-2">
-                            <input id="luminance-distance" value="5" min="0" max="100" step="1" class="border-dark border rounded w-100" value=0>
-                        </div>
-                        <div class="col-6 ">
-                            <div id="luminance-distance-slider"></div>
+                    <div class="row mb-2 justify-content-center">
+                        <div class="col-4">
+                            <button type="button" id="reset-weights" class="reset-weights btn btn-secondary border-dark border rounded" data-bs-toggle="tooltip" data-bs-title="Reset weights to default values">
+                                Reset weights
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +68,7 @@
     </div>
 
     <!--Paint compare modal-->
-    <div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
+    <div class="modal " id="compare-modal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -95,8 +105,9 @@
             </div>
         </div>
     </div>
+
     <!--Select saved colour modal-->
-    <div class="modal fade" id="selectSavedColModal" tabindex="-1" aria-labelledby="selectSavedModalLabel" aria-hidden="true">
+    <div class="modal fade" id="select-saved-colour-modal" tabindex="-1" aria-labelledby="selectSavedModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -139,7 +150,7 @@
     </div>
 
     <!--Add saved colour modal-->
-    <div class="modal fade" id="addSavedColModal" tabindex="-1" aria-labelledby="addSavedColModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add-saved-colour-modal" tabindex="-1" aria-labelledby="addSavedColModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -220,7 +231,7 @@
     </div>
     
     <!--Add saved paint modal-->
-    <div class="modal fade" id="addSavedPaintModal" tabindex="-1" aria-labelledby="addSavedPaintModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add-saved-paint-modal" tabindex="-1" aria-labelledby="addSavedPaintModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -245,7 +256,7 @@
                             </div>
                             <div class="col-8">
                                 <form id="paint-input" class="h-100">
-                                    <textarea id="colour-notes" maxlength="256" class="w-100 h-100 border border-dark rounded" placeholder="Notes about paint (optional)" name="notes"></textarea>
+                                    <textarea id="paint-notes" maxlength="256" class="w-100 h-100 border border-dark rounded" placeholder="Notes about paint (optional)" name="notes"></textarea>
                                 </form>
                             </div>
                         </div>
@@ -297,6 +308,7 @@
             </div>
         </div>
     </div>
+
     
     <!--First help modal-->
     <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
@@ -325,7 +337,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body container">
-                     <p class="text-start">Choose from analogous, complementary or triadic to find paint colours that match the adjusted colour. Leeway on the hue, saturation and luminance values is in settings.</p>
+                     <p class="text-start">Paints with analogous colours to the adjusted colour are shown by default. In Filters, you can choose complementary and triadic colours. You can cntrol how the relevance is calculated in Settings.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -334,20 +346,4 @@
         </div>
     </div>
 
-    <!--Confirm modal-->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body container">
-                     <p id="confirmation-message" class="text-start"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+

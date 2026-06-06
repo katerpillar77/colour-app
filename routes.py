@@ -6,6 +6,8 @@ from user_functions import *
 from models import User
 from forms import LoginForm, RegistrationForm
 from urllib.parse import urlsplit, urlunsplit
+from import_database import import_json_to_database
+
 
 
 @app.context_processor
@@ -26,7 +28,18 @@ def inject_question_icon():
 
 @app.route('/')
 def index():
-    return render_template('index.html', paints=get_all_paints())
+    return render_template('index.html') #, paints=get_all_paints(10))
+
+#temporary database import
+@app.route('/import-json')
+def import_json():
+    result= import_json_to_database(4, 'import_json/lick.json')
+    flash (result)
+    return redirect('/')
+
+@app.route('/return-paints-hue',methods=["POST"])
+def return_paints_hue():
+    return get_paints_hue(request.get_json() )
 
 @app.route('/add', methods=["GET", "POST"])
 @login_required
@@ -71,44 +84,81 @@ def add():
 
 #JS requests
 
-@app.route('/returnWorkspaces', methods=["GET"])
+@app.route('/return-brands-with-paints', methods=["GET"])
+def returnBrandsWithPaints():
+    return get_brands_with_paints()
+
+
+@app.route('/return-workspaces', methods=["GET"])
 @login_required
 def returnWorkspaces():
     return get_workspaces()
 
 
-@app.route('/returnWorkspacesWithColours', methods=["GET"])
+@app.route('/return-workspaces-with-colours', methods=["GET"])
 @login_required
 def returnWorkspacesWithColours():
     return get_workspaces_with_colours()
 
 
-@app.route('/returnSavedColours', methods=["GET"])
+@app.route('/return-saved-colours', methods=["GET"])
 @login_required
 def returnSavedColours():
     return get_saved_colours()
 
 
-@app.route('/returnSavedPaints', methods=["GET"])
+@app.route('/return-saved-paints', methods=["GET"])
 @login_required
 def returnSavedPaints():
     return get_saved_paints()
 
 
-@app.route('/addSavedColour', methods=["POST"])
+@app.route('/add-saved-colour', methods=["POST"])
 @login_required
-def add_saved_colours():
-    data=request.get_json()    
-    add_colour_to_workspace(data)
-    return {'result' : True}
+def add_saved_colour():
+    return {'result' : add_colour_to_workspace(request.get_json() )}
   
 
-@app.route('/addSavedPaint', methods=["POST"])
+@app.route('/add-saved-paint', methods=["POST"])
 @login_required
-def add_saved_paints():
-    data=request.get_json()      
-    return {'result' : add_paint_to_workspace(data)}
+def add_saved_paint(): 
+    return {'result' : add_paint_to_workspace(request.get_json() )}
 
+
+@app.route('/edit-saved-paint', methods=["POST"])
+@login_required
+def edit_saved_paint():
+    return {'result' : edit_saved_paint_row(request.get_json())}
+
+
+@app.route('/edit-saved-colour', methods=["POST"])
+@login_required
+def edit_saved_colour():  
+    return {'result' : edit_saved_colour_row(request.get_json())}
+
+
+@app.route('/remove-saved-paint', methods=["POST"])
+@login_required
+def remove_saved_paint():  
+    return {'result' : remove_paint_from_workspace(request.get_json())}
+
+
+@app.route('/remove-saved-colour', methods=["POST"])
+@login_required
+def remove_saved_colour():   
+    return {'result' : remove_colour_from_workspace(request.get_json())}
+
+
+@app.route('/return-saved-paint-details', methods=["POST"])
+@login_required
+def return_saved_paint_details():
+    return get_saved_paint_details(request.get_json())
+
+
+@app.route('/return-saved-colour-details', methods=["POST"])
+@login_required
+def return_saved_colour_details():   
+    return get_saved_colour_details(request.get_json())
 
 # Users
 
