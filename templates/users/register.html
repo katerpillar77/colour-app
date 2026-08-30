@@ -5,5 +5,11 @@
 {% endblock %}
 {% block main %}
     <h1>Register new user</h1>
-    {{ wtf.quick_form(form ) }}
+       <div class="container border border-dark rounded mb-4 p-2 constrain-sm">
+            <div class="row mb">
+                <div class="col">
+                    {{ wtf.quick_form(form ) }}
+                </div>
+            </div>
+        </div>
 {% endblock %}
