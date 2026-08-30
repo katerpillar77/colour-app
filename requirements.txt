@@ -8,5 +8,5 @@ requests
 Flask-Login
 Flask-WTF
 email-validator
-pywjt
+PyJWT
 resend
