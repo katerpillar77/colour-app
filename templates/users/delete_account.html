@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% import 'bootstrap_wtf.html' as wtf %}
+{% block title %}
+    Confirm account deletion
+{% endblock %}
+{% block main %}
+    <h1>Delete Account</h1>
+    <div class="container border border-dark rounded mb-4 p-2 constrain-sm">
+        <div class="row mb-2">
+            <div class="col-4 text-end">
+                Email:
+            </div>
+            <div class="col text-start">
+               {{ user.username }}
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4 text-end">
+                Name: 
+            </div>
+            <div class="col text-start">
+                {{ user.name }}
+            </div>
+        </div> 
+        <div class="row mb-2">     
+            <div class="col text-danger">
+                Final warning - deletion is permanent and cannot be undone. 
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}  
+                    
+                    {{ wtf.form_field(form.submit) }}
+                </form>                
+            </div>
+        </div>
+    </div>
+{% endblock %}

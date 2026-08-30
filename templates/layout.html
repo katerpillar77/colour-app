@@ -14,6 +14,7 @@
 
         {% block include %}{% endblock %}
 
+        <!-- https://favicon.io/emoji-favicons/money-bag/ -->
         <link href="/static/favicon.png" rel="icon">
 
         <link href="/static/css/styles.css" rel="stylesheet">
@@ -33,12 +34,17 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'index' }}"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
-                        <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'add' }}"><a class="nav-link" href="{{ url_for('add') }}">Add a paint to the database</a></li>
-                        <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'account' }}">
-                            {% if current_user.is_anonymous == false %}
+                        {% if current_user.is_anonymous == false %}
+                            <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'workspaces' }}">
+                                <a class="nav-link" href="{{ url_for('workspaces') }}">Workspaces</a>
+                            </li>
+                            <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'account' }}">
                                 <a class="nav-link" href="{{ url_for('account') }}">Account</a>
-                            {% endif %}
-                        </li>
+                            </li>
+                            <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'add' }}">
+                                <a class="nav-link" href="{{ url_for('add') }}">Add a paint to the database</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item {{ 'active" aria-current="page' if request.url_rule.endpoint == 'login' }}">
                             {% if current_user.is_anonymous %}
                                 <a class="nav-link" href="{{ url_for('login') }}">Login</a>
@@ -52,10 +58,17 @@
         </nav>
 
         {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary mb-0 text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
-                </div>
+            <header>                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                          
+                            <div class="alert alert-{{category}} text-center" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
             </header>
         {% endif %}
 

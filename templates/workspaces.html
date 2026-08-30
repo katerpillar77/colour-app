@@ -1,21 +1,21 @@
 {% extends "layout.html" %}
-{% import 'bootstrap_wtf.html' as wtf %}
+
 {% block title %}
-    Account
+    Workspaces
 {% endblock %}
 
 {%block include %}
  
     <!--page-specific js-->
-    <script src="{{ url_for('static', filename='js/account.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/workspaces.js')}}"></script>
 
 {% endblock %}
 
 {% block main %}
-    <h1>Account</h1>
+    <h1>Workspaces</h1>
     {% if workspaces %}
         <div id="user-workspaces" class="container mb-4 border border-dark rounded p-2 constrain-lg">
-            <h4 class="mb-3 display-6">Workspaces</h4>        
+                 
             <div class="accordion" id="accordion-workspace">
                 {% for w in workspaces %}
                     <div class="accordion-item">
@@ -120,43 +120,7 @@
             </div>        
         </div><!-- end user-workspaces -->
     {% endif %}
-    <div id="user-details" class="container border border-dark rounded mb-4 p-2 constrain-sm">
-        <h4 class="mb-2 display-6">User details</h4>
-        <div class="row mb-2">
-            <div class="col-4 text-end">
-                Email:
-            </div>
-            <div class="col text-start">
-               {{ user.username }}
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-4 text-end">
-                Name: 
-            </div>
-            <div class="col text-start">
-                {{ user.name }}
-            </div>
-        </div>   
-        {% if verified == true %} 
-        <div class="row mb-2">
-            <div class="col">
-                {{ wtf.quick_form(formEditUser) }}    
-            </div>
-        </div>
-        {% else %}
-            <div class="row mb-2">
-                <div class="col">
-                    {{ wtf.quick_form(formVerify) }}    
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col ">
-                    {{ wtf.quick_form(formDelete )}} 
-                </div>
-            </div>   
-        {% endif %}       
-    </div><!-- end user-details -->
-    {% include "account-modals.html" %}
+    
+    {% include "workspace-modals.html" %}
 {% endblock %}
 

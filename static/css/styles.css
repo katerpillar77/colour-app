@@ -6,6 +6,10 @@ nav .navbar-brand
     background-image:url('/static/images/rainbowbanner.jpg');
     background-size: 100% 100%;
 }
+
+#login-form .form-check-input{
+    float:none !important;
+}
 #selected-colour .cp_dialog {
     width: 50%
 }
@@ -17,6 +21,9 @@ nav .navbar-brand
 }
 .constrain-968, .constrain-lg {
     max-width: 968px
+}
+.cp_input {
+    width: 7rem;
 }
 
 .colour-ref {
@@ -78,4 +85,8 @@ span.colour-name  {
  {
   display: none;
  }
+}
+
+#sort-button {
+    white-space: normal;
 }

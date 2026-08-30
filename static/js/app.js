@@ -141,26 +141,32 @@ async function savePaint(modal, paint, ws, workspace) {
 }
 
 
-async function displayColoursInWorkspaces(destElem, modalAction, colour_to_add="") {
+async function displayColoursInWorkspaces(destElem, modalAction, colour_to_add="" ) {
     //inserts list of saved colours nested inside workspaces into modal for adding/selecting saved colours
     showSpinner(destElem, true);
 
     //get data
-    let with_colours=false;
-    if (modalAction=="select") {
-        //get only workspaces with saved colours
-        with_colours=true;        
-    } 
-    
-    const [colours, workspaces] = await Promise.all([loadData('/return-saved-colours'),
-        loadData('/return-workspaces-with-colours')]);
+   // let with_colours=false;
+    //if (modalAction=="select") {
+   //     //get only workspaces with saved colours
+   //     with_colours=true;        
+   // } 
 
+    let [colours, workspaces] =[];
+    if (modalAction=="select"){
+        [colours, workspaces] = await Promise.all([loadData('/return-saved-colours'),
+            loadData('/return-workspaces-with-colours')]);
+    } else {
+        [colours, workspaces] = await Promise.all([loadData('/return-saved-colours'),
+            loadData('/return-workspaces')]);
+    }
     if (modalAction=="select" && workspaces[0]==0){
         //no workspaces with colours returned
         insert_text(destElem, "No saved colours.");
         return;
     }
-    if (colours == false || workspaces == false) {
+
+    if (colours === false || workspaces === false) {
         //error has occurred
         insert_text(destElem, "Could not load saved colours.");
         return;

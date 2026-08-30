@@ -7,6 +7,8 @@ from sqlalchemy.schema import DDLElement
 from sqlalchemy.sql import table
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from time import time
+import jwt
 
 @login.user_loader
 def load_user(id):
@@ -14,20 +16,69 @@ def load_user(id):
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
+    name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
                                                 unique=True)
-    email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
+    username: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
                                              unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+    verified: so.Mapped[bool] = so.mapped_column(sa.Boolean, default=False)
+    workspaces=so.relationship('Workspace', back_populates='user', cascade="all, delete")
+
+    def __repr__(self):
+        return '{}'.format(self.username)
+    
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    workspaces=so.relationship('Workspace', back_populates='user')
-    def __repr__(self):
-        return '{}'.format(self.username)
+    
+    def is_verified(self):
+        return self.verified == True
+    
+   
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256')
 
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return db.session.get(User, id)
+    
+    def get_verify_email_token(self, expires_in=600):
+        return jwt.encode(
+            {'verify_email': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256')
+
+    @staticmethod
+    def verify_verify_email_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['verify_email']
+        except:
+            return
+        return db.session.get(User, id)
+    
+    def get_delete_account_token(self, expires_in=600):
+        return jwt.encode(
+            {'delete_account': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256')
+
+    @staticmethod
+    def verify_delete_account_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['delete_account']
+        except:
+            return
+        return db.session.get(User, id)
+    
 class Workspace(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True)
@@ -35,8 +86,8 @@ class Workspace(db.Model):
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
                                                index=True)
     user=so.relationship('User', back_populates='workspaces')
-    saved_colours=so.relationship('SavedColour', back_populates='workspace')
-    saved_paints=so.relationship('SavedPaint', back_populates='workspace')
+    saved_colours=so.relationship('SavedColour', back_populates='workspace', cascade="all, delete")
+    saved_paints=so.relationship('SavedPaint', back_populates='workspace', cascade="all, delete")
     def __repr__(self):
         return '{} owned by {}'.format(self.name, self.user)
 
@@ -79,7 +130,7 @@ class SavedColour(db.Model):
                                                index=True)
     workspace_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Workspace.id),
                                                index=True)
-    workspace=so.relationship('Workspace', back_populates='saved_colours')
+    workspace=so.relationship('Workspace', back_populates='saved_colours', cascade="all, delete")
     colour=so.relationship('Colour', back_populates='saved_colours');
     def __repr__(self):
         return '{} {}'.format(self.name, self.colour)
@@ -91,7 +142,7 @@ class SavedPaint(db.Model):
                                                index=True)
     workspace_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Workspace.id),
                                                index=True)
-    workspace=so.relationship('Workspace', back_populates='saved_paints')
+    workspace=so.relationship('Workspace', back_populates='saved_paints', cascade="all, delete")
     paint=so.relationship('Paint', back_populates='saved_paints');
     def __repr__(self):
         return '{} - {}'.format(self.notes, self.paint)

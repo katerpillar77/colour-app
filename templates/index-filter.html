@@ -6,30 +6,34 @@
                 </button>
             </h2>
             <div id="collapse-filter" class="accordion-collapse collapse " >
-                <div id="filter-options" class="accordion-body container text-start">                    
+                <div id="filter-options" class="accordion-body container text-start p-1 p-md-2">                    
                     <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <ul id="hue-type-select" class="list-group mb-2">
+                        <div class="col-12 col-md-6 col-lg-12 pe-md-2 px-lg-3">
+                            <ul id="filter-hue" class="list-group mb-2 mb-md-1 mb-lg-2">
                                 <li class="list-group-item">
-                                    <input checked  class="hue-select-type form-check-input me-1" type="checkbox" value="1" id="hue-select-1">
-                                    <label class="form-check-label" for="hue-select-1">Analogous<span id="hue-select-type-1"></span></label>
+                                    <input checked  class="hue-select-type form-check-input me-1" type="checkbox" value="1" id="hue-1">
+                                    <label id="hue-select-type-1" class="form-check-label" for="hue-select-1" data-text="Analogous"></label>
                                 </li>
                                 <li class="list-group-item">
-                                    <input class="hue-select-type form-check-input me-1" type="checkbox" value="2" id="hue-select-2">
-                                    <label class="form-check-label" for="hue-select-2">Complementary<span id="hue-select-type-2"></label>
+                                    <input class="hue-select-type form-check-input me-1" type="checkbox" value="2" id="hue-2">
+                                    <label id="hue-select-type-2" class="form-check-label" for="hue-select-2" data-text="Complementary"></label>
                                 </li>
                                 <li class="list-group-item">
-                                    <input class="hue-select-type form-check-input me-1" type="checkbox" value="3" id="hue-select-3">
-                                    <label class="form-check-label" for="hue-select-3">First triadic<span id="hue-select-type-3"></span></label>
+                                    <input class="hue-select-type form-check-input me-1" type="checkbox" value="3" id="hue-3">
+                                    <label id="hue-select-type-3" class="form-check-label" for="hue-select-3" data-text="First triadic"></label>
                                 </li>
                                 <li class="list-group-item">
-                                    <input class="hue-select-type form-check-input me-1" type="checkbox" value="4" id="hue-select-4">
-                                    <label class="form-check-label" for="hue-select-4">Second triadic<span id="hue-select-type-4"></span></label>
+                                    <input class="hue-select-type form-check-input me-1" type="checkbox" value="4" id="hue-4">
+                                    <label id="hue-select-type-4" class="form-check-label" for="hue-select-4" data-text="Second triadic"></label>
                                 </li>
                             </ul>
+                             <!-- Button trigger settings modal -->
+                            <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                                Settings
+                            </button>
                         </div>
                    
-                        <div class="col-12 col-lg-6"> 
+                        <div class="col-12 col-md-6 col-lg-12 ps-md-2 px-lg-3"> 
                             <div class="accordion mb-2" id="accordion-brand">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
@@ -49,7 +53,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion mb-2" id="accordion-brand">
+                           
+                            <div class="accordion" id="accordion-brand">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="p-2 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-relevance" aria-expanded="false" aria-controls="collapse-relevance">

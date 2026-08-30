@@ -1,9 +1,14 @@
-from app import db
+
+from flask import render_template, url_for
 from flask_login import current_user
+from sqlalchemy import func, delete
+from app import db
 from models import Brand, Paint, Colour, SavedColour, SavedPaint, User, Workspace, sa
-from sqlalchemy import func
 from colour_functions import getColourID
 from helpers import obj_to_dict
+import resend
+
+resend.api_key = "re_hCrfyR6R_7oT8TTLDeRpFck1JWRnECydG"
 
 def get_user_details():
     # get user's details
@@ -172,4 +177,137 @@ def edit_saved_colour_row(data):
     return True
 
 
+def edit_user_details(data):
+    # update user details that aren't email address
+    # only name at the moment    
+    print(data)
+    query = sa.update(User).where(User.id == current_user.id).values(name=data.name)
+    try:
+        db.session.execute(query)
+        db.session.commit()
+    except:
+        print('Error editing user details.')
+        return False
+    
+    return True
 
+def edit_username(data):
+    # update email address - will require re-verification of email address    
+    query = sa.update(User).where(User.id == current_user.id).values(username=data.username, verified = False)
+    try:
+        db.session.execute(query)
+        db.session.commit()
+    except:
+        print('Error editing username.')
+        return False
+    return True
+
+def send_password_reset_email(user):
+    token = user.get_reset_password_token()
+    resend.Emails.send({
+        "from": "reset@paintcolours.app",
+        "to": [user.username],
+        "subject": "Reset your password for Paint Colour Comparison Tool",              
+        "html": render_template('email/reset_password.html', user=user, token=token)
+    })
+
+def send_password_reset_confirmation_email(user):
+    resend.Emails.send({
+        "from": "reset@paintcolours.app",
+        "to": [user.username],
+        "subject": "Password reset for Paint Colour Comparison Tool",              
+        "html": render_template('email/reset_password_confirmation.html', user=user)
+    })
+
+def send_verification_email(user):
+    token = user.get_verify_email_token()
+    resend.Emails.send({
+        "from": "hello@paintcolours.app",
+        "to": [user.username],
+        "subject": "Verify email address for Paint Colour Comparison Tool",              
+        "html": render_template('email/verify_email.html', user=user, token=token)
+    })
+
+def send_registration_confirmation_email(user):
+    resend.Emails.send({
+        "from": "hello@paintcolours.app",
+        "to": [user.username],
+        "subject": "Email address verified for Paint Colour Comparison Tool",              
+        "html": render_template('email/registration_confirmation.html', user=user)
+    })
+
+def send_delete_email(user):
+    token = user.get_delete_account_token()
+    resend.Emails.send({
+        "from": "delete@paintcolours.app",
+        "to": [user.username],
+        "subject": "Account deletion requested for Paint Colour Comparison Tool",              
+        "html": render_template('email/delete_account.html', user=user, token=token)
+    })
+    
+def send_delete_confirmation_email(user):
+    resend.Emails.send({
+        "from": "delete@paintcolours.app",
+        "to": [user.username],
+        "subject": "Account deleted at Paint Colour Comparison Tool",              
+        "html": render_template('email/delete_account_confirmation.html', user=user)
+    })
+
+def setup_user_account(user):
+    #user has verified email address, so verify the user
+    #also create a default workspace for the user if they have no workspaces 
+    #(verification can take place because the email address changed)
+    query = sa.update(User).where(User.id == user.id).values(verified=True)
+    try:
+        db.session.execute(query)
+        db.session.commit()
+    except:
+        print('Error verifying user email address.')
+        return False
+    
+    # create a default workspace for the user if they don't have one yet
+    if len(get_workspaces())==0:
+        row = Workspace(
+            name='Default Workspace',
+            notes='This is your default workspace where you can save colours and paints. You can also create additional workspaces to organise your saved colours and paints.',
+            user_id=user.id
+        )
+        try:
+            db.session.add(row)
+            db.session.commit()
+        except: 
+            print('Error creating default workspace for user.')
+            # don't want to return False here because the user has been verified, so just log the error and continue
+
+    return True
+
+def delete_user_account(user):
+    # delete the user account and all associated data
+    ##query = sa.delete(User).where(User.id == current_user.id)
+   # user = sa.select(User).where(User.id == current_user.id)
+    userid = current_user.id
+    user = db.session.query(User).filter_by(id = userid).first()
+    try:
+        db.session.delete(user)
+        db.session.commit()
+    except:
+        print('Error deleting user account.')
+        return False
+    return True
+
+def delete_user_account2(user):
+    #this one does not cascade delete
+    # delete the user account and all associated data
+    query = sa.delete(User).where(User.id == current_user.id)
+    try:
+        db.session.execute(query)
+        db.session.commit()
+    except:
+        print('Error deleting user account.')
+        return False
+    return True
+
+def delete_user_account1(user):
+    #temp for testing flow without deletion
+  
+    return True
