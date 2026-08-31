@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% import 'bootstrap_wtf.html' as wtf %}
+{% block title %}
+    Account
+{% endblock %}
+
+{%block include %}
+ 
+    <!--page-specific js-->
+    <script src="{{ url_for('static', filename='js/account.js')}}"></script>
+
+{% endblock %}
+
+{% block main %}
+    <h1>Account Details</h1>
+    <div class="container border border-dark rounded mb-4 p-2 constrain-sm">
+        {% if verified == false %} 
+            <div class="row mt-2 mb-4">
+                <div class="col">
+                    {{ wtf.quick_form(formVerify) }}    
+                </div>
+            </div>
+        {% endif %}
+        
+        <form id="form-name" method="post">
+            {{ formEdit.hidden_tag() }}
+            <div class="row mb text-start">
+                <div id="field-name" class="col-12 col-sm-8">
+                    {{wtf.form_field(formEdit.name)}}
+                </div>
+                <div id = "button-name" class="col-12 col-sm-4 align-self-end">
+                    {{wtf.form_field(formEdit.submitEdit)}}
+                </div>   
+            </div>
+        </form>
+        <form id="form-email" method="post">
+            {{ formEdit.hidden_tag() }}
+            <div class="row mb text-start">
+                <div id="field-email" class="col-12 col-sm-8">
+                    {{wtf.form_field(formEditU.username)}}
+                </div>
+                <div id = "button-email" class="col-12 col-sm-4 align-self-end">
+                    {{wtf.form_field(formEditU.submitEditU)}}
+                </div>   
+            </div>
+        </form>
+        <div class="row mb">
+            <div class="col">
+                {{ wtf.quick_form(formChangePassword) }}
+            </div>   
+        </div>
+
+        <div class="row mb">
+            <div class="col">
+                {{ wtf.quick_form(formDelete) }}
+            </div>   
+        </div>
+        
+    </div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 // initialise everything
 document.addEventListener('DOMContentLoaded', function() {
     
-    //set global variables
+    //set closure variables
     const HUE_THRESHOLD=5;
     let WEIGHTS = {
         'hue': 3,
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     let CALCULATED_HUE=[{'type':'1', 'hue':'0'}];
     let FILTERS= {};
+    let SORT_TYPE = '1';
 
     //indicates that there is no selected colour yet
         //will change to true on the first run of changeColour
@@ -209,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             refreshPaintList();
         });
 
-        //button to allow use to select colour from saved colours
+        //button to allow user to select colour from saved colours
         const select_saved_colour = document.getElementById('select-saved-colour');
         if (!!select_saved_colour) {
             select_saved_colour.addEventListener('click', function() {
@@ -248,10 +249,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        //populate FILTERS 
+        FILTERS['hue']=[];
+        filters.querySelectorAll('.hue-select-type').forEach(e => {
+            let label1 = filters.querySelector('#hue-select-type-'+e.value);
+            FILTERS['hue'].push({'option': e.value, 'name': label1.dataset.text, 'checked':false, 'found': false});
+        }); 
         FILTERS['relevance']=[];
         filters.querySelectorAll('.select-relevance').forEach(e => {
             //only show results above a relevance threshold
-            FILTERS['relevance'].push({option: e.value, checked:false, found: false});
+            FILTERS['relevance'].push({'option': e.value, 'name':'>' + e.value + '%', 'checked':false, 'found': false});
             e.addEventListener("change", function() {
                 filterList();
             });
@@ -259,9 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         //add filter options to the filters that aren't preset
         filter_list = filters.querySelectorAll('.filter-dynamic');
-        for (destElem of filter_list){
+        for (f of filter_list){
             let filter_details={};
-            switch (destElem.id) {
+            switch (f.id) {
                 case 'filter-brand':
                     filter_details={
                         route:'/return-brands-with-paints',
@@ -274,14 +281,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             if (!("route" in filter_details)) {
-                console.log('There is no switch case for ' + destElem.id);
+                console.log('There is no switch case for ' + f.id);
                 continue;
             }
             
             //initiate item for this filter in FILTERS
             FILTERS[filter_details.id_name]=[];
             //get li template
-            const template=destElem.querySelector('li.template');
+            const template=f.querySelector('li.template');
             if (!template) {
                 continue;
             }
@@ -290,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!data) {
                 continue;
             }
+            //console.log(data);
             //create a li for each item in data
             for (const d of data) {
                 //clone li template
@@ -307,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 l.setAttribute('for', li_id);
                 l.innerHTML=d[filter_details.label];
                 //add this option to FILTERS
-                FILTERS[filter_details.id_name].push({option: i.value, checked:false, found: false});
+                FILTERS[filter_details.id_name].push({'option': i.value, 'name':d[filter_details.label], 'checked':false, 'found': false});
                 e.addEventListener('click', function() {
                     filterList();
                 });
@@ -359,6 +367,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     displayColoursInWorkspaces(modalElement, 'add', colour);
                 });
             });
+
+            //initiate sort order buttons
+            document.querySelectorAll('.sort-option').forEach((button) => {
+                button.addEventListener('click', function(){
+                    SORT_TYPE = button.id.substr(5);
+                    //console.log(document.getElementById('sort-button'));
+                    //console.log(button.innerHTML);
+                    document.getElementById('sort-button').innerHTML = button.innerHTML;
+                    sortList();
+                });                
+            });
+
             //this won't run again
             colour_initiated = true;
         }
@@ -394,13 +414,13 @@ document.addEventListener('DOMContentLoaded', function() {
         temp_height=section.offsetHeight;        
         section.style.minHeight=temp_height+'px';
 
-        const destElem=section.querySelector('#paints-list');
+        const paints_list=section.querySelector('#paints-list');
         //hide paints list until done to avoid visual artifacts
-        destElem.setAttribute('hidden', 'true');
+        paints_list.setAttribute('hidden', 'true');
         //clear the current list to just template        
-        const template=destElem.querySelector('#template');
-        destElem.innerHTML="";
-        destElem.appendChild(template);
+        const template=paints_list.querySelector('#template');
+        paints_list.innerHTML="";
+        paints_list.appendChild(template);
 
         //for each entry in calculated_hue
         for (let i=0; i<CALCULATED_HUE.length; i++) {
@@ -431,10 +451,10 @@ document.addEventListener('DOMContentLoaded', function() {
         //show the list again
         showSpinner(section, false);
         section.style.minHeight='';
-        destElem.removeAttribute('hidden');
+        paints_list.removeAttribute('hidden');
 
         //initiate tool tips for all buttons
-        const tooltipTriggerList = destElem.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipTriggerList = paints_list.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
             tooltipTriggerEl))   
 
@@ -460,17 +480,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     default:
                     // code block
                 }
-                //add text to select for filter
-                document.getElementById('hue-select-type-'+ e.value).innerHTML = " - hue " + hue;
+                //add text to select for filter, also add to FILTERS
+                let label1 = document.getElementById('hue-select-type-'+ e.value);
+                let hue_label=label1.dataset.text + " - hue " + hue;
+                label1.innerHTML = hue_label;
+                let result=FILTERS['hue'].find(x => x.option === e.value);
+                //console.log(result);
+                result.name=hue_label;
                 if (e.checked==true) {
                     CALCULATED_HUE.push({'type':e.value, 'hue':hue.toString()});
+                    result.checked=true;
                 }
             });
             //console.log(CALCULATED_HUE);
         }
         
-        async function fetchPaints(this_hue){
-            //get paints within HUE_THRESHOLD of the specified hue
+        //get paints within HUE_THRESHOLD of the specified hue
+        async function fetchPaints(this_hue){            
             const response=await fetch('/return-paints-hue', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -491,14 +517,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }            
             if (data == false) {
                 //error has occurred
-                insert_text(destElem, "Could not load saved paints.");
+                insert_text(paints_list, "Could not load saved paints.");
                 return false;
             }
             return data;
         }
 
-        function create_row(p, this_hue) {
         //creates a new '.item-card' element for paint p
+        function create_row(p, this_hue) {        
             //clone item-card template
             let new_row=template.cloneNode(true);
             new_row.id="paint-" + p.id;
@@ -535,8 +561,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return item_card;
         }        
 
-        function setButtons(e, p){
-        //add event listeners to buttons in the row
+         //add event listeners to buttons in the row
+        function setButtons(e, p){       
             let button=e.querySelector('.save-paint');
             if (!!button) {
                 //button to save paint in a workspace
@@ -581,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //recalculate all rankings when saturation/hue changes
     function calculateRankings(){
         //recalculate ranking for every paint item
-        const items = destElem.querySelectorAll("#paints-list .item-card");
+        const items = document.querySelectorAll("#paints-list .item-card");
         for (e of items) {
             setPaintRanking(e, {'saturation': document.getElementById('saturation').value, 'luminance': document.getElementById('luminance').value})
         } 
@@ -635,12 +661,11 @@ document.addEventListener('DOMContentLoaded', function() {
             ranking_threshold =entry[1];
         }
 
-        //update FILTERS with which options are checked
+        //update FILTERS with which options are checked, and reinitialise found to false
         updateFilterVariable();
-
-        destElem = document.getElementById('paints-list');
+        const paints_list = document.getElementById('paints-list');
         //check every paint item
-        const items = destElem.querySelectorAll(".item-card");
+        const items = paints_list.querySelectorAll(".item-card");
         for (e of items) {
             //ignore the template 
             if (e.id == 'template'){
@@ -650,7 +675,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 results=true;
             };              
         };      
-        console.log(FILTERS);
+        //console.log(FILTERS);
         //display no results if none
         const no_results = document.getElementById('no-results');
         if (results == true) {
@@ -665,64 +690,82 @@ document.addEventListener('DOMContentLoaded', function() {
         
         //grey out unavailable options
         updateFilters();
-
-
-        function updateFilterVariable(){
+       
         //update the variable FILTERS with selected/not selected filter options
+        function updateFilterVariable(){        
+        //also show selected options
+        //also initiate found to false
+            
+        //clear #selected-options and get ready to add updated ones
+            //clear the current list to just template 
+            const d = document.getElementById('selected-options'); 
+            //get the template
+            const template=d.querySelector('.template');  
+            d.innerHTML="";
+            d.appendChild(template);   
+            let filters_all=document.getElementById('accordion-filter');
             for (const [filter_name]  of Object.entries(FILTERS)){
                 let one_checked=false;
-                //don't need to do it for relevance
-                if (filter_name != 'relevance') {
-                    let filter_section=document.getElementById('filter-'+ filter_name);
-                    for ( let i = 0; i < FILTERS[filter_name].length; i++ ) {
-                        let o = FILTERS[filter_name][i];  
-                        //re-initialise found
-                        o.found=false; 
-                        //note whether the option is checked 
-                        o.checked=filter_section.querySelector('#' + filter_name + '-' + o.option).checked;  
-                        if (o.checked ){
-                            //note that at least one option in the filter is checked
-                            one_checked=true;
-                        }
-                    } 
-                    //if none of the options were checked, consider them all checked
-                    if (!one_checked) {
-                        for ( let i = 0; i < FILTERS[filter_name].length; i++ ) {
-                            FILTERS[filter_name][i].checked=true;
-                        }
-                    }
+                let none_means_one = false;
+                switch (filter_name) {
+                    case 'relevance', 'hue':                         
+                        break;  
+                    default:
+                        none_means_one=true;                                                                 
                 }
+                for ( let i = 0; i < FILTERS[filter_name].length; i++ ) {
+                    let o = FILTERS[filter_name][i];  
+                    //re-initialise found
+                    o.found=false;
+                    //note whether the option is checked 
+                    o.checked=filters_all.querySelector('#filter-'+ filter_name).querySelector('#' + filter_name + '-' + o.option).checked;  
+                    //console.log(o);
+                    if (o.checked ){
+                        one_checked=true;
+                        displaySelectedOption(filter_name, o, template);
+                    }
+                } 
+                //for some filters, if none of the options were checked, consider them all checked 
+                if (!one_checked && none_means_one) {
+                    for ( let i = 0; i < FILTERS[filter_name].length; i++ ) {
+                        FILTERS[filter_name][i].checked=true;
+                    }
+                } 
             }
+            //console.log(FILTERS);
         }
 
         //hide an element as required by selected filter options
         function applyFilters(e){
            
             let matches=0;
-            let num_filters=Object.entries(FILTERS).length;
+            let num_filters=Object.entries(FILTERS).length-1;
             
             //iterate through filters
             for (const [filter_name, options]  of Object.entries(FILTERS)){
-                if (filter_name != 'relevance') {  
-                    //get option for this filter from the element              
-                    let element_option = e.dataset[filter_name];
-                    //find the option in the array
-                    result=options.find(x => x.option === element_option);
-                    //if this option is checked, it's a match
-                    if (result.checked==true) {
-                        matches++;                        
-                    }  
-                    //note that the option exists in the list
-                    result.found=true;                  
-                } else {
-                    //filter by ranking threshold            
-                    if (Number(e.dataset.ranking) >= Number(ranking_threshold))  {
-                        //it's a match       
-                        matches++;  
-                    }
-                }      
+                switch(filter_name) {
+                    case 'relevance':
+                        //filter by ranking threshold            
+                        if (Number(e.dataset.ranking) >= Number(ranking_threshold))  {
+                            //it's a match       
+                            matches++;  
+                        }
+                        break;
+                    case 'hue':
+                        break;
+                    default:
+                        //get option for this filter from the element              
+                        let element_option = e.dataset[filter_name];
+                        //find the option in the array
+                        let result=options.find(x => x.option === element_option);
+                        //if this option is checked, it's a match
+                        if (result.checked==true) {
+                            matches++;                                            
+                        }  
+                        //note that the option exists in the list
+                        result.found=true;                      
+               }
             }
-        
             //check number of matches against number of filters
             if( matches == num_filters){
                 //all matches, show the element
@@ -734,20 +777,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }            
         }   
 
-        function sortList(items){
-            //TODO add other sort options
-            
-            //sort by ranking
-            elements = Array.from(items);
-            elements.sort(function(a, b) {
-                return b.dataset.ranking - a.dataset.ranking;
+        //add a button displaying the selected option above the filters
+        function displaySelectedOption(f, o, template) {
+                     
+            //clone the template
+            const new_button=template.cloneNode(true);
+            new_button.id="selected-" + f + '-' + o.option;
+            let b = undefined;
+            if (f=="relevance") {
+                b = template.parentNode.prependChild(new_button);
+            } else {
+                b = template.parentNode.appendChild(new_button);
+            }
+            //add details to button
+            b.removeAttribute("hidden");
+            b.classList.remove('template');
+            b.classList.add('d-inline-block');
+            b.dataset.filter=f;
+            b.dataset.option=o.option;
+            const s= b.querySelector('.option-name');
+            s.innerHTML= o.name;            
+         
+            //add an event listener to remove the filter option
+            const filters=document.getElementById('accordion-filter');
+            b.addEventListener('click', function() {
+                const filter_name=b.dataset.filter;
+                //uncheck the relevant filter option              
+                input_option=filters.querySelector('#filter-'+filter_name + ' #' + filter_name + '-' + b.dataset.option).checked=false;
+                //apply the filters
+                if (filter_name=="hue") {
+                    refreshPaintList();
+                } else {
+                    filterList();
+                }
             });
-            // Append the sorted items back to the wrapper
-            elements.forEach(function(element) {
-                destElem.appendChild(element);
-            });
+            //initialise the tooltip
+            let tooltip = new bootstrap.Tooltip(b);
         }   
-        
+
         function updateFilters(){
             //grey out options in the filters that aren't available
             const filters=document.getElementById('filter-options');
@@ -768,6 +835,53 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    //sort list of paints by selected order
+    function sortList(items=""){
+        
+        const destElem = document.getElementById('paints-list');
+        //if items not passed, get it
+        if (items=="" ){
+            items = destElem.querySelectorAll(".item-card");
+        }
+       
+        //sort by selected option
+        let elements = Array.from(items);
+        let sortFunc=undefined;
+        //get sort function for selected option
+        switch (SORT_TYPE){
+            case '1':
+                sortFunc=function(a, b){
+                    let diff = b.dataset.ranking - a.dataset.ranking;
+                    return diff;
+                };                
+                break;
+            case '2':
+                sortFunc=function(a, b) {
+                    return a.dataset.hueDiff - b.dataset.hueDiff;
+                };
+                break;
+            case '3':
+                sortFunc=function(a, b) {
+                    return a.dataset.satDiff - b.dataset.satDiff;
+                };
+                break;
+            case '4':
+                sortFunc=function(a, b) {
+                    return a.dataset.lumDiff - b.dataset.lumDiff;
+                };
+                break;
+            default:                    
+        }
+
+        if (sortFunc) {
+            elements.sort(sortFunc);
+            // Append the sorted items back to the wrapper
+            elements.forEach(function(element) {
+                destElem.appendChild(element);
+            });
+        }
+    }   
+
 // Helper function: change background colour of an element
     const applyColor = (el, colour) => {
         if (colour) {
@@ -777,4 +891,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    Element.prototype.prependChild = function(newElement) {
+        return this.insertBefore(newElement, this.firstChild);
+    };
 });

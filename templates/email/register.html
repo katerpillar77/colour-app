@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% import 'bootstrap_wtf.html' as wtf %}
+{% block title %}
+    Register new user
+{% endblock %}
+{% block main %}
+    <h1>Register new user</h1>
+       <div class="container border border-dark rounded mb-4 p-2 constrain-sm">
+            <div class="row mb">
+                <div class="col">
+                    {{ wtf.quick_form(form ) }}
+                </div>
+            </div>
+        </div>
+{% endblock %}
