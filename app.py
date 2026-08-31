@@ -17,7 +17,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 
-import routes
+import routes, models
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

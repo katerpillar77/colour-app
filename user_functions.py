@@ -3,12 +3,14 @@ from flask import render_template, url_for
 from flask_login import current_user
 from sqlalchemy import func, delete
 from app import db
+from config import Config
 from models import Brand, Paint, Colour, SavedColour, SavedPaint, User, Workspace, sa
 from colour_functions import getColourID
 from helpers import obj_to_dict
 import resend
 
-resend.api_key = "re_hCrfyR6R_7oT8TTLDeRpFck1JWRnECydG"
+resend.api_key = Config.RESEND_API
+print (resend.api_key)
 
 def get_user_details():
     # get user's details
@@ -295,19 +297,3 @@ def delete_user_account(user):
         return False
     return True
 
-def delete_user_account2(user):
-    #this one does not cascade delete
-    # delete the user account and all associated data
-    query = sa.delete(User).where(User.id == current_user.id)
-    try:
-        db.session.execute(query)
-        db.session.commit()
-    except:
-        print('Error deleting user account.')
-        return False
-    return True
-
-def delete_user_account1(user):
-    #temp for testing flow without deletion
-  
-    return True
