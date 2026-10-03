@@ -5,6 +5,10 @@
 {% endblock %}
 
 {%block include %}
+
+    <!-- identify page for use in app.js-->    
+    <meta name="page-identifier" content="main">
+
     <!--rangeSlider-->
     <script src="https://cdn.jsdelivr.net/npm/range-slider-input@2.4/dist/rangeslider.umd.min.js"></script>
 
@@ -16,7 +20,7 @@
     <script src="{{ url_for('static', filename='js/tinycolor-min.js')}}"></script>
 
     <!--page-specific js-->
-    <script src="{{ url_for('static', filename='js/index.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/main.min.js')}}" type="module" ></script>
 
 {% endblock %}
 
@@ -42,9 +46,9 @@
                 <div id="selected-colour" class="colour-ref w-100 px-3 py-2 border border-dark rounded">
                     <div class="row mb-2">
                         <div  class="col col-2 text-start px-1"  data-bs-toggle="tooltip" data-bs-title="Add reference colour to saved colours">
-                            <button id="save-reference-colour" class="add-saved-colour border p-0 btn btn-light border-dark rounded" colour="#ffffff"  hidden>
+                            <button id="save-reference-colour" class="add-saved-colour border p-0 btn btn-light border-dark rounded" data-colour="#ffffff"  hidden>
                                 {% if verified %}
-                                    <img src="{{ heart }}" class="m-1">
+                                    <img src="{{ heart }}" class="m-1" alt="Save reference colour to a workspace">
                                 {% endif %}
                             </button>
                         </div>
@@ -57,7 +61,7 @@
                                 </form>
                             {% elif verified %}
                                 <button id="select-saved-colour" class="border mt-4 mb-1 btn btn-light border-dark rounded select-fav mt-1 "  data-bs-toggle="tooltip" data-bs-title="Choose from your saved colours">
-                                    Saved colours <img src="{{ heart_fill }}">
+                                    Saved colours <img src="{{ heart_fill }}" alt="Select a saved colour">
                                 </button>
                             {% else %}
                                 <form action ="/email_not_verified",  method="get">
@@ -79,9 +83,9 @@
                 <div id="adjusted-colour" class="colour-ref px-3 py-2 w-100 border border-dark rounded">
                     <div class="row mb-2">
                         <div  class="col col-2 text-start px-1"  data-bs-toggle="tooltip" data-bs-title="Add adjusted colour to saved colours">
-                            <button id="save-adjusted-colour" class="add-saved-colour border p-0 btn btn-light border-dark rounded" colour="#ffffff" hidden> 
+                            <button id="save-adjusted-colour" class="add-saved-colour border p-0 btn btn-light border-dark rounded" data-colour="#ffffff" hidden> 
                                 {% if verified %}
-                                    <img src="{{ heart }}" class="m-1">
+                                    <img src="{{ heart }}" class="m-1" alt="Save adjusted colour to a workspace">
                                 {% endif %}
                             </button>
                         </div>
@@ -94,7 +98,7 @@
                         <label for="hue">Hue: </label>
                     </div>
                     <div class="col-2">
-                        <input id="hue" class="border-dark border rounded w-100" value=0 max="360" min="0" step="1">
+                        <input type="number" id="hue" class="border-dark border rounded w-100" value=0 max="360" min="0" step="1">
                     </div>
                     <div class="col-6 ">
                         <button id="reset" class="btn btn-secondary border-dark border rounded" data-bs-toggle="tooltip" data-bs-title="Reset adjusted colour to reference colour">Reset adjusted colour</button>
@@ -105,7 +109,7 @@
                         <label for="saturation">Saturation:</label>
                     </div>
                     <div class="col-2">
-                        <input id="saturation" class="border-dark border rounded w-100" min="0" max="100" step="1">
+                        <input  type="number" id="saturation" class="border-dark border rounded w-100" min="0" max="100" step="1">
                     </div>
                     <div class="col-6  pe-5 pe-sm-2">
                         <div id="saturation-slider"></div>
@@ -116,7 +120,7 @@
                         <label for="luminance">Luminance:</label>
                     </div>
                     <div class="col-2">
-                        <input id="luminance" class="border-dark border rounded w-100" min="0" max="100" step="1">
+                        <input  type="number" id="luminance" class="border-dark border rounded w-100" min="0" max="100" step="1">
                     </div>
                     <div class="col-6  pe-5 pe-sm-2">
                         <div id="luminance-slider"></div>
@@ -141,13 +145,13 @@
                 <div class="col-2"></div>
             </div>
         </div>
-        <p class="text-start d-none d-md-block">Paints with analogous colours to the adjusted colour are shown by default. In Filters, you can choose complementary and triadic colours. You can control how the relevance is calculated in Settings.</p>
+        <p class="text-start d-none d-md-block">Paints with analogous colours to the adjusted colour are shown by default. In Filters, you can also choose complementary and triadic colours.</p>
         <div id= "list-section" class="container">            
             <div class="row">
                 <div id="selected-options" class="order-1 col-12 col-lg-9 mb-2 px-0 text-start">
                     <button class="selected-option template m-1 p-1 border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Remove filter" hidden>
                         <span class="option-name px-1"></span>
-                        <span class="option-close px-1" ><img src="{{ cross }}" class="mb-1"></span>
+                        <span class="option-close px-1" ><img src="{{ cross }}" class="mb-1" alt="Remove filter option"></span>
                     </button>
                 </div>
                 <div class="order-3 order-lg-2 col-12 col-sm-3 col-md-2 col-lg-3 px-0 mb-2 text-end">
@@ -163,7 +167,7 @@
                     <div id="no-results" hidden>No paints found.</div>
                     <div class="spinner"></div>
                     <div id="paints-list">
-                        <div id="template" hidden class="row item-card justify-content-center align-items-center py-1 mb-2 rounded" >
+                        <div id="template-item-card" hidden class="row item-card justify-content-center align-items-center py-1 mb-2 rounded" >
                             <div class="col-4 ">
                                 <div class="row">
                                     <div class="brand-name col-12 col-md-5 p-1 p-1"></div>
@@ -177,12 +181,12 @@
                                             <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours"></button>
                                         </div>
                                     {% else %}
-                                        <div class="col-10 col-md-5 p-0" >
+                                        <div class="col-8 col-sm-10 col-md-5 p-0" >
                                             <button type="button" class="colour-holder compare btn w-100 h-100 border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Compare with reference/adjusted colours"></button>
                                         </div>
-                                        <div class="col-2 p-1" >
+                                        <div class="col-4 col-sm-2 p-1" >
                                             <button type="button" class="save-paint p-0 btn w-auto border border-dark rounded" data-bs-toggle="tooltip" data-bs-title="Add to saved paints">
-                                                <img class="m-1" src="{{ heart }}">
+                                                <img class="m-1" src="{{ heart }}" alt="Save paint to a workspace">
                                             </button>
                                         </div>
                                     {% endif %}

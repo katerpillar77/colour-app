@@ -7,7 +7,7 @@
 {%block include %}
  
     <!--page-specific js-->
-    <script src="{{ url_for('static', filename='js/account.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/account.min.js')}}"></script>
 
 {% endblock %}
 
@@ -21,7 +21,13 @@
                 </div>
             </div>
         {% endif %}
-        
+        <div class="row mb-4">
+            <div class="col">
+                To change your account details, enter the new information and click the "Save change" button. 
+                If you change your email address, you will not be able to access your account or workpaces until you verify the new address.
+            </div>
+
+        </div>
         <form id="form-name" method="post">
             {{ formEdit.hidden_tag() }}
             <div class="row mb text-start">
