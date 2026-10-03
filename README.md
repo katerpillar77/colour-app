@@ -1,8 +1,8 @@
 # Paint chooser app
 
-## The idea of this web app is to allow users to find a paint colour that goes with a colour they already have, such as another paint colour, or a colour taken from a wallpaper, tile or carpet.
+## The idea of this web app is to allow users to find a paint colour that goes with a colour they already have, such as another paint colour, or a colour taken from a wallpaper, tile, furniture etc.
 
-On the main page, a user chooses a reference colour and paint colours are displayed that match that colour, ordered by similarity. The user can adjust the hue, saturation and luminance of the colour, and can filter by brand. The user can also choose to see complementary and/or tertiary colours. By clicking on the paint colour, they can compare it with the reference/adjusted colour.
+On the main page, a user chooses a reference colour and paint colours are displayed that match that colour, ordered by similarity. The user can adjust the hue, saturation and luminance of the colour, and can filter the paints by brand. The user can also choose to see complementary and/or tertiary colours. By clicking on the paint colour, they can compare it with the reference/adjusted colour.
 
 The user can save colours and paints to workspaces. In the Workspaces page, the user can manage saved paints and colours, by editing or removing them. Workspaces can also be edited and deleted.
 
@@ -31,7 +31,9 @@ The main page presents a “Reference colour” box and an “Adjusted colour”
 
 The page also displays matching paints underneath the controls, with results ranked by similarity to the selected colour. The results are displayed with the brand and paint name, a colour swatch, the HSL values, and a relevance (similarity) score.
 
-Filters are provided for brand and minimum similarity. Sorting can be by overall similarity, or by similar hue, luminance or saturation. The user can also choose to see paints that are similar to the complementary or triadic colours of the adjusted colour, ie the same saturation and luminance but different hue.
+Filters are provided for brand and minimum similarity. I wrote the JS for filtering so it could be easily expanded to add more filters if I want in the future, by using a global variable holding the filter options rather than hardcoding them into the JS. Filter options for brands are dynamically created rather than being hardcoded into the HTML. 
+
+Sorting can be by overall similarity, or by similar hue, luminance or saturation. The user can also choose to see paints that are similar to the complementary or triadic colours of the adjusted colour, ie the same saturation and luminance but different hue.
 
 My JS code provides the following functionality:
 
