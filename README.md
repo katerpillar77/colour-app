@@ -14,7 +14,7 @@ The web app is written in Flask, with client-side operations handled by Javascri
 
 I relied heavily on the Mega Flask Tutorial by Miguel Grinberg for user login and session management, SQLAlchemy, and WTForms (including using his bootstrap_wtf.html).
 
-I used Bootstrap for most of the CSS, so style.css is minimal. I also used Bootstrap for JS actions such as modals and accordions.
+I used Bootstrap for most of the styling, so style.css is minimal. I also used Bootstrap for JS actions such as modals and accordions.
 
 In summary, I used:
 
@@ -156,12 +156,10 @@ I split the JS up so that it doesn't all have to be loaded for every page. I now
 
 ## Further work
 
-Since I intend to use this web app, I will keep developing it. Proposed improvements and work are:
+Since I intend to actually use this web app, I will keep developing it. Proposed improvements and work are:
 
 * functionality to compare more than one colour and paint, both on the main page and the workspaces page
 * adding drag and drop functionality to the workspaces, so that colours and paints can be dragged between workspaces, or dragged to a delete area, rather than the button clicks and modals that are now used
 * creating a contact/support page and cookie policy, just in case other people want to use the app
 * add a "copy" button to the paints so the hexcode or similar information can be easily input to somewhere else, like an interior design website
-* add a button to make the password visible when the user is typing it in
 * functionality to remember the most-recently-used workspace and open it automatically when the user is choosing or saving colours/paints
-  
