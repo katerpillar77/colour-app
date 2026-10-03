@@ -1,4 +1,3 @@
-
 //js for account page
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -27,4 +26,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-})
+});

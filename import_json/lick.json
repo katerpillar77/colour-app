@@ -1,0 +1,802 @@
+[
+  {
+    "name": "White 07",
+    "hex": "#FFFFFF",
+    "tone": "Light tone",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 100
+  },
+  {
+    "name": "White 01",
+    "hex": "#F2F2EB",
+    "tone": "Light tone",
+    "hue": 60,
+    "saturation": 21,
+    "lightness": 94
+  },
+  {
+    "name": "White 02",
+    "hex": "#EEEEEE",
+    "tone": "Light tone",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 93
+  },
+  {
+    "name": "White 03",
+    "hex": "#F3F1E5",
+    "tone": "Light tone",
+    "hue": 51,
+    "saturation": 37,
+    "lightness": 93
+  },
+  {
+    "name": "White 04",
+    "hex": "#E8E8E8",
+    "tone": "Light tone",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 91
+  },
+  {
+    "name": "White 05",
+    "hex": "#E7E0D0",
+    "tone": "Light tone",
+    "hue": 42,
+    "saturation": 32,
+    "lightness": 86
+  },
+  {
+    "name": "White 06",
+    "hex": "#F0EAE1",
+    "tone": "Light tone",
+    "hue": 36,
+    "saturation": 33,
+    "lightness": 91
+  },
+  {
+    "name": "Beige 03",
+    "hex": "#DFDBCF",
+    "tone": "Light tone",
+    "hue": 45,
+    "saturation": 20,
+    "lightness": 84
+  },
+  {
+    "name": "Beige 01",
+    "hex": "#DBCFBA",
+    "tone": "Light tone",
+    "hue": 38,
+    "saturation": 31,
+    "lightness": 79
+  },
+  {
+    "name": "Beige 02 Soho Farmhouse",
+    "hex": "#B6A18B",
+    "tone": "Light tone",
+    "hue": 31,
+    "saturation": 23,
+    "lightness": 63
+  },
+  {
+    "name": "Beige 09",
+    "hex": "#C6C0B5",
+    "tone": "Light tone",
+    "hue": 39,
+    "saturation": 13,
+    "lightness": 74
+  },
+  {
+    "name": "Taupe 02",
+    "hex": "#EAE7E4",
+    "tone": "Light tone",
+    "hue": 30,
+    "saturation": 12,
+    "lightness": 91
+  },
+  {
+    "name": "Taupe 03",
+    "hex": "#E3D4C4",
+    "tone": "Light tone",
+    "hue": 31,
+    "saturation": 36,
+    "lightness": 83
+  },
+  {
+    "name": "Greige 02 Soho Warehouse",
+    "hex": "#CDC7B8",
+    "tone": "Light tone",
+    "hue": 43,
+    "saturation": 17,
+    "lightness": 76
+  },
+  {
+    "name": "Greige 01",
+    "hex": "#C6BDA9",
+    "tone": "Light tone",
+    "hue": 41,
+    "saturation": 20,
+    "lightness": 72
+  },
+  {
+    "name": "Grey 01",
+    "hex": "#D4D5D0",
+    "tone": "Light tone",
+    "hue": 72,
+    "saturation": 6,
+    "lightness": 83
+  },
+  {
+    "name": "Grey 02",
+    "hex": "#D4D2CB",
+    "tone": "Light tone",
+    "hue": 47,
+    "saturation": 9,
+    "lightness": 81
+  },
+  {
+    "name": "Grey 03",
+    "hex": "#C9C6BF",
+    "tone": "Light tone",
+    "hue": 42,
+    "saturation": 8,
+    "lightness": 77
+  },
+  {
+    "name": "Green 13",
+    "hex": "#B9CCAE",
+    "tone": "Light tone",
+    "hue": 98,
+    "saturation": 23,
+    "lightness": 74
+  },
+  {
+    "name": "Green 01",
+    "hex": "#B9B9A3",
+    "tone": "Light tone",
+    "hue": 60,
+    "saturation": 14,
+    "lightness": 68
+  },
+  {
+    "name": "Green 09",
+    "hex": "#C6CDBF",
+    "tone": "Light tone",
+    "hue": 90,
+    "saturation": 12,
+    "lightness": 78
+  },
+  {
+    "name": "Blue 14",
+    "hex": "#E7EEF5",
+    "tone": "Light tone",
+    "hue": 210,
+    "saturation": 41,
+    "lightness": 93
+  },
+  {
+    "name": "Blue 02",
+    "hex": "#D3DBD9",
+    "tone": "Light tone",
+    "hue": 165,
+    "saturation": 10,
+    "lightness": 84
+  },
+  {
+    "name": "Blue 01",
+    "hex": "#C9CFCA",
+    "tone": "Light tone",
+    "hue": 130,
+    "saturation": 6,
+    "lightness": 80
+  },
+  {
+    "name": "Blue 03",
+    "hex": "#BECABF",
+    "tone": "Light tone",
+    "hue": 125,
+    "saturation": 10,
+    "lightness": 77
+  },
+  {
+    "name": "Yellow 05",
+    "hex": "#FFFCD6",
+    "tone": "Light tone",
+    "hue": 56,
+    "saturation": 100,
+    "lightness": 92
+  },
+  {
+    "name": "Yellow 01",
+    "hex": "#F5E6A3",
+    "tone": "Light tone",
+    "hue": 49,
+    "saturation": 80,
+    "lightness": 80
+  },
+  {
+    "name": "Pink 01",
+    "hex": "#EDE2D7",
+    "tone": "Light tone",
+    "hue": 30,
+    "saturation": 38,
+    "lightness": 89
+  },
+  {
+    "name": "Pink 04",
+    "hex": "#F3E0E4",
+    "tone": "Light tone",
+    "hue": 347,
+    "saturation": 44,
+    "lightness": 92
+  },
+  {
+    "name": "Pink 02",
+    "hex": "#E9D2BF",
+    "tone": "Light tone",
+    "hue": 27,
+    "saturation": 49,
+    "lightness": 83
+  },
+  {
+    "name": "Purple 05",
+    "hex": "#F6F3F1",
+    "tone": "Light tone",
+    "hue": 24,
+    "saturation": 22,
+    "lightness": 95
+  },
+  {
+    "name": "Purple 06",
+    "hex": "#DBD2D8",
+    "tone": "Light tone",
+    "hue": 320,
+    "saturation": 11,
+    "lightness": 84
+  },
+  {
+    "name": "Beige 10",
+    "hex": "#B2AC9F",
+    "tone": "Mid tone",
+    "hue": 41,
+    "saturation": 11,
+    "lightness": 66
+  },
+  {
+    "name": "Taupe 05",
+    "hex": "#B2ACA4",
+    "tone": "Mid tone",
+    "hue": 34,
+    "saturation": 8,
+    "lightness": 67
+  },
+  {
+    "name": "Grey 04",
+    "hex": "#B1B0A7",
+    "tone": "Mid tone",
+    "hue": 54,
+    "saturation": 6,
+    "lightness": 67
+  },
+  {
+    "name": "Grey 14",
+    "hex": "#D9D7DB",
+    "tone": "Mid tone",
+    "hue": 270,
+    "saturation": 5,
+    "lightness": 85
+  },
+  {
+    "name": "Grey 18",
+    "hex": "#B2B2AD",
+    "tone": "Mid tone",
+    "hue": 60,
+    "saturation": 3,
+    "lightness": 69
+  },
+  {
+    "name": "Green 02",
+    "hex": "#8A9082",
+    "tone": "Mid tone",
+    "hue": 86,
+    "saturation": 6,
+    "lightness": 54
+  },
+  {
+    "name": "Green 18",
+    "hex": "#919B6D",
+    "tone": "Mid tone",
+    "hue": 73,
+    "saturation": 19,
+    "lightness": 52
+  },
+  {
+    "name": "Green 07",
+    "hex": "#508351",
+    "tone": "Mid tone",
+    "hue": 121,
+    "saturation": 24,
+    "lightness": 41
+  },
+  {
+    "name": "Green 08",
+    "hex": "#A2C3AF",
+    "tone": "Mid tone",
+    "hue": 144,
+    "saturation": 22,
+    "lightness": 70
+  },
+  {
+    "name": "Green 14",
+    "hex": "#A1B392",
+    "tone": "Mid tone",
+    "hue": 93,
+    "saturation": 18,
+    "lightness": 64
+  },
+  {
+    "name": "Blue 13",
+    "hex": "#A2B9B6",
+    "tone": "Mid tone",
+    "hue": 172,
+    "saturation": 14,
+    "lightness": 68
+  },
+  {
+    "name": "Blue 09",
+    "hex": "#AED4C8",
+    "tone": "Mid tone",
+    "hue": 161,
+    "saturation": 31,
+    "lightness": 76
+  },
+  {
+    "name": "Blue 08",
+    "hex": "#ABCCD3",
+    "tone": "Mid tone",
+    "hue": 190,
+    "saturation": 31,
+    "lightness": 75
+  },
+  {
+    "name": "Blue 15",
+    "hex": "#CADBE1",
+    "tone": "Mid tone",
+    "hue": 196,
+    "saturation": 28,
+    "lightness": 84
+  },
+  {
+    "name": "Blue 04",
+    "hex": "#9CB7C5",
+    "tone": "Mid tone",
+    "hue": 200,
+    "saturation": 26,
+    "lightness": 69
+  },
+  {
+    "name": "Blue 17",
+    "hex": "#8398A5",
+    "tone": "Mid tone",
+    "hue": 203,
+    "saturation": 16,
+    "lightness": 58
+  },
+  {
+    "name": "Blue 18",
+    "hex": "#7593A6",
+    "tone": "Mid tone",
+    "hue": 203,
+    "saturation": 22,
+    "lightness": 55
+  },
+  {
+    "name": "Blue 05",
+    "hex": "#547F9C",
+    "tone": "Mid tone",
+    "hue": 204,
+    "saturation": 30,
+    "lightness": 47
+  },
+  {
+    "name": "Blue 10",
+    "hex": "#729ECE",
+    "tone": "Mid tone",
+    "hue": 211,
+    "saturation": 48,
+    "lightness": 63
+  },
+  {
+    "name": "Blue 19",
+    "hex": "#4E7ABB",
+    "tone": "Mid tone",
+    "hue": 216,
+    "saturation": 44,
+    "lightness": 52
+  },
+  {
+    "name": "Blue 20",
+    "hex": "#FFFFFF",
+    "tone": "Mid tone",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 100
+  },
+  {
+    "name": "Teal 04",
+    "hex": "#96B5A9",
+    "tone": "Mid tone",
+    "hue": 157,
+    "saturation": 17,
+    "lightness": 65
+  },
+  {
+    "name": "Teal 05",
+    "hex": "#6E8D7F",
+    "tone": "Mid tone",
+    "hue": 153,
+    "saturation": 12,
+    "lightness": 49
+  },
+  {
+    "name": "Teal 06",
+    "hex": "#4B8B86",
+    "tone": "Mid tone",
+    "hue": 175,
+    "saturation": 30,
+    "lightness": 42
+  },
+  {
+    "name": "Teal 01",
+    "hex": "#8A9A97",
+    "tone": "Mid tone",
+    "hue": 169,
+    "saturation": 7,
+    "lightness": 57
+  },
+  {
+    "name": "Yellow 06",
+    "hex": "#FFE887",
+    "tone": "Mid tone",
+    "hue": 48,
+    "saturation": 100,
+    "lightness": 76
+  },
+  {
+    "name": "Yellow 08",
+    "hex": "#F1D893",
+    "tone": "Mid tone",
+    "hue": 44,
+    "saturation": 77,
+    "lightness": 76
+  },
+  {
+    "name": "Yellow 07",
+    "hex": "#E9D39F",
+    "tone": "Mid tone",
+    "hue": 42,
+    "saturation": 63,
+    "lightness": 77
+  },
+  {
+    "name": "Orange 05",
+    "hex": "#E1A07A",
+    "tone": "Mid tone",
+    "hue": 22,
+    "saturation": 63,
+    "lightness": 68
+  },
+  {
+    "name": "Orange 03",
+    "hex": "#CD9973",
+    "tone": "Mid tone",
+    "hue": 25,
+    "saturation": 47,
+    "lightness": 63
+  },
+  {
+    "name": "Orange 04",
+    "hex": "#CE7D53",
+    "tone": "Mid tone",
+    "hue": 20,
+    "saturation": 56,
+    "lightness": 57
+  },
+  {
+    "name": "Red 01",
+    "hex": "#A06457",
+    "tone": "Mid tone",
+    "hue": 11,
+    "saturation": 30,
+    "lightness": 48
+  },
+  {
+    "name": "Red 03",
+    "hex": "#C3867B",
+    "tone": "Mid tone",
+    "hue": 9,
+    "saturation": 37,
+    "lightness": 62
+  },
+  {
+    "name": "Pink 07",
+    "hex": "#DFCFCB",
+    "tone": "Mid tone",
+    "hue": 12,
+    "saturation": 24,
+    "lightness": 84
+  },
+  {
+    "name": "Pink 08",
+    "hex": "#C2A79C",
+    "tone": "Mid tone",
+    "hue": 17,
+    "saturation": 24,
+    "lightness": 69
+  },
+  {
+    "name": "Pink 13 Nashville House",
+    "hex": "#DAAFA2",
+    "tone": "Mid tone",
+    "hue": 14,
+    "saturation": 43,
+    "lightness": 75
+  },
+  {
+    "name": "Pink 03",
+    "hex": "#E2C6C4",
+    "tone": "Mid tone",
+    "hue": 4,
+    "saturation": 34,
+    "lightness": 83
+  },
+  {
+    "name": "Pink 05",
+    "hex": "#D8B9B8",
+    "tone": "Mid tone",
+    "hue": 2,
+    "saturation": 29,
+    "lightness": 78
+  },
+  {
+    "name": "Purple 01",
+    "hex": "#AB9A9F",
+    "tone": "Mid tone",
+    "hue": 342,
+    "saturation": 9,
+    "lightness": 64
+  },
+  {
+    "name": "Brown 02",
+    "hex": "#9F7655",
+    "tone": "Dark tone",
+    "hue": 27,
+    "saturation": 30,
+    "lightness": 48
+  },
+  {
+    "name": "Greige 03",
+    "hex": "#7D7661",
+    "tone": "Dark tone",
+    "hue": 45,
+    "saturation": 13,
+    "lightness": 44
+  },
+  {
+    "name": "Grey 15",
+    "hex": "#7C7C7C",
+    "tone": "Dark tone",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 49
+  },
+  {
+    "name": "Grey 16",
+    "hex": "#7A7773",
+    "tone": "Dark tone",
+    "hue": 34,
+    "saturation": 3,
+    "lightness": 46
+  },
+  {
+    "name": "Grey 17",
+    "hex": "#6C6F70",
+    "tone": "Dark tone",
+    "hue": 195,
+    "saturation": 2,
+    "lightness": 43
+  },
+  {
+    "name": "Grey 07",
+    "hex": "#616766",
+    "tone": "Dark tone",
+    "hue": 170,
+    "saturation": 3,
+    "lightness": 39
+  },
+  {
+    "name": "Grey 08 Amsterdam House",
+    "hex": "#495459",
+    "tone": "Dark tone",
+    "hue": 199,
+    "saturation": 10,
+    "lightness": 32
+  },
+  {
+    "name": "Green 06",
+    "hex": "#414842",
+    "tone": "Dark tone",
+    "hue": 129,
+    "saturation": 5,
+    "lightness": 27
+  },
+  {
+    "name": "Green 20",
+    "hex": "#3E5945",
+    "tone": "Dark tone",
+    "hue": 136,
+    "saturation": 18,
+    "lightness": 30
+  },
+  {
+    "name": "Green 05 Rome House",
+    "hex": "#616044",
+    "tone": "Dark tone",
+    "hue": 58,
+    "saturation": 18,
+    "lightness": 32
+  },
+  {
+    "name": "Green 19",
+    "hex": "#7F7A5F",
+    "tone": "Dark tone",
+    "hue": 51,
+    "saturation": 14,
+    "lightness": 44
+  },
+  {
+    "name": "Green 04",
+    "hex": "#647A74",
+    "tone": "Dark tone",
+    "hue": 164,
+    "saturation": 10,
+    "lightness": 44
+  },
+  {
+    "name": "Green 03",
+    "hex": "#6F7A76",
+    "tone": "Dark tone",
+    "hue": 158,
+    "saturation": 5,
+    "lightness": 46
+  },
+  {
+    "name": "Blue 111",
+    "hex": "#1A4677",
+    "tone": "Dark tone",
+    "hue": 212,
+    "saturation": 64,
+    "lightness": 28
+  },
+  {
+    "name": "Blue 06",
+    "hex": "#4C5F6B",
+    "tone": "Dark tone",
+    "hue": 203,
+    "saturation": 17,
+    "lightness": 36
+  },
+  {
+    "name": "Blue 07",
+    "hex": "#3D4F56",
+    "tone": "Dark tone",
+    "hue": 197,
+    "saturation": 17,
+    "lightness": 29
+  },
+  {
+    "name": "Teal 02",
+    "hex": "#778384",
+    "tone": "Dark tone",
+    "hue": 185,
+    "saturation": 5,
+    "lightness": 49
+  },
+  {
+    "name": "Teal 03",
+    "hex": "#596869",
+    "tone": "Dark tone",
+    "hue": 184,
+    "saturation": 8,
+    "lightness": 38
+  },
+  {
+    "name": "Yellow 03",
+    "hex": "#E8BE62",
+    "tone": "Dark tone",
+    "hue": 41,
+    "saturation": 74,
+    "lightness": 65
+  },
+  {
+    "name": "Yellow 02",
+    "hex": "#DDA865",
+    "tone": "Dark tone",
+    "hue": 34,
+    "saturation": 64,
+    "lightness": 63
+  },
+  {
+    "name": "Orange 02",
+    "hex": "#B27549",
+    "tone": "Dark tone",
+    "hue": 25,
+    "saturation": 42,
+    "lightness": 49
+  },
+  {
+    "name": "Orange 01",
+    "hex": "#E05523",
+    "tone": "Dark tone",
+    "hue": 16,
+    "saturation": 75,
+    "lightness": 51
+  },
+  {
+    "name": "Red 06",
+    "hex": "#764A4A",
+    "tone": "Dark tone",
+    "hue": 0,
+    "saturation": 23,
+    "lightness": 38
+  },
+  {
+    "name": "Red 02",
+    "hex": "#A4493E",
+    "tone": "Dark tone",
+    "hue": 6,
+    "saturation": 45,
+    "lightness": 44
+  },
+  {
+    "name": "Pink 09",
+    "hex": "#C9A19D",
+    "tone": "Dark tone",
+    "hue": 5,
+    "saturation": 29,
+    "lightness": 70
+  },
+  {
+    "name": "Pink 12",
+    "hex": "#D6898D",
+    "tone": "Dark tone",
+    "hue": 357,
+    "saturation": 48,
+    "lightness": 69
+  },
+  {
+    "name": "Purple 03",
+    "hex": "#432D2E",
+    "tone": "Dark tone",
+    "hue": 357,
+    "saturation": 20,
+    "lightness": 22
+  },
+  {
+    "name": "Black 01",
+    "hex": "#444A4C",
+    "tone": "Dark tone",
+    "hue": 195,
+    "saturation": 6,
+    "lightness": 28
+  },
+  {
+    "name": "Black 02",
+    "hex": "#3C3C3C",
+    "tone": "Dark tone",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 24
+  }
+]

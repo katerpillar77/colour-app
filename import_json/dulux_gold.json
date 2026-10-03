@@ -1,0 +1,933 @@
+[
+  {
+    "name": "Desert Wind",
+    "hex": "#F9F1E4",
+    "hue": 37,
+    "saturation": 64,
+    "lightness": 94
+  },
+  {
+    "name": "Ivory Lace",
+    "hex": "#F7EDDA",
+    "hue": 39,
+    "saturation": 64,
+    "lightness": 91
+  },
+  {
+    "name": "Honey Beam",
+    "hex": "#FBEAD6",
+    "hue": 32,
+    "saturation": 82,
+    "lightness": 91
+  },
+  {
+    "name": "Coastal Glow",
+    "hex": "#F8EAD5",
+    "hue": 36,
+    "saturation": 71,
+    "lightness": 90
+  },
+  {
+    "name": "Apricot White",
+    "hex": "#F2E3D2",
+    "hue": 32,
+    "saturation": 55,
+    "lightness": 89
+  },
+  {
+    "name": "Buttermilk",
+    "hex": "#F0DFBC",
+    "hue": 40,
+    "saturation": 63,
+    "lightness": 84
+  },
+  {
+    "name": "Sunbaked Terracotta",
+    "hex": "#E0B595",
+    "hue": 26,
+    "saturation": 55,
+    "lightness": 73
+  },
+  {
+    "name": "Muted Gold",
+    "hex": "#BA9A74",
+    "hue": 33,
+    "saturation": 34,
+    "lightness": 59
+  },
+  {
+    "name": "Sumatran Melody 6",
+    "hex": "#F2E7DF",
+    "hue": 25,
+    "saturation": 42,
+    "lightness": 91
+  },
+  {
+    "name": "Treacle Tart 6",
+    "hex": "#F2E6DE",
+    "hue": 24,
+    "saturation": 43,
+    "lightness": 91
+  },
+  {
+    "name": "Harvest Fruits 6",
+    "hex": "#F6E9D5",
+    "hue": 36,
+    "saturation": 65,
+    "lightness": 90
+  },
+  {
+    "name": "Golden Rambler 6",
+    "hex": "#F5E9D4",
+    "hue": 38,
+    "saturation": 62,
+    "lightness": 90
+  },
+  {
+    "name": "Eastern Spice 6",
+    "hex": "#F4E5D9",
+    "hue": 27,
+    "saturation": 55,
+    "lightness": 90
+  },
+  {
+    "name": "Pharaohs Gold 6",
+    "hex": "#F5E8D2",
+    "hue": 38,
+    "saturation": 64,
+    "lightness": 89
+  },
+  {
+    "name": "Californian Sands 6",
+    "hex": "#F9E9CB",
+    "hue": 39,
+    "saturation": 79,
+    "lightness": 89
+  },
+  {
+    "name": "Buttercup Cloud",
+    "hex": "#FDEEBD",
+    "hue": 46,
+    "saturation": 94,
+    "lightness": 87
+  },
+  {
+    "name": "Honey Glaze",
+    "hex": "#F8EAC4",
+    "hue": 44,
+    "saturation": 79,
+    "lightness": 87
+  },
+  {
+    "name": "Moroccan Sands 6",
+    "hex": "#F5E5C7",
+    "hue": 39,
+    "saturation": 70,
+    "lightness": 87
+  },
+  {
+    "name": "Nectar Jewels 6",
+    "hex": "#F5DECE",
+    "hue": 25,
+    "saturation": 66,
+    "lightness": 88
+  },
+  {
+    "name": "Polar Flame 6",
+    "hex": "#F5E2C9",
+    "hue": 34,
+    "saturation": 69,
+    "lightness": 87
+  },
+  {
+    "name": "Pharaohs Gold 5",
+    "hex": "#F8E5C2",
+    "hue": 39,
+    "saturation": 79,
+    "lightness": 87
+  },
+  {
+    "name": "Golden Rambler 5",
+    "hex": "#F8E4C2",
+    "hue": 38,
+    "saturation": 79,
+    "lightness": 87
+  },
+  {
+    "name": "Wholemeal Honey 6",
+    "hex": "#F4DDCC",
+    "hue": 26,
+    "saturation": 65,
+    "lightness": 88
+  },
+  {
+    "name": "Treacle Tart 5",
+    "hex": "#EFDCCF",
+    "hue": 24,
+    "saturation": 50,
+    "lightness": 87
+  },
+  {
+    "name": "Honey Drizzle 6",
+    "hex": "#F3DEC8",
+    "hue": 31,
+    "saturation": 64,
+    "lightness": 87
+  },
+  {
+    "name": "Dutch Gold 6",
+    "hex": "#F5DEC5",
+    "hue": 31,
+    "saturation": 71,
+    "lightness": 87
+  },
+  {
+    "name": "Californian Sands 5",
+    "hex": "#F9E3BC",
+    "hue": 38,
+    "saturation": 84,
+    "lightness": 86
+  },
+  {
+    "name": "Harvest Fruits 5",
+    "hex": "#F5DFC4",
+    "hue": 33,
+    "saturation": 71,
+    "lightness": 86
+  },
+  {
+    "name": "Polar Flame 5",
+    "hex": "#F9DBBD",
+    "hue": 30,
+    "saturation": 83,
+    "lightness": 86
+  },
+  {
+    "name": "Tuscan Treasure 5",
+    "hex": "#FBDCB1",
+    "hue": 35,
+    "saturation": 90,
+    "lightness": 84
+  },
+  {
+    "name": "Pharaohs Gold 4",
+    "hex": "#F8DEB1",
+    "hue": 38,
+    "saturation": 84,
+    "lightness": 83
+  },
+  {
+    "name": "Californian Sands 4",
+    "hex": "#FADEAE",
+    "hue": 38,
+    "saturation": 88,
+    "lightness": 83
+  },
+  {
+    "name": "Dutch Gold 5",
+    "hex": "#F6D8B8",
+    "hue": 31,
+    "saturation": 78,
+    "lightness": 84
+  },
+  {
+    "name": "Golden Rambler 4",
+    "hex": "#FBDCAE",
+    "hue": 36,
+    "saturation": 91,
+    "lightness": 83
+  },
+  {
+    "name": "Eastern Spice 5",
+    "hex": "#F3D4BD",
+    "hue": 26,
+    "saturation": 69,
+    "lightness": 85
+  },
+  {
+    "name": "Moroccan Sands 5",
+    "hex": "#FADBAF",
+    "hue": 35,
+    "saturation": 88,
+    "lightness": 83
+  },
+  {
+    "name": "Polar Flame 4",
+    "hex": "#F8D6B3",
+    "hue": 30,
+    "saturation": 83,
+    "lightness": 84
+  },
+  {
+    "name": "Sumatran Melody 5",
+    "hex": "#EACEC0",
+    "hue": 20,
+    "saturation": 50,
+    "lightness": 84
+  },
+  {
+    "name": "Treacle Tart 4",
+    "hex": "#E4D1C2",
+    "hue": 26,
+    "saturation": 39,
+    "lightness": 83
+  },
+  {
+    "name": "Pharaohs Gold 3",
+    "hex": "#FADAA1",
+    "hue": 38,
+    "saturation": 90,
+    "lightness": 81
+  },
+  {
+    "name": "Harvest Fruits 4",
+    "hex": "#F9D1AA",
+    "hue": 30,
+    "saturation": 87,
+    "lightness": 82
+  },
+  {
+    "name": "Honey Drizzle 5",
+    "hex": "#EFCFAD",
+    "hue": 31,
+    "saturation": 67,
+    "lightness": 81
+  },
+  {
+    "name": "Nectar Jewels 5",
+    "hex": "#F0C8B0",
+    "hue": 22,
+    "saturation": 68,
+    "lightness": 82
+  },
+  {
+    "name": "Wholemeal Honey 5",
+    "hex": "#E9C9B2",
+    "hue": 25,
+    "saturation": 56,
+    "lightness": 81
+  },
+  {
+    "name": "Moroccan Sands 4",
+    "hex": "#FBD295",
+    "hue": 36,
+    "saturation": 93,
+    "lightness": 78
+  },
+  {
+    "name": "Golden Rambler 3",
+    "hex": "#FFD191",
+    "hue": 35,
+    "saturation": 100,
+    "lightness": 78
+  },
+  {
+    "name": "Californian Sands 3",
+    "hex": "#FDD28D",
+    "hue": 37,
+    "saturation": 97,
+    "lightness": 77
+  },
+  {
+    "name": "Polar Flame 3",
+    "hex": "#FFC88F",
+    "hue": 31,
+    "saturation": 100,
+    "lightness": 78
+  },
+  {
+    "name": "Dutch Gold 4",
+    "hex": "#F2C89B",
+    "hue": 31,
+    "saturation": 77,
+    "lightness": 78
+  },
+  {
+    "name": "Harvest Fruits 3",
+    "hex": "#F9C292",
+    "hue": 28,
+    "saturation": 90,
+    "lightness": 77
+  },
+  {
+    "name": "Earth Glaze 6",
+    "hex": "#FFCE7D",
+    "hue": 37,
+    "saturation": 100,
+    "lightness": 75
+  },
+  {
+    "name": "Polar Flame 2",
+    "hex": "#FAC681",
+    "hue": 34,
+    "saturation": 92,
+    "lightness": 74
+  },
+  {
+    "name": "Pharaohs Gold 2",
+    "hex": "#FFCF73",
+    "hue": 39,
+    "saturation": 100,
+    "lightness": 73
+  },
+  {
+    "name": "Eastern Spice 4",
+    "hex": "#F0BC94",
+    "hue": 26,
+    "saturation": 75,
+    "lightness": 76
+  },
+  {
+    "name": "Golden Bark 6",
+    "hex": "#FDCB77",
+    "hue": 38,
+    "saturation": 97,
+    "lightness": 73
+  },
+  {
+    "name": "Sumatran Melody 4",
+    "hex": "#E1B7A3",
+    "hue": 19,
+    "saturation": 51,
+    "lightness": 76
+  },
+  {
+    "name": "Tuscan Treasure 4",
+    "hex": "#F1C184",
+    "hue": 34,
+    "saturation": 80,
+    "lightness": 73
+  },
+  {
+    "name": "Nectar Jewels 4",
+    "hex": "#EAB696",
+    "hue": 23,
+    "saturation": 67,
+    "lightness": 75
+  },
+  {
+    "name": "Honey Drizzle 4",
+    "hex": "#E9BD8E",
+    "hue": 31,
+    "saturation": 67,
+    "lightness": 74
+  },
+  {
+    "name": "Wholemeal Honey 4",
+    "hex": "#E7B794",
+    "hue": 25,
+    "saturation": 63,
+    "lightness": 74
+  },
+  {
+    "name": "Moroccan Sands 3",
+    "hex": "#FBBD71",
+    "hue": 33,
+    "saturation": 95,
+    "lightness": 71
+  },
+  {
+    "name": "Californian Sands 2",
+    "hex": "#F9BF70",
+    "hue": 35,
+    "saturation": 92,
+    "lightness": 71
+  },
+  {
+    "name": "Pharaohs Gold 1",
+    "hex": "#FCC367",
+    "hue": 37,
+    "saturation": 96,
+    "lightness": 70
+  },
+  {
+    "name": "Honey Drizzle 3",
+    "hex": "#EEBA7D",
+    "hue": 32,
+    "saturation": 77,
+    "lightness": 71
+  },
+  {
+    "name": "Golden Rambler 2",
+    "hex": "#FFBE67",
+    "hue": 34,
+    "saturation": 100,
+    "lightness": 70
+  },
+  {
+    "name": "Tuscan Treasure 3",
+    "hex": "#F3BA6F",
+    "hue": 34,
+    "saturation": 85,
+    "lightness": 69
+  },
+  {
+    "name": "Dutch Gold 3",
+    "hex": "#E6B580",
+    "hue": 31,
+    "saturation": 67,
+    "lightness": 70
+  },
+  {
+    "name": "Treacle Tart 3",
+    "hex": "#D1B098",
+    "hue": 25,
+    "saturation": 38,
+    "lightness": 71
+  },
+  {
+    "name": "Moroccan Sands 2",
+    "hex": "#FFAF65",
+    "hue": 29,
+    "saturation": 100,
+    "lightness": 70
+  },
+  {
+    "name": "Harvest Fruits 2",
+    "hex": "#F4AC71",
+    "hue": 27,
+    "saturation": 86,
+    "lightness": 70
+  },
+  {
+    "name": "Rich Havana 6",
+    "hex": "#FCBB58",
+    "hue": 36,
+    "saturation": 96,
+    "lightness": 67
+  },
+  {
+    "name": "Polar Flame 1",
+    "hex": "#F9B462",
+    "hue": 33,
+    "saturation": 93,
+    "lightness": 68
+  },
+  {
+    "name": "Earth Glaze 5",
+    "hex": "#FFC04D",
+    "hue": 39,
+    "saturation": 100,
+    "lightness": 65
+  },
+  {
+    "name": "Eastern Spice 3",
+    "hex": "#EBAA76",
+    "hue": 27,
+    "saturation": 75,
+    "lightness": 69
+  },
+  {
+    "name": "Golden Rambler 1",
+    "hex": "#FFB54F",
+    "hue": 35,
+    "saturation": 100,
+    "lightness": 65
+  },
+  {
+    "name": "Sumatran Melody 3",
+    "hex": "#D9A387",
+    "hue": 20,
+    "saturation": 52,
+    "lightness": 69
+  },
+  {
+    "name": "Wholemeal Honey 3",
+    "hex": "#E0A678",
+    "hue": 27,
+    "saturation": 63,
+    "lightness": 67
+  },
+  {
+    "name": "Spicy Sandalwood 6",
+    "hex": "#EC9F6C",
+    "hue": 24,
+    "saturation": 77,
+    "lightness": 67
+  },
+  {
+    "name": "Californian Sands 1",
+    "hex": "#FAB248",
+    "hue": 36,
+    "saturation": 95,
+    "lightness": 63
+  },
+  {
+    "name": "Nectar Jewels 3",
+    "hex": "#D99F7A",
+    "hue": 23,
+    "saturation": 56,
+    "lightness": 66
+  },
+  {
+    "name": "Golden Bark 5",
+    "hex": "#FFB240",
+    "hue": 36,
+    "saturation": 100,
+    "lightness": 63
+  },
+  {
+    "name": "Nigerian Sands 6",
+    "hex": "#F8A850",
+    "hue": 31,
+    "saturation": 92,
+    "lightness": 64
+  },
+  {
+    "name": "Honey Drizzle 2",
+    "hex": "#E0A767",
+    "hue": 32,
+    "saturation": 66,
+    "lightness": 64
+  },
+  {
+    "name": "Tuscan Treasure 2",
+    "hex": "#F9A947",
+    "hue": 33,
+    "saturation": 94,
+    "lightness": 63
+  },
+  {
+    "name": "Roasted Pumpkin 6",
+    "hex": "#E09B6C",
+    "hue": 24,
+    "saturation": 65,
+    "lightness": 65
+  },
+  {
+    "name": "Treacle Tart 2",
+    "hex": "#C49A7A",
+    "hue": 26,
+    "saturation": 39,
+    "lightness": 62
+  },
+  {
+    "name": "Rich Havana 5",
+    "hex": "#F7A835",
+    "hue": 36,
+    "saturation": 92,
+    "lightness": 59
+  },
+  {
+    "name": "Dutch Gold 2",
+    "hex": "#D89E55",
+    "hue": 33,
+    "saturation": 63,
+    "lightness": 59
+  },
+  {
+    "name": "Jamaican Bronze 2",
+    "hex": "#E09851",
+    "hue": 30,
+    "saturation": 70,
+    "lightness": 60
+  },
+  {
+    "name": "Nigerian Sands 5",
+    "hex": "#F49839",
+    "hue": 30,
+    "saturation": 89,
+    "lightness": 59
+  },
+  {
+    "name": "Harvest Fruits 1",
+    "hex": "#F08948",
+    "hue": 23,
+    "saturation": 85,
+    "lightness": 61
+  },
+  {
+    "name": "Spicy Sandalwood 5",
+    "hex": "#E58C4F",
+    "hue": 24,
+    "saturation": 74,
+    "lightness": 60
+  },
+  {
+    "name": "Earth Glaze 4",
+    "hex": "#FEAB13",
+    "hue": 39,
+    "saturation": 99,
+    "lightness": 54
+  },
+  {
+    "name": "Roasted Pumpkin 5",
+    "hex": "#DA8953",
+    "hue": 24,
+    "saturation": 65,
+    "lightness": 59
+  },
+  {
+    "name": "Cherished Gold",
+    "hex": "#C19659",
+    "hue": 35,
+    "saturation": 46,
+    "lightness": 55
+  },
+  {
+    "name": "Earth Glaze 3",
+    "hex": "#E39931",
+    "hue": 35,
+    "saturation": 76,
+    "lightness": 54
+  },
+  {
+    "name": "Wholemeal Honey 2",
+    "hex": "#D48B4C",
+    "hue": 28,
+    "saturation": 61,
+    "lightness": 56
+  },
+  {
+    "name": "Golden Bark 4",
+    "hex": "#FFA405",
+    "hue": 38,
+    "saturation": 100,
+    "lightness": 51
+  },
+  {
+    "name": "Nectar Jewels 2",
+    "hex": "#CD8555",
+    "hue": 24,
+    "saturation": 55,
+    "lightness": 57
+  },
+  {
+    "name": "Spicy Sandalwood 4",
+    "hex": "#E0843F",
+    "hue": 26,
+    "saturation": 72,
+    "lightness": 56
+  },
+  {
+    "name": "Rich Havana 4",
+    "hex": "#F3951B",
+    "hue": 34,
+    "saturation": 90,
+    "lightness": 53
+  },
+  {
+    "name": "Eastern Spice 2",
+    "hex": "#DD883A",
+    "hue": 29,
+    "saturation": 71,
+    "lightness": 55
+  },
+  {
+    "name": "Roasted Pumpkin 4",
+    "hex": "#D77E44",
+    "hue": 24,
+    "saturation": 65,
+    "lightness": 55
+  },
+  {
+    "name": "Honey Drizzle 1",
+    "hex": "#D19038",
+    "hue": 35,
+    "saturation": 62,
+    "lightness": 52
+  },
+  {
+    "name": "Moroccan Sands 1",
+    "hex": "#EB8621",
+    "hue": 30,
+    "saturation": 83,
+    "lightness": 53
+  },
+  {
+    "name": "Mustard Blanket",
+    "hex": "#B89441",
+    "hue": 42,
+    "saturation": 48,
+    "lightness": 49
+  },
+  {
+    "name": "Sumatran Melody 2",
+    "hex": "#C2794F",
+    "hue": 22,
+    "saturation": 49,
+    "lightness": 54
+  },
+  {
+    "name": "Notebook Orange",
+    "hex": "#C2794F",
+    "hue": 22,
+    "saturation": 49,
+    "lightness": 54
+  },
+  {
+    "name": "Golden Bark 3",
+    "hex": "#D98C1D",
+    "hue": 35,
+    "saturation": 76,
+    "lightness": 48
+  },
+  {
+    "name": "Nigerian Sands 4",
+    "hex": "#D77E29",
+    "hue": 29,
+    "saturation": 69,
+    "lightness": 50
+  },
+  {
+    "name": "Teddybear Brown",
+    "hex": "#AA7E54",
+    "hue": 29,
+    "saturation": 34,
+    "lightness": 50
+  },
+  {
+    "name": "Treacle Tart 1",
+    "hex": "#AD7A51",
+    "hue": 27,
+    "saturation": 36,
+    "lightness": 50
+  },
+  {
+    "name": "Nigerian Sands 3",
+    "hex": "#CC7436",
+    "hue": 25,
+    "saturation": 60,
+    "lightness": 51
+  },
+  {
+    "name": "Spicy Sandalwood 3",
+    "hex": "#DC7525",
+    "hue": 26,
+    "saturation": 72,
+    "lightness": 50
+  },
+  {
+    "name": "Dutch Gold 1",
+    "hex": "#C88326",
+    "hue": 34,
+    "saturation": 68,
+    "lightness": 47
+  },
+  {
+    "name": "Rich Havana 3",
+    "hex": "#CE8121",
+    "hue": 33,
+    "saturation": 72,
+    "lightness": 47
+  },
+  {
+    "name": "Brave Olive",
+    "hex": "#AC833F",
+    "hue": 37,
+    "saturation": 46,
+    "lightness": 46
+  },
+  {
+    "name": "Tuscan Gold",
+    "hex": "#AC833F",
+    "hue": 37,
+    "saturation": 46,
+    "lightness": 46
+  },
+  {
+    "name": "Jamaican Bronze 1",
+    "hex": "#C27B2E",
+    "hue": 31,
+    "saturation": 62,
+    "lightness": 47
+  },
+  {
+    "name": "Roasted Pumpkin 3",
+    "hex": "#C86C25",
+    "hue": 26,
+    "saturation": 69,
+    "lightness": 46
+  },
+  {
+    "name": "Prized Gold",
+    "hex": "#C07722",
+    "hue": 32,
+    "saturation": 70,
+    "lightness": 44
+  },
+  {
+    "name": "Eastern Spice 1",
+    "hex": "#C37120",
+    "hue": 30,
+    "saturation": 72,
+    "lightness": 45
+  },
+  {
+    "name": "Nectar Jewels 1",
+    "hex": "#B4662F",
+    "hue": 25,
+    "saturation": 59,
+    "lightness": 45
+  },
+  {
+    "name": "Wholemeal Honey 1",
+    "hex": "#AE6830",
+    "hue": 27,
+    "saturation": 57,
+    "lightness": 44
+  },
+  {
+    "name": "Sumatran Melody 1",
+    "hex": "#AE6335",
+    "hue": 23,
+    "saturation": 53,
+    "lightness": 45
+  },
+  {
+    "name": "Golden Bark 2",
+    "hex": "#A96B2B",
+    "hue": 30,
+    "saturation": 59,
+    "lightness": 42
+  },
+  {
+    "name": "Earth Glaze 2",
+    "hex": "#986735",
+    "hue": 30,
+    "saturation": 48,
+    "lightness": 40
+  },
+  {
+    "name": "Nigerian Sands 2",
+    "hex": "#9A5C38",
+    "hue": 22,
+    "saturation": 47,
+    "lightness": 41
+  },
+  {
+    "name": "Spicy Sandalwood 2",
+    "hex": "#9F5E2E",
+    "hue": 25,
+    "saturation": 55,
+    "lightness": 40
+  },
+  {
+    "name": "Rich Havana 2",
+    "hex": "#995F2C",
+    "hue": 28,
+    "saturation": 55,
+    "lightness": 39
+  },
+  {
+    "name": "Roasted Pumpkin 2",
+    "hex": "#8F5833",
+    "hue": 24,
+    "saturation": 47,
+    "lightness": 38
+  },
+  {
+    "name": "Golden Bark 1",
+    "hex": "#6A4E36",
+    "hue": 28,
+    "saturation": 33,
+    "lightness": 31
+  },
+  {
+    "name": "Rich Havana 1",
+    "hex": "#654330",
+    "hue": 22,
+    "saturation": 36,
+    "lightness": 29
+  }
+]

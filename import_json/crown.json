@@ -1,0 +1,835 @@
+[
+  {
+    "name": "Pure Brilliant White",
+    "hex": "#F3F3ED",
+    "hue": 60,
+    "saturation": 20,
+    "lightness": 94
+  },
+  {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hue": 0,
+    "saturation": 0,
+    "lightness": 100
+  },
+  {
+    "name": "Fresh Coconut®",
+    "hex": "#ECECE9",
+    "hue": 60,
+    "saturation": 7,
+    "lightness": 92
+  },
+  {
+    "name": "Best China®",
+    "hex": "#EEEFEA",
+    "hue": 72,
+    "saturation": 14,
+    "lightness": 93
+  },
+  {
+    "name": "Chalky White",
+    "hex": "#E9EBE9",
+    "hue": 120,
+    "saturation": 5,
+    "lightness": 92
+  },
+  {
+    "name": "Gallery Wall®",
+    "hex": "#EBECEB",
+    "hue": 120,
+    "saturation": 3,
+    "lightness": 92
+  },
+  {
+    "name": "Sail White®",
+    "hex": "#EEEBE5",
+    "hue": 40,
+    "saturation": 21,
+    "lightness": 92
+  },
+  {
+    "name": "Woven Calico®",
+    "hex": "#EDEDE5",
+    "hue": 60,
+    "saturation": 18,
+    "lightness": 91
+  },
+  {
+    "name": "Canvas White®",
+    "hex": "#F1EFE6",
+    "hue": 49,
+    "saturation": 28,
+    "lightness": 92
+  },
+  {
+    "name": "Milk Bottle®",
+    "hex": "#F1F4E9",
+    "hue": 76,
+    "saturation": 33,
+    "lightness": 94
+  },
+  {
+    "name": "Milk White",
+    "hex": "#F2F4EC",
+    "hue": 75,
+    "saturation": 27,
+    "lightness": 94
+  },
+  {
+    "name": "Cotton Cloth®",
+    "hex": "#E7E8E4",
+    "hue": 75,
+    "saturation": 8,
+    "lightness": 90
+  },
+  {
+    "name": "Clay White®",
+    "hex": "#E9EBED",
+    "hue": 210,
+    "saturation": 10,
+    "lightness": 92
+  },
+  {
+    "name": "Writing Paper®",
+    "hex": "#E4E7E2",
+    "hue": 96,
+    "saturation": 9,
+    "lightness": 90
+  },
+  {
+    "name": "Cotton Belt",
+    "hex": "#F0EFE1",
+    "hue": 56,
+    "saturation": 33,
+    "lightness": 91
+  },
+  {
+    "name": "Cream White",
+    "hex": "#F4EEE1",
+    "hue": 41,
+    "saturation": 46,
+    "lightness": 92
+  },
+  {
+    "name": "Collector's White",
+    "hex": "#F4F0E0",
+    "hue": 48,
+    "saturation": 48,
+    "lightness": 92
+  },
+  {
+    "name": "Swan Feather®",
+    "hex": "#F1ECE1",
+    "hue": 41,
+    "saturation": 36,
+    "lightness": 91
+  },
+  {
+    "name": "Beige White",
+    "hex": "#EAE4D8",
+    "hue": 40,
+    "saturation": 30,
+    "lightness": 88
+  },
+  {
+    "name": "Chalk Hill",
+    "hex": "#E6E1D6",
+    "hue": 41,
+    "saturation": 24,
+    "lightness": 87
+  },
+  {
+    "name": "Antique Cream",
+    "hex": "#E8E1D2",
+    "hue": 41,
+    "saturation": 32,
+    "lightness": 87
+  },
+  {
+    "name": "Soft Linen",
+    "hex": "#F8F3E0",
+    "hue": 48,
+    "saturation": 63,
+    "lightness": 93
+  },
+  {
+    "name": "Ivory Cream",
+    "hex": "#F5E8D4",
+    "hue": 36,
+    "saturation": 62,
+    "lightness": 90
+  },
+  {
+    "name": "Magnolia",
+    "hex": "#F4E4CE",
+    "hue": 35,
+    "saturation": 63,
+    "lightness": 88
+  },
+  {
+    "name": "Ivory Stone",
+    "hex": "#F0E2CB",
+    "hue": 37,
+    "saturation": 55,
+    "lightness": 87
+  },
+  {
+    "name": "Soft Cream",
+    "hex": "#FCE3C6",
+    "hue": 32,
+    "saturation": 90,
+    "lightness": 88
+  },
+  {
+    "name": "Cornish Cream",
+    "hex": "#F5E8C5",
+    "hue": 44,
+    "saturation": 71,
+    "lightness": 87
+  },
+  {
+    "name": "Almond Cream®",
+    "hex": "#E6DBC9",
+    "hue": 37,
+    "saturation": 37,
+    "lightness": 85
+  },
+  {
+    "name": "Light Cream",
+    "hex": "#F2DABE",
+    "hue": 32,
+    "saturation": 67,
+    "lightness": 85
+  },
+  {
+    "name": "Toasted Almond®",
+    "hex": "#D9C8B8",
+    "hue": 29,
+    "saturation": 30,
+    "lightness": 79
+  },
+  {
+    "name": "Bitter Chocolate",
+    "hex": "#61554F",
+    "hue": 20,
+    "saturation": 10,
+    "lightness": 35
+  },
+  {
+    "name": "Gentle Hush®",
+    "hex": "#CDC8BC",
+    "hue": 42,
+    "saturation": 15,
+    "lightness": 77
+  },
+  {
+    "name": "Organic Cloth®",
+    "hex": "#E7E1DB",
+    "hue": 30,
+    "saturation": 20,
+    "lightness": 88
+  },
+  {
+    "name": "Clay Like",
+    "hex": "#D5D0C9",
+    "hue": 35,
+    "saturation": 13,
+    "lightness": 81
+  },
+  {
+    "name": "Dash Of Nutmeg®",
+    "hex": "#D5D0C9",
+    "hue": 35,
+    "saturation": 13,
+    "lightness": 81
+  },
+  {
+    "name": "White Pepper®",
+    "hex": "#DACEC2",
+    "hue": 30,
+    "saturation": 24,
+    "lightness": 81
+  },
+  {
+    "name": "Soaring Dove®",
+    "hex": "#E3E1DB",
+    "hue": 45,
+    "saturation": 12,
+    "lightness": 87
+  },
+  {
+    "name": "Snowfall®",
+    "hex": "#DED9D0",
+    "hue": 39,
+    "saturation": 18,
+    "lightness": 84
+  },
+  {
+    "name": "Afternoon Tea®",
+    "hex": "#DED2C3",
+    "hue": 33,
+    "saturation": 29,
+    "lightness": 82
+  },
+  {
+    "name": "Wheatgrass",
+    "hex": "#DED2C3",
+    "hue": 33,
+    "saturation": 29,
+    "lightness": 82
+  },
+  {
+    "name": "Sandblast",
+    "hex": "#E2D6C5",
+    "hue": 35,
+    "saturation": 33,
+    "lightness": 83
+  },
+  {
+    "name": "Sandstone",
+    "hex": "#DBCAB5",
+    "hue": 33,
+    "saturation": 35,
+    "lightness": 78
+  },
+  {
+    "name": "Country Stone",
+    "hex": "#DFD0BC",
+    "hue": 34,
+    "saturation": 35,
+    "lightness": 81
+  },
+  {
+    "name": "Mid Stone",
+    "hex": "#BFAD96",
+    "hue": 34,
+    "saturation": 24,
+    "lightness": 67
+  },
+  {
+    "name": "East Village®",
+    "hex": "#CDC1B4",
+    "hue": 31,
+    "saturation": 20,
+    "lightness": 75
+  },
+  {
+    "name": "Reframed®",
+    "hex": "#CEC3B2",
+    "hue": 36,
+    "saturation": 22,
+    "lightness": 75
+  },
+  {
+    "name": "Sewing Bee",
+    "hex": "#D2B88F",
+    "hue": 37,
+    "saturation": 43,
+    "lightness": 69
+  },
+  {
+    "name": "Drawing Board®",
+    "hex": "#C5BAAE",
+    "hue": 31,
+    "saturation": 17,
+    "lightness": 73
+  },
+  {
+    "name": "Picnic Basket®",
+    "hex": "#B9A594",
+    "hue": 28,
+    "saturation": 21,
+    "lightness": 65
+  },
+  {
+    "name": "Rustic Twine®",
+    "hex": "#C5A887",
+    "hue": 32,
+    "saturation": 35,
+    "lightness": 65
+  },
+  {
+    "name": "Potted History®",
+    "hex": "#A0958A",
+    "hue": 30,
+    "saturation": 10,
+    "lightness": 58
+  },
+  {
+    "name": "Pale Gold",
+    "hex": "#F8D5A7",
+    "hue": 34,
+    "saturation": 85,
+    "lightness": 81
+  },
+  {
+    "name": "Egyptian Sand®",
+    "hex": "#ECCCA0",
+    "hue": 35,
+    "saturation": 67,
+    "lightness": 78
+  },
+  {
+    "name": "Sunrise",
+    "hex": "#FFE6AB",
+    "hue": 42,
+    "saturation": 100,
+    "lightness": 84
+  },
+  {
+    "name": "Happy Daze®",
+    "hex": "#FFDF85",
+    "hue": 44,
+    "saturation": 100,
+    "lightness": 76
+  },
+  {
+    "name": "Mustard Jar®",
+    "hex": "#E7BD67",
+    "hue": 40,
+    "saturation": 73,
+    "lightness": 65
+  },
+  {
+    "name": "Overjoyed®",
+    "hex": "#D3A764",
+    "hue": 36,
+    "saturation": 56,
+    "lightness": 61
+  },
+  {
+    "name": "Yarn®",
+    "hex": "#CCA54F",
+    "hue": 41,
+    "saturation": 55,
+    "lightness": 55
+  },
+  {
+    "name": "Saddle Stitch®",
+    "hex": "#A77E65",
+    "hue": 23,
+    "saturation": 27,
+    "lightness": 53
+  },
+  {
+    "name": "Woodland Wanderer®",
+    "hex": "#535F55",
+    "hue": 130,
+    "saturation": 7,
+    "lightness": 35
+  },
+  {
+    "name": "Botanical Extract®",
+    "hex": "#E2EAE3",
+    "hue": 127,
+    "saturation": 16,
+    "lightness": 90
+  },
+  {
+    "name": "Willow Breeze®",
+    "hex": "#CFD6D0",
+    "hue": 129,
+    "saturation": 8,
+    "lightness": 83
+  },
+  {
+    "name": "Poetry®",
+    "hex": "#D4D4C1",
+    "hue": 60,
+    "saturation": 18,
+    "lightness": 79
+  },
+  {
+    "name": "Spice Rack®",
+    "hex": "#C5D0BE",
+    "hue": 97,
+    "saturation": 16,
+    "lightness": 78
+  },
+  {
+    "name": "Sow Good®",
+    "hex": "#B9C0B0",
+    "hue": 86,
+    "saturation": 11,
+    "lightness": 72
+  },
+  {
+    "name": "Mellow Sage",
+    "hex": "#B9C0B0",
+    "hue": 86,
+    "saturation": 11,
+    "lightness": 72
+  },
+  {
+    "name": "Bay Tree",
+    "hex": "#A8AE99",
+    "hue": 77,
+    "saturation": 11,
+    "lightness": 64
+  },
+  {
+    "name": "Light Fern®",
+    "hex": "#B5B09A",
+    "hue": 49,
+    "saturation": 15,
+    "lightness": 66
+  },
+  {
+    "name": "Craft Fair®",
+    "hex": "#9FAD9B",
+    "hue": 107,
+    "saturation": 10,
+    "lightness": 64
+  },
+  {
+    "name": "Curiosity®",
+    "hex": "#94A8AA",
+    "hue": 185,
+    "saturation": 11,
+    "lightness": 62
+  },
+  {
+    "name": "Olive",
+    "hex": "#8C907F",
+    "hue": 74,
+    "saturation": 7,
+    "lightness": 53
+  },
+  {
+    "name": "Evergreen Echo®",
+    "hex": "#8B927D",
+    "hue": 80,
+    "saturation": 9,
+    "lightness": 53
+  },
+  {
+    "name": "Family Tree®",
+    "hex": "#6F796B",
+    "hue": 103,
+    "saturation": 6,
+    "lightness": 45
+  },
+  {
+    "name": "Collage®",
+    "hex": "#4D6C66",
+    "hue": 168,
+    "saturation": 17,
+    "lightness": 36
+  },
+  {
+    "name": "Ivy Grey®",
+    "hex": "#77938E",
+    "hue": 169,
+    "saturation": 11,
+    "lightness": 52
+  },
+  {
+    "name": "Botany Bay®",
+    "hex": "#6A8886",
+    "hue": 176,
+    "saturation": 12,
+    "lightness": 47
+  },
+  {
+    "name": "Emerald Vision®",
+    "hex": "#21645D",
+    "hue": 174,
+    "saturation": 50,
+    "lightness": 26
+  },
+  {
+    "name": "Endeavour®",
+    "hex": "#435C64",
+    "hue": 195,
+    "saturation": 20,
+    "lightness": 33
+  },
+  {
+    "name": "Racing Green",
+    "hex": "#3E4945",
+    "hue": 158,
+    "saturation": 8,
+    "lightness": 26
+  },
+  {
+    "name": "Moonlight Bay®",
+    "hex": "#CFDFEC",
+    "hue": 207,
+    "saturation": 43,
+    "lightness": 87
+  },
+  {
+    "name": "Watermark®",
+    "hex": "#CAD6D7",
+    "hue": 185,
+    "saturation": 14,
+    "lightness": 82
+  },
+  {
+    "name": "Soft Wave®",
+    "hex": "#BBC9CC",
+    "hue": 191,
+    "saturation": 14,
+    "lightness": 77
+  },
+  {
+    "name": "Blue Glaze®",
+    "hex": "#BAC7D0",
+    "hue": 205,
+    "saturation": 19,
+    "lightness": 77
+  },
+  {
+    "name": "Powder Blue",
+    "hex": "#B0CFE6",
+    "hue": 206,
+    "saturation": 52,
+    "lightness": 80
+  },
+  {
+    "name": "Soft Duck Egg",
+    "hex": "#B3CEC5",
+    "hue": 160,
+    "saturation": 22,
+    "lightness": 75
+  },
+  {
+    "name": "Stepping Stone®",
+    "hex": "#AAC5C5",
+    "hue": 180,
+    "saturation": 19,
+    "lightness": 72
+  },
+  {
+    "name": "Gentle Blue",
+    "hex": "#9BB7BD",
+    "hue": 191,
+    "saturation": 20,
+    "lightness": 67
+  },
+  {
+    "name": "Duck Egg",
+    "hex": "#9BB7BD",
+    "hue": 191,
+    "saturation": 20,
+    "lightness": 67
+  },
+  {
+    "name": "Scrapbook®",
+    "hex": "#90AEB9",
+    "hue": 196,
+    "saturation": 23,
+    "lightness": 65
+  },
+  {
+    "name": "Simply Duck Egg",
+    "hex": "#94A8AA",
+    "hue": 185,
+    "saturation": 11,
+    "lightness": 62
+  },
+  {
+    "name": "Feeling Free®",
+    "hex": "#8EA2B2",
+    "hue": 207,
+    "saturation": 19,
+    "lightness": 63
+  },
+  {
+    "name": "Silver Blue",
+    "hex": "#8F9CAF",
+    "hue": 216,
+    "saturation": 17,
+    "lightness": 62
+  },
+  {
+    "name": "Button Box®",
+    "hex": "#648186",
+    "hue": 189,
+    "saturation": 15,
+    "lightness": 46
+  },
+  {
+    "name": "Teal",
+    "hex": "#4B8394",
+    "hue": 194,
+    "saturation": 33,
+    "lightness": 44
+  },
+  {
+    "name": "Runaway®",
+    "hex": "#627787",
+    "hue": 206,
+    "saturation": 16,
+    "lightness": 46
+  },
+  {
+    "name": "Palm Springs®",
+    "hex": "#00878C",
+    "hue": 182,
+    "saturation": 100,
+    "lightness": 27
+  },
+  {
+    "name": "Bright Bluejay®",
+    "hex": "#47669E",
+    "hue": 219,
+    "saturation": 38,
+    "lightness": 45
+  },
+  {
+    "name": "Abstract Art®",
+    "hex": "#396A88",
+    "hue": 203,
+    "saturation": 41,
+    "lightness": 38
+  },
+  {
+    "name": "Indulgence®",
+    "hex": "#536C7D",
+    "hue": 204,
+    "saturation": 20,
+    "lightness": 41
+  },
+  {
+    "name": "Seldom Seen®",
+    "hex": "#E4E7E2",
+    "hue": 96,
+    "saturation": 9,
+    "lightness": 90
+  },
+  {
+    "name": "Early Dawn®",
+    "hex": "#E0E0DC",
+    "hue": 60,
+    "saturation": 6,
+    "lightness": 87
+  },
+  {
+    "name": "Soft Steel®",
+    "hex": "#DCDFE1",
+    "hue": 204,
+    "saturation": 8,
+    "lightness": 87
+  },
+  {
+    "name": "Splash Of Pepper®",
+    "hex": "#DCDFE1",
+    "hue": 204,
+    "saturation": 8,
+    "lightness": 87
+  },
+  {
+    "name": "Sugar Bowl®",
+    "hex": "#DADAD5",
+    "hue": 60,
+    "saturation": 6,
+    "lightness": 85
+  },
+  {
+    "name": "Spotlight®",
+    "hex": "#DDDAD9",
+    "hue": 15,
+    "saturation": 6,
+    "lightness": 86
+  },
+  {
+    "name": "Sketch Pad®",
+    "hex": "#D4D6D6",
+    "hue": 180,
+    "saturation": 2,
+    "lightness": 84
+  },
+  {
+    "name": "Soft Scribbles®",
+    "hex": "#D3D0CB",
+    "hue": 38,
+    "saturation": 8,
+    "lightness": 81
+  },
+  {
+    "name": "Salt Spray®",
+    "hex": "#CCCDC9",
+    "hue": 75,
+    "saturation": 4,
+    "lightness": 80
+  },
+  {
+    "name": "Grey Putty®",
+    "hex": "#C8C6BD",
+    "hue": 49,
+    "saturation": 9,
+    "lightness": 76
+  },
+  {
+    "name": "Pacific Oyster®",
+    "hex": "#CACDCC",
+    "hue": 160,
+    "saturation": 3,
+    "lightness": 80
+  },
+  {
+    "name": "Clean Slate®",
+    "hex": "#C5C6CA",
+    "hue": 228,
+    "saturation": 5,
+    "lightness": 78
+  },
+  {
+    "name": "Neighbourhood®",
+    "hex": "#BDBDB9",
+    "hue": 60,
+    "saturation": 3,
+    "lightness": 73
+  },
+  {
+    "name": "Cloud Burst®",
+    "hex": "#C7C3C1",
+    "hue": 20,
+    "saturation": 5,
+    "lightness": 77
+  },
+  {
+    "name": "Gravel",
+    "hex": "#C7C3C1",
+    "hue": 20,
+    "saturation": 5,
+    "lightness": 77
+  },
+  {
+    "name": "Linen Cupboard®",
+    "hex": "#C7C3C1",
+    "hue": 20,
+    "saturation": 5,
+    "lightness": 77
+  },
+  {
+    "name": "Light Grey",
+    "hex": "#C1C0BA",
+    "hue": 51,
+    "saturation": 5,
+    "lightness": 74
+  },
+  {
+    "name": "Marble Top®",
+    "hex": "#BDC7C4",
+    "hue": 162,
+    "saturation": 8,
+    "lightness": 76
+  },
+  {
+    "name": "Needles & Pins®",
+    "hex": "#C0C4C3",
+    "hue": 165,
+    "saturation": 3,
+    "lightness": 76
+  },
+  {
+    "name": "Cloudy Day",
+    "hex": "#B7BCB7",
+    "hue": 120,
+    "saturation": 4,
+    "lightness": 73
+  }
+]
