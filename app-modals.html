@@ -1,0 +1,54 @@
+    <!--COMMON MODALS-->
+    <!--Confirm modal-->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container">
+                    <p id="confirmation-message" class="text-start"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--Add saved workspace modal-->
+    <div class="modal fade" id="add-workspace-modal" tabindex="-1" aria-labelledby="addWorkspaceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addWorkspaceModalLabel">Add workspace</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-add-workspace" class="modal-body container">
+                    <div class="container px-0 mb-3">
+                        <form id="workspace-input">
+                            <div class="row mb-2">
+                                <label class="form-label col-2 col-form-label" for="add-workspace-name">Name</label>                           
+                                <div class="col-10">    
+                                    <input class="form-control" id="add-workspace-name" class="w-100 border border-dark rounded" name="name" required type="text" maxlength="32" placeholder="Name (required)" autocomplete="off">                               
+                                    <div hidden class="ws-name-required error text-danger">Name is required</div>
+                                    <div hidden class="ws-name-duplicate error text-danger"></div>
+                                </div>                                    
+                            </div>
+                            <div class="row ">
+                                <label class="form-label col-2 col-form-label" for="add-workspace-notes">Notes</label>                           
+                                <div class="col-10">    
+                                    <textarea class="form-control" id="add-workspace-notes" class="w-100 border border-dark rounded" name="notes" maxlength="256" placeholder="Notes for workspace (optional)" autocomplete="off"></textarea>                            
+                                </div>                                    
+                            </div>
+                        </form>
+                    </div><!--end #workspace-details-->    
+                </div><!--end .modal-body-->
+                <div class="modal-footer">
+                    <button id="add-workspace-modal-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="add-workspace-modal-save" type="button" class="btn btn-primary" >Add workspace</button>
+                </div>
+            </div>
+        </div>
+    </div>

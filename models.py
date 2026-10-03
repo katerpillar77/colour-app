@@ -3,7 +3,7 @@ from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from sqlalchemy.ext import compiler
-from sqlalchemy.schema import DDLElement
+from sqlalchemy.schema import DDLElement, UniqueConstraint
 from sqlalchemy.sql import table
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -16,8 +16,7 @@ def load_user(id):
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
-                                                unique=True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
                                              unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
@@ -86,6 +85,7 @@ class Workspace(db.Model):
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
                                                index=True)
     user=so.relationship('User', back_populates='workspaces')
+    __table_args__ = (UniqueConstraint("name", "user_id", name="name-userid-unique"),)
     saved_colours=so.relationship('SavedColour', back_populates='workspace', cascade="all, delete")
     saved_paints=so.relationship('SavedPaint', back_populates='workspace', cascade="all, delete")
     def __repr__(self):
@@ -130,6 +130,7 @@ class SavedColour(db.Model):
                                                index=True)
     workspace_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Workspace.id),
                                                index=True)
+    __table_args__ = (UniqueConstraint("name", "workspace_id", name="name-workspaceid-unique"),)
     workspace=so.relationship('Workspace', back_populates='saved_colours', cascade="all, delete")
     colour=so.relationship('Colour', back_populates='saved_colours');
     def __repr__(self):
@@ -142,6 +143,7 @@ class SavedPaint(db.Model):
                                                index=True)
     workspace_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Workspace.id),
                                                index=True)
+    __table_args__ = (UniqueConstraint("paint_id", "workspace_id", name="paintid-workspaceid-unique"),)
     workspace=so.relationship('Workspace', back_populates='saved_paints', cascade="all, delete")
     paint=so.relationship('Paint', back_populates='saved_paints');
     def __repr__(self):

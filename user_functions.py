@@ -6,21 +6,27 @@ from app import db
 from config import Config
 from models import Brand, Paint, Colour, SavedColour, SavedPaint, User, Workspace, sa
 from colour_functions import getColourID
-from helpers import obj_to_dict
+from helpers import *
 import resend
 
 resend.api_key = Config.RESEND_API
-print (resend.api_key)
+
 
 def get_user_details():
     # get user's details
     query = sa.select(User).where(User.id == current_user.id)
     return db.session.scalars(query).first()
 
+def get_workspace_details(data):
+    # get details of one workspace    
+    query = sa.select(Workspace.id, Workspace.name, Workspace.notes).where(Workspace.id == data['workspace_id'])
+    results = db.session.execute(query)
+    # convert to list of dictionaries because had to use execute
+    return obj_to_dict(results)
 
 def get_workspaces():
-    # get all workspaces for the current user
-    query = sa.select(Workspace.id, Workspace.name, Workspace.notes).where(Workspace.user_id == current_user.id).order_by(Workspace.id)
+    # get all workspaces for the current user, in alphabetical order
+    query = sa.select(Workspace.id, Workspace.name, Workspace.notes).where(Workspace.user_id == current_user.id).order_by(Workspace.name)
     results = db.session.execute(query)
     # convert to list of dictionaries because had to use execute
     return obj_to_dict(results)
@@ -61,6 +67,7 @@ def get_saved_paints():
     return obj_to_dict(results)
 
 
+
 def get_saved_paint_details(data):
     # get details of one saved paint
     paint_colours = sa.select(Paint.id.label('paintid'), Paint.name.label(
@@ -80,8 +87,32 @@ def get_saved_colour_details(data):
         'saved_colour_name'), SavedColour.notes.label('saved_colour_notes')).join(Colour.saved_colours).where(SavedColour.id == data['saved_colour_id'])
     #print(query)
     results = db.session.execute(query)
+    print(results)
     # convert to list of dictionaries because had to use execute
     return obj_to_dict(results)
+
+def add_workspace_for_user(data):
+    #adds a workspace for a user
+    user_id = current_user.id
+    #check if workspace name is already used
+    query = sa.select(Workspace.id).where(Workspace.user_id==user_id).where(Workspace.name==data['workspace_name'])
+    if db.session.scalar(query)!=None:
+        print('Duplication of workspace name requested - workspace not added')
+        return '99'
+    
+    #add row to Workspace table
+    row = Workspace(
+        user_id=user_id,
+        name=data['workspace_name'],
+        notes=data['workspace_notes']
+    )
+    try:
+        db.session.add(row)
+        db.session.commit()
+    except: 
+        print('Error adding workspace.')
+        return False
+    return True
 
 def add_colour_to_workspace(data):
     #adds a saved colour to a workspace
@@ -90,7 +121,11 @@ def add_colour_to_workspace(data):
     colour['hex']=data['colour_hex'].lstrip('#')
     colour_id=getColourID(colour)
     
-    #TODO prevent same colour being saved twice
+    #check if colour name is already used within workspace
+    query = sa.select(SavedColour.id).where(SavedColour.workspace_id==data['workspace_id']).where(SavedColour.name==data['colour_name'])
+    if db.session.scalar(query)!=None:
+        print('Duplication of colour name within workspace requested - colour not saved')
+        return '99'
     
     #add row to SavedColour table
     row = SavedColour(
@@ -103,20 +138,18 @@ def add_colour_to_workspace(data):
         db.session.add(row)
         db.session.commit()
     except: 
-        print('Error adding paint to workspace.')
+        print('Error adding colour to workspace.')
         return False
     return True
 
 def add_paint_to_workspace(data):
     #adds a saved paint to a workspace
-    #get id from Colour table
     
     #check if paint is already saved
     query = sa.select(SavedPaint.id).where(SavedPaint.paint_id==data['paint_id']).where(SavedPaint.workspace_id==data['workspace_id'])
-    results = db.session.scalar(query)
-    # convert to list of dictionaries because had to use execute
-    if results!=None:
-        return False
+    if  db.session.scalar(query)!=None:
+        print('Duplication of paint in workspace requested - paint not added')
+        return '99'
         
     #add row to SavedPaint table
     row = SavedPaint(
@@ -131,6 +164,17 @@ def add_paint_to_workspace(data):
         print('Error adding paint to workspace.')
         return False
 
+    return True
+
+def delete_workspace(data):
+    ws_id = data['workspace_id']
+    user = db.session.query(Workspace).filter_by(id = ws_id).first()
+    try:
+        db.session.delete(user)
+        db.session.commit()
+    except:
+        print('Error removing workspace.')
+        return False
     return True
 
 def remove_colour_from_workspace(data):
@@ -155,14 +199,33 @@ def remove_paint_from_workspace(data):
         return False
     return True
 
-def edit_saved_paint_row(data):
-    # update the notes for a saved paint
-    query = sa.update(SavedPaint).where(SavedPaint.id == data['saved_paint_id']).values(notes=data['saved_paint_notes'])
+def edit_workspace_row(data):
+    # update the name notes for a workspace
+    
+    #check if workspace name is already used
+    query = sa.select(Workspace.id).where(Workspace.user_id==current_user.id).where(Workspace.name==data['workspace_name'])
+    results = db.session.scalar(query)
+    # convert to list of dictionaries because had to use execute
+    if results!=None:
+        print('Duplication of workspace name requested - workspace not added')
+        return '99'
+    query = sa.update(Workspace).where(Workspace.id == data['workspace_id']).values(name=data['workspace_name'], notes=data['workspace_notes'])
     try:
         db.session.execute(query)
         db.session.commit()
     except:
         print('Error editing saved paint.')
+        return False
+    return True
+
+def edit_saved_paint_row(data):
+    # update the notes for a saved paint
+    query = sa.update(SavedPaint).where(SavedPaint.id == data['saved_paint_id']).values(notes=data['saved_paint_notes'])
+    try:        
+        db.session.execute(query)
+        db.session.commit()
+    except:
+        print('Error editing workspace.')
         return False
     return True
 
@@ -285,8 +348,6 @@ def setup_user_account(user):
 
 def delete_user_account(user):
     # delete the user account and all associated data
-    ##query = sa.delete(User).where(User.id == current_user.id)
-   # user = sa.select(User).where(User.id == current_user.id)
     userid = current_user.id
     user = db.session.query(User).filter_by(id = userid).first()
     try:

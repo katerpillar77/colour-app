@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% import 'bootstrap_wtf.html' as wtf %}
+{% block title %}
+    Verify email address
+{% endblock %}
+{% block main %}
+    <h1>Verify email address</h1>
+    <div id="verify" class="container border border-dark rounded mb-4 p-2 constrain-sm">
+        <div class="row mb-3">
+            <div class="col">
+                An email has been sent to you to verify your email address. Please check your inbox and click the link in the email.
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                 If you did not receive the email, please check your spam folder or click the button below to resend the verification email.
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col">
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+    <body>
+        <p>Dear {{ user.name }},</p>
+        <p>
+            To verify your email address for paintcolours.app, 
+            <a href="{{ url_for('verify_email', token=token, _external=True) }}">click here</a>.
+        </p>
+        <p>Alternatively, you can paste the following link in your browser's address bar:</p>
+        <p>{{ url_for('verify_email', token=token, _external=True) }}</p>
+        <p>If you have not used this email address to set up an account, you can ignore this message.</p>
+    </body>
+</html>

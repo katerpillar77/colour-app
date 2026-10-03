@@ -136,6 +136,11 @@ def returnSavedPaints():
     return get_saved_paints()
 
 
+@app.route('/add-workspace', methods=["POST"])
+@login_required
+def add_workspace():
+    return {'result' : add_workspace_for_user(request.get_json() )}
+
 @app.route('/add-saved-colour', methods=["POST"])
 @login_required
 def add_saved_colour():
@@ -147,6 +152,10 @@ def add_saved_colour():
 def add_saved_paint(): 
     return {'result' : add_paint_to_workspace(request.get_json() )}
 
+@app.route('/edit-workspace', methods=["POST"])
+@login_required
+def edit_workspace():
+    return {'result' : edit_workspace_row(request.get_json())}
 
 @app.route('/edit-saved-paint', methods=["POST"])
 @login_required
@@ -160,6 +169,12 @@ def edit_saved_colour():
     return {'result' : edit_saved_colour_row(request.get_json())}
 
 
+@app.route('/remove-workspace', methods=["POST"])
+@login_required
+def remove_workspace():  
+    print(request.get_json())
+    return {'result' : delete_workspace(request.get_json())}
+
 @app.route('/remove-saved-paint', methods=["POST"])
 @login_required
 def remove_saved_paint():  
@@ -171,6 +186,10 @@ def remove_saved_paint():
 def remove_saved_colour():   
     return {'result' : remove_colour_from_workspace(request.get_json())}
 
+@app.route('/return-workspace-details', methods=["POST"])
+@login_required
+def return_workspace_details():
+    return get_workspace_details(request.get_json())
 
 @app.route('/return-saved-paint-details', methods=["POST"])
 @login_required

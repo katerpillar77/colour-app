@@ -52,11 +52,11 @@ class NavigateToEditUserDetails(FlaskForm):
 
 class EditUserDetails(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    submitEdit = SubmitField('Update details')
+    submitEdit = SubmitField('Save change')
 
 class EditUsername(FlaskForm):
     username = StringField('Email', validators=[DataRequired(), Email()])
-    submitEditU = SubmitField('Update email')
+    submitEditU = SubmitField('Save change')
 
     def validate_username(self, username):
         user = db.session.scalar(sa.select(User).where(
