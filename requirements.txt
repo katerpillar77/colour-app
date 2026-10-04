@@ -10,3 +10,5 @@ Flask-WTF
 email-validator
 PyJWT
 resend
+numpy==2.5.3
+scikit-image==0.26.0
