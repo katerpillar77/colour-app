@@ -40,10 +40,12 @@ My JS code provides the following functionality:
 * colouring the reference/adjusted colour boxes
 * populating a modal to select user's saved colours using a GET request
 * fetching paints that match the adjusted colour using a GET request
-* calculating a colour similarity for each paint, filtering the paints and sorting them
+* filtering the paints and sorting them in accordance with user selections
 * populating modals to save colours and paints using GET requests, and sending POST requests to add entries to the database
 
-The similarity/relevance for a paint is calculated by the distance between the adjusted colour and the paint's colour in CIELCh colour space. This involves transforming both colours from RGB to XYZ to CIELab to CIELCh. I originally did a weighted sum of the distances between the hues, saturations and luminances, but I didn't think it really captured the difference between colours. I'm still not entirely happy with the current distance measurement, as I think it puts too much weight on the saturation and luminance differences. I might change it again.
+I needed to find a way to measure distance between colour. At first I assumed that hue was the most important metric, and I only fetched paints within a certain distance of the hue of the adjusted colour, then did a weighted sum in JS of the distances between the hues, saturations and luminances. However, this did not capture the situation where low saturation or low luminance means that a greater deviation in hue is tolerated. I changed to calculating the E76 delta in CIELab which is a better way of measuring distance between colour. The newer E2000 delta is considered more accurate, but it is extremely computationally expensive and overkill for this use case. 
+
+I also moved the calculations from JS to the backend, so that the server calculates the distance for all the paints and only returns those with a small delta. This increases computation on the backend but decreases network use and client-side calculation. Overall I think it's faster, and returns more relevant results. I also decided to store the Lab values in the database so they are only calculated once per colour.
 
 ### Third-party libraries
 
